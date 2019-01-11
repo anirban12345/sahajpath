@@ -579,8 +579,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Students wise Attendance</a></li>
-            <li><a href="<?php echo site_url('Attendance/addAttendance'); ?>"><i class="fa fa-circle-o text-aqua"></i>Staff wise Attendance</a></li>  			
+            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Students Attendance</a></li>
+            <li><a href="<?php echo site_url('Attendance/addAttendance'); ?>"><i class="fa fa-circle-o text-aqua"></i>Staff Attendance</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Edit Students Attendance</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Edit Staff Attendance</a></li>
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student wise report</a></li>  			

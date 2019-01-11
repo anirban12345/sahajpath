@@ -259,8 +259,7 @@
   
   	//Timepicker
     $('.timepicker').timepicker({
-      showInputs: false,
-	  timeFormat: 'h:mm p'
+      showInputs: false	  
     })
 	
 </script>
