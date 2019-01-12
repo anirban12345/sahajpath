@@ -466,7 +466,7 @@
           </ul>
         </li>
 	
-		
+		<!--
 		<li class="treeview">
           <a href="#">
             <i class="fa fa-inr"></i>
@@ -485,7 +485,7 @@
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Check Paid Fee List with date range</a></li>  			
           </ul>
         </li>
-		
+		-->
 		<!--
 		<li class="treeview">
           <a href="#">
