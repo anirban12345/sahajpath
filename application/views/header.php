@@ -466,7 +466,7 @@
           </ul>
         </li>
 	
-		<!--
+		
 		<li class="treeview">
           <a href="#">
             <i class="fa fa-inr"></i>
@@ -486,6 +486,7 @@
           </ul>
         </li>
 		
+		<!--
 		<li class="treeview">
           <a href="#">
             <i class="fa fa-book"></i>

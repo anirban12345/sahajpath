@@ -51,6 +51,7 @@
                 <!-- /.input group -->
 				</div>
 				
+				<?php echo date('h:i A',time()); ?>
 				
 				<!-- time Picker -->
               <div class="bootstrap-timepicker">
@@ -61,7 +62,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
                     </div>
-					<input type="text" class="form-control timepicker" value=<?php echo date('h:i:s p',time()); ?> />
+					<input type="text" class="form-control timepicker" value=<?php echo date('h:i A',time()); ?> />
                   </div>
                   <!-- /.input group -->
                 </div>
