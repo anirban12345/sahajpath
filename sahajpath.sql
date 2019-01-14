@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2019 at 02:20 PM
+-- Generation Time: Jan 14, 2019 at 04:31 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -42,7 +42,7 @@ CREATE TABLE `caste` (
 --
 
 INSERT INTO `caste` (`caste_id`, `cname`, `caste_date`, `caste_time`, `caste_flag`, `user_id`) VALUES
-(1, 'SC', '2019-01-08', '14:02:34', 1, 6),
+(1, 'SC', '2019-01-08', '14:02:34', 0, 6),
 (2, 'ST', '2019-01-08', '15:23:23', 1, 6),
 (3, 'OBC - A', '2019-01-08', '15:21:45', 0, 6),
 (4, 'General', '2019-01-08', '15:30:38', 1, 6),
@@ -72,6 +72,61 @@ INSERT INTO `class` (`class_id`, `name`, `class_date`, `class_time`, `class_flag
 (2, 'Class II', '2019-01-08', '11:22:23', 1, 6),
 (3, 'Class III', '2019-01-09', '09:10:04', 1, 6),
 (4, 'Class IV', '2019-01-09', '09:09:45', 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_fees`
+--
+
+CREATE TABLE `class_fees` (
+  `cf_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `fees_id` int(11) NOT NULL,
+  `cf_date` date NOT NULL,
+  `cf_time` time NOT NULL,
+  `cf_flag` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `class_fees`
+--
+
+INSERT INTO `class_fees` (`cf_id`, `class_id`, `fees_id`, `cf_date`, `cf_time`, `cf_flag`, `user_id`) VALUES
+(1, 1, 1, '2019-01-12', '21:30:47', 1, 6),
+(2, 1, 2, '2019-01-12', '21:30:47', 1, 6),
+(3, 1, 3, '2019-01-12', '21:30:47', 1, 6),
+(4, 2, 1, '2019-01-12', '22:10:41', 1, 6),
+(5, 2, 2, '2019-01-12', '22:10:41', 1, 6),
+(6, 2, 3, '2019-01-12', '22:10:41', 1, 6),
+(7, 2, 4, '2019-01-12', '22:10:41', 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fees`
+--
+
+CREATE TABLE `fees` (
+  `f_id` int(11) NOT NULL,
+  `f_head` varchar(255) NOT NULL,
+  `f_rs` varchar(255) NOT NULL,
+  `f_date` date NOT NULL,
+  `f_time` time NOT NULL,
+  `f_flag` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fees`
+--
+
+INSERT INTO `fees` (`f_id`, `f_head`, `f_rs`, `f_date`, `f_time`, `f_flag`, `user_id`) VALUES
+(1, 'Tution Fees', '500', '2019-01-12', '20:40:17', 1, 6),
+(2, 'Examination Fees', '150', '2019-01-12', '20:44:17', 1, 6),
+(3, 'Development Fees', '50', '2019-01-12', '20:44:47', 1, 6),
+(4, 'Library', '25', '2019-01-12', '20:44:56', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -406,7 +461,13 @@ INSERT INTO `users_log` (`id`, `User_Id`, `Log_Date`, `Log_Time`) VALUES
 (75, 6, '2019-01-11', '11:30:32'),
 (76, 6, '2019-01-11', '15:32:42'),
 (77, 6, '2019-01-11', '16:10:37'),
-(78, 6, '2019-01-11', '17:55:59');
+(78, 6, '2019-01-11', '17:55:59'),
+(79, 6, '2019-01-11', '23:14:11'),
+(80, 6, '2019-01-12', '12:16:16'),
+(81, 6, '2019-01-12', '08:52:55'),
+(82, 6, '2019-01-12', '20:08:17'),
+(83, 6, '2019-01-13', '18:30:13'),
+(84, 6, '2019-01-14', '08:59:53');
 
 -- --------------------------------------------------------
 
@@ -467,6 +528,18 @@ ALTER TABLE `caste`
 --
 ALTER TABLE `class`
   ADD PRIMARY KEY (`class_id`);
+
+--
+-- Indexes for table `class_fees`
+--
+ALTER TABLE `class_fees`
+  ADD PRIMARY KEY (`cf_id`);
+
+--
+-- Indexes for table `fees`
+--
+ALTER TABLE `fees`
+  ADD PRIMARY KEY (`f_id`);
 
 --
 -- Indexes for table `religion`
@@ -551,6 +624,18 @@ ALTER TABLE `class`
   MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `class_fees`
+--
+ALTER TABLE `class_fees`
+  MODIFY `cf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `fees`
+--
+ALTER TABLE `fees`
+  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `religion`
 --
 ALTER TABLE `religion`
@@ -602,7 +687,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_log`
 --
 ALTER TABLE `users_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `user_attendance`

@@ -227,10 +227,11 @@
 <script src="<?php echo base_url().'assets/';?>plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url().'assets/';?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- bootstrap datepicker -->
-<script src="<?php echo base_url().'assets/';?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- bootstrap time picker -->
 <script src="<?php echo base_url().'assets/';?>plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url().'assets/';?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
 <!-- ChartJS -->
 <script src="<?php echo base_url().'assets/';?>bower_components/chart.js/Chart.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -258,10 +259,7 @@
   
   	//Timepicker
     $('.timepicker').timepicker({
-		defaultTime: 'current',		
-		minuteStep: 1,
-		disableFocus: true,
-		template: 'dropdown'		
+      showInputs: false	  
     })
 	
 </script>

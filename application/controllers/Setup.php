@@ -420,6 +420,80 @@ class Setup extends CI_Controller
 		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
 		redirect('Setup/subjectDtls', 'refresh');	
 	}
+	/*     */
+	
+	public function feesDtls()
+	{	
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');		
+		$data['allrec']=$this->Globalmodel->getdata('fees');		
+		//print_r($data['countuser']);
+		//print_r($data['rec'][0]->id);
+		$this->load->view('header',$data);
+		$this->load->view('setup/feesdtls',$data);
+		$this->load->view('setup/footer');	
+	}
+	
+	public function editFeesDtls($id)
+	{	
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');		
+		$data['allrec']=$this->Globalmodel->getdata_by_field('fees','f_id',$id);		
+		//print_r($data['countuser']);
+		//print_r($data['rec'][0]->id);
+		$this->load->view('header',$data);
+		$this->load->view('setup/feesdtls_edit',$data);
+		$this->load->view('setup/footer');	
+	}
+	
+	public function saveFeesDtls()
+	{
+		$fhead=$this->input->post('fhead');	
+		$frs=$this->input->post('frs');	
+		$userid=$this->session->userdata('userid');
+		
+		$dtls=array(
+					'f_head'=>$fhead,
+					'f_rs'=>$frs,
+					'f_date'=>date('Y-m-d'), 
+					'f_time'=>date('H:i:s'), 
+					'f_flag'=>1,
+					'user_id'=>$userid
+					);
+		$this->Globalmodel->savedata('fees',$dtls);
+		$this->session->set_flashdata('successmsg','fees Successfully Saved');
+		redirect('Setup/feesDtls');	
+	}
+	
+	public function updateFeesDtls($id)
+	{
+		$fhead=$this->input->post('fhead');	
+		$frs=$this->input->post('frs');	
+		$userid=$this->session->userdata('userid');
+		
+		$dtls=array(
+					'f_head'=>$fhead,
+					'f_rs'=>$frs,
+					'f_date'=>date('Y-m-d'), 
+					'f_time'=>date('H:i:s'), 
+					'f_flag'=>1,
+					'user_id'=>$userid
+					);
+		$this->Globalmodel->updatedata('fees','f_id',$id,$dtls);
+		$this->session->set_flashdata('successmsg','Fees Successfully Saved');
+		redirect('Setup/feesDtls');	
+	}
+	
+	public function activateFees($id)
+	{
+		$this->Globalmodel->activate('fees','f_id',$id,'f_flag');	
+			
+		$this->session->set_flashdata('successmsg','Fees Successfully Saved');
+		redirect('Setup/feesDtls', 'refresh');	
+	}
+	
 	
 	
 }

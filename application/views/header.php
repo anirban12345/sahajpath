@@ -393,6 +393,7 @@
             <li><a href="<?php echo site_url('Setup/classDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Class</a></li>  			
 			<li><a href="<?php echo site_url('Setup/sectionDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Sections</a></li>  			
 			<li><a href="<?php echo site_url('Setup/subjectDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Subject</a></li>
+			<li><a href="<?php echo site_url('Setup/feesDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Fees</a></li>
 			<!--<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Group / Class / Subject</a></li>
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Pick-Up Point</a></li>  -->
           </ul>
@@ -466,7 +467,7 @@
           </ul>
         </li>
 	
-		<!--
+		
 		<li class="treeview">
           <a href="#">
             <i class="fa fa-inr"></i>
@@ -476,8 +477,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Add Fee</a></li>
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Fee Details</a></li>  
+            <li><a href="<?php echo site_url('Fees/addFees'); ?>"><i class="fa fa-circle-o text-aqua"></i>Add Fee</a></li>
+            <li><a href="<?php echo site_url('Fees/feesDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Fee Details</a></li>  
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Pay / Taken Fee</a></li>  
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Print Receipts</a></li>  
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Generate Student Fee Card</a></li>  
@@ -485,7 +486,7 @@
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Check Paid Fee List with date range</a></li>  			
           </ul>
         </li>
-		-->
+		
 		<!--
 		<li class="treeview">
           <a href="#">
