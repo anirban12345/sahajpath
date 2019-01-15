@@ -31,20 +31,22 @@ class Attendance extends CI_Controller
 	
 	public function saveAttendanceDtls()
 	{
-		$classname=$this->input->post('classname');		
-		$subjectname=$this->input->post('subjectname');		
+		$entrydate=$this->input->post('entrydate');		
+		$entrytime=$this->input->post('entrytime');
+		$exittime=$this->input->post('exittime');
 		$userid=$this->session->userdata('userid');
 		
 		$dtls=array(
-					'class_id'=>$classname,																				
-					'subname'=>$subjectname,
-					'sub_date'=>date('Y-m-d'), 
-					'sub_time'=>date('H:i:s'), 
-					'sub_flag'=>1,
+					'entrydate'=>$entrydate,																				
+					'entrytime'=>$entrytime,
+					'exittime'=>$exittime
+					'a_date'=>date('Y-m-d'), 
+					'a_time'=>date('H:i:s'), 
+					'a_flag'=>1,
 					'user_id'=>$userid
 					);
-		$this->Globalmodel->savedata('subject',$dtls);
-		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
-		redirect('Setup/subjectDtls');	
+		$this->Globalmodel->savedata('user_attendance',$dtls);
+		$this->session->set_flashdata('successmsg','Attendance Successfully Saved');
+		redirect('Attendance/addAttendance');	
 	}
 }

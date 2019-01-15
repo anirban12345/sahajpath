@@ -50,8 +50,8 @@
 					<tr>
 					  <th>Sl No.</th>
 					  <th>Class Name</th>					  
-					  <!--<th>Fees Head</th>					  
-					  <th>Fees ( <i class="fa fa-inr"></i> )</th> -->					  
+					  <th>Fees Head</th>					  
+					  <th>Fees ( <i class="fa fa-inr"></i> )</th>
 					  <th>Status</th>
 					  <th>Action</th>					  					  
 					</tr>
@@ -62,8 +62,16 @@
 					<tr>
 					  <td><?=$i++?></td>
 					  <td><?=$r->name?></td>
-					  <!--<td><?=$r->f_head?></td>	
-					  <td><?=$r->f_rs?></td> -->
+					  
+					  <?php 
+					  
+					  print_r($fee[0][$r->cf_id]);
+					  
+					  ?>
+					  <td><?=$r->f_head?></td>	
+					  <td><?=$r->f_rs?></td>
+					  
+					  
 					  
 					  <?php if($r->class_flag==1){ ?>
 					  <td><span class="label label-success">Active</span></td>

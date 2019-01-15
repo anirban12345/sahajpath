@@ -45,15 +45,40 @@ class Fees extends CI_Controller
 		$this->load->view('fee/footer');	
 	}
 	
+	public function fees_head_arr($d)
+	{
+		$p='';
+		for($i=0;$i<sizeof($d);$i++)
+		{
+			$data['rec']=$this->Globalmodel->getdata_by_field('fees','f_id',$d[$i]);
+			//print_r($data['rec']);
+			foreach($data['rec'] as $r)
+			{
+			    $p.=$r->f_head.',';
+			}
+		}
+		return $p;
+	}
+	
 	public function feesDtls()
 	{	
+		$p=array();
 		$username=$this->session->userdata('username');
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');		
-		$data['allrec']=$this->Globalmodel->getdata('class');		
-		//$data['allrec']=$this->Feesmodel->get_all_class_fees();		
+		//$data['allrec']=$this->Globalmodel->getdata('class');		
+		$data['allrec']=$this->Feesmodel->get_all_class_fees();
+
+		foreach($data['allrec'] as $r)	
+		{
+			$d=explode(',',$r->fees_id);						
+			array_push($p,array($r->cf_id=>$this->fees_head_arr($d)));
+		}
+		$data['fee']=$p;
+			
+		print_r($data['fee']);
 		//print_r($data['allrec']);
-		//print_r($data['rec'][0]->id);
+		
 		$this->load->view('header',$data);
 		$this->load->view('fee/feesdtls',$data);
 		$this->load->view('fee/footer');	
