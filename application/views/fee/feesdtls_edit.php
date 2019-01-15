@@ -36,30 +36,29 @@
             <!-- form start -->
 			
 			<?php foreach($allrec as $r) {?>
-            <form role="form" action="<?php echo site_url('Fees/saveFeesDtls/'.$r->cf_id);?>" method="post">
+            <form role="form" action="<?php echo site_url('Fees/updateFeesDtls/'.$r->cf_id);?>" method="post">
               <div class="box-body">
 			   
 				<div class="form-group">
-                  <label for="fhead">Fees Head</label>
+                  <label for="classname">Fees Head</label>
+				  <input type="hidden" id="classid" name="classid" autocomplete="off" value="<?=$r->class_id?>" />
                   <input type="text" class="form-control" id="classname" placeholder="Enter Class" name="classname" autocomplete="off" value="<?=$r->name?>" readonly />
                 </div>
 			  </div>	
-			<?php }?>
+			
 			
 			 <div class="box-body">
-			<?php foreach($allrec as $r) {?>	
-				 <?php $i=0; foreach($fees as $r1){?>
-					<?php if($r->fees_id==$r1->f_id){ ?>
+			<?php foreach($fees as $r1) {?>	
+				 
 					<div class="form-group">
 						<div class="checkbox">
 							<label>						
-								<input type="checkbox" name="fees[]" value="<?=$r1->f_id?>" checked />
+								<input type="checkbox" name="fees[]" value="<?=$r1->f_id?>" <?php if(strpos($r->fees_id,$r1->f_id) !== false) echo "checked='checked'";?> />
 								<?=$r1->f_head.' ( <i class="fa fa-inr"></i> '.$r1->f_rs.' )'?>
 							</label>
 						</div>  
-					</div>						
-				 <?php }?>
-                <?php } ?>
+					</div>	
+			<?php } ?>					
               </div>
               <!-- /.box-body -->
 			  
@@ -67,7 +66,7 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
-			<?php } ?>
+			<?php }?>
           </div>	
         </div>  
       </div>

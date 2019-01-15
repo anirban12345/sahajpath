@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2019 at 04:31 AM
+-- Generation Time: Jan 15, 2019 at 07:41 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -82,7 +82,7 @@ INSERT INTO `class` (`class_id`, `name`, `class_date`, `class_time`, `class_flag
 CREATE TABLE `class_fees` (
   `cf_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
-  `fees_id` int(11) NOT NULL,
+  `fees_id` varchar(255) NOT NULL,
   `cf_date` date NOT NULL,
   `cf_time` time NOT NULL,
   `cf_flag` int(11) NOT NULL,
@@ -94,13 +94,9 @@ CREATE TABLE `class_fees` (
 --
 
 INSERT INTO `class_fees` (`cf_id`, `class_id`, `fees_id`, `cf_date`, `cf_time`, `cf_flag`, `user_id`) VALUES
-(1, 1, 1, '2019-01-12', '21:30:47', 1, 6),
-(2, 1, 2, '2019-01-12', '21:30:47', 1, 6),
-(3, 1, 3, '2019-01-12', '21:30:47', 1, 6),
-(4, 2, 1, '2019-01-12', '22:10:41', 1, 6),
-(5, 2, 2, '2019-01-12', '22:10:41', 1, 6),
-(6, 2, 3, '2019-01-12', '22:10:41', 1, 6),
-(7, 2, 4, '2019-01-12', '22:10:41', 1, 6);
+(1, 1, '1,2,3', '2019-01-12', '21:30:47', 1, 6),
+(4, 2, '1,2,3,4', '2019-01-12', '22:10:41', 1, 6),
+(10, 3, '2,4', '2019-01-15', '22:35:20', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -123,7 +119,7 @@ CREATE TABLE `fees` (
 --
 
 INSERT INTO `fees` (`f_id`, `f_head`, `f_rs`, `f_date`, `f_time`, `f_flag`, `user_id`) VALUES
-(1, 'Tution Fees', '500', '2019-01-12', '20:40:17', 1, 6),
+(1, 'Tution Fee', '500', '2019-01-15', '22:04:50', 1, 6),
 (2, 'Examination Fees', '150', '2019-01-12', '20:44:17', 1, 6),
 (3, 'Development Fees', '50', '2019-01-12', '20:44:47', 1, 6),
 (4, 'Library', '25', '2019-01-12', '20:44:56', 1, 6);
@@ -268,10 +264,10 @@ CREATE TABLE `student_class_map` (
 --
 
 INSERT INTO `student_class_map` (`scm_id`, `scm_session`, `reg_no`, `class_id`, `section_id`, `scm_date`, `scm_time`, `scm_flag`, `user_id`) VALUES
-(1, '2018-2019', '190108220637', 1, 1, '2019-01-09', '15:58:53', 1, 6),
-(3, '2019-2020', '190108171535', 1, 1, '2019-01-09', '16:43:36', 1, 6),
-(4, '2019-2020', '190108220637', 1, 1, '2019-01-09', '21:38:20', 1, 6),
-(5, '2019-2020', '190108173615', 2, 2, '2019-01-10', '10:09:59', 1, 6);
+(1, '2018', '190108220637', 1, 1, '2019-01-09', '15:58:53', 1, 6),
+(3, '2019', '190108171535', 1, 1, '2019-01-09', '16:43:36', 1, 6),
+(4, '2020', '190108220637', 1, 1, '2019-01-09', '21:38:20', 1, 6),
+(5, '2021', '190108173615', 2, 2, '2019-01-10', '10:09:59', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -359,11 +355,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `Firstname`, `Lastname`, `Address`, `Phoneno`, `Username`, `Password`, `Image`, `Levelid`, `Udate`, `Utime`, `Uflag`, `user_id`) VALUES
 (1, 'user1', 'user1', 'dd', '9963688525', 'user1', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2019-01-06', '17:07:40', 1, 0),
 (2, 'Admin', 'Admin', 'dd', '9963688525', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 1, '2018-08-07', '11:05:31', 1, 0),
-(3, 'user2', 'user2', 'swdd', '9963688526', 'user2', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2018-08-07', '13:44:15', 0, 0),
+(3, 'user2', 'user2', 'swdd', '9963688526', 'user2', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2018-08-07', '13:44:15', 1, 0),
 (4, 'Sajal', 'Das', 'Patuli', '9963688526', 'sajal', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 3, '2019-01-05', '13:44:15', 1, 6),
 (5, 'non-teaching', 'non-teaching', 'swdd', '9963688526', 'nonteaching', 'e10adc3949ba59abbe56e057f20f883e', '1533629805.jpg', 4, '2019-01-05', '13:44:15', 1, 0),
 (6, 'Anirban', 'Seth', 'Kolkata 700007', '9996663335', 'anirban', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 1, '2019-01-06', '15:55:03', 1, 0),
-(7, 'Rahul', 'Ghosh', 'West Bengal', '8885552225', 'rahul', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2019-01-06', '23:18:26', 0, 0),
+(7, 'Rahul', 'Ghosh', 'West Bengal', '8885552225', 'rahul', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2019-01-06', '23:18:26', 1, 0),
 (8, 'Tapan', 'Halder', 'Bagnan', '9966335522', 'tapan', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 3, '2019-01-11', '14:21:18', 1, 6);
 
 -- --------------------------------------------------------
@@ -467,7 +463,11 @@ INSERT INTO `users_log` (`id`, `User_Id`, `Log_Date`, `Log_Time`) VALUES
 (81, 6, '2019-01-12', '08:52:55'),
 (82, 6, '2019-01-12', '20:08:17'),
 (83, 6, '2019-01-13', '18:30:13'),
-(84, 6, '2019-01-14', '08:59:53');
+(84, 6, '2019-01-14', '08:59:53'),
+(85, 6, '2019-01-14', '23:42:40'),
+(86, 6, '2019-01-15', '09:21:00'),
+(87, 6, '2019-01-15', '21:08:20'),
+(88, 6, '2019-01-15', '22:18:51');
 
 -- --------------------------------------------------------
 
@@ -486,6 +486,14 @@ CREATE TABLE `user_attendance` (
   `a_flag` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_attendance`
+--
+
+INSERT INTO `user_attendance` (`a_id`, `a_user_id`, `entrydate`, `entrytime`, `exittime`, `a_date`, `a_time`, `a_flag`, `user_id`) VALUES
+(3, 2, '2019-01-16', '00:01:00', '00:09:00', '2019-01-16', '00:09:45', 1, 6),
+(5, 6, '2019-01-16', '00:06:00', '00:09:00', '2019-01-16', '00:09:53', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -627,7 +635,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `class_fees`
 --
 ALTER TABLE `class_fees`
-  MODIFY `cf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `fees`
@@ -687,13 +695,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_log`
 --
 ALTER TABLE `users_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `user_attendance`
 --
 ALTER TABLE `user_attendance`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_level`

@@ -32,8 +32,8 @@ class Feesmodel extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('class_fees');		
 		$this->db->join('class','class_fees.class_id=class.class_id');		
-		$this->db->join('fees','class_fees.fees_id=fees.f_id');	
-		$this->db->order_by('name','asc');		
+		//$this->db->join('fees','class_fees.fees_id=fees.f_id');	
+		//$this->db->order_by('name','asc');		
 		$this->query=$this->db->get();		
 		return $this->query->result();  
 	}

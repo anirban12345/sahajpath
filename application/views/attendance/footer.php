@@ -251,7 +251,7 @@
   $('.select2').select2();
   
   //Date picker
-  $('#edate').datepicker({
+  $('#entrydate').datepicker({
      autoclose: true,
 	 format: 'dd-M-yyyy' 
   });

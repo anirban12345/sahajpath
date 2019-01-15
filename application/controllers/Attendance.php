@@ -31,21 +31,69 @@ class Attendance extends CI_Controller
 	
 	public function saveAttendanceDtls()
 	{
-		$entrydate=$this->input->post('entrydate');		
-		$entrytime=$this->input->post('entrytime');
-		$exittime=$this->input->post('exittime');
+		$staffid=$this->input->post('staffid');
+		$entrydate=$this->input->post('entrydate');	
+		$entrydate=date("Y-m-d",strtotime($entrydate));		
+		$entrytime=$this->input->post('entrytime');		
 		$userid=$this->session->userdata('userid');
 		
-		$dtls=array(
+		$data['adata']=$this->Globalmodel->getdata_by_field_array('user_attendance',array('a_user_id'=>$staffid,'entrydate'=>$entrydate));
+		
+		//print_r($data['adata'][0]->a_id);
+		
+		if(count($data['adata'])==0)
+		{
+			$dtls=array(
+					'a_user_id'=>$staffid,
 					'entrydate'=>$entrydate,																				
-					'entrytime'=>$entrytime,
-					'exittime'=>$exittime
+					'entrytime'=>date("H:i:s a",strtotime($entrytime)),
+					'exittime'=>date('H:i:s'),
 					'a_date'=>date('Y-m-d'), 
 					'a_time'=>date('H:i:s'), 
 					'a_flag'=>1,
 					'user_id'=>$userid
 					);
-		$this->Globalmodel->savedata('user_attendance',$dtls);
+			$this->Globalmodel->savedata('user_attendance',$dtls);
+		}
+		else
+		{
+			$dtls=array(
+					'exittime'=>date("H:i:s a",strtotime($entrytime)),
+					'a_date'=>date('Y-m-d'), 
+					'a_time'=>date('H:i:s'), 
+					'a_flag'=>1,
+					'user_id'=>$userid
+					);
+			$this->Globalmodel->updatedata('user_attendance','a_id',$data['adata'][0]->a_id,$dtls);	
+		}		
+		$this->session->set_flashdata('successmsg','Attendance Successfully Saved');
+		redirect('Attendance/addAttendance');	
+		
+	}
+	
+	public function updateAttendanceDtls()
+	{
+		$staffid=$this->input->post('staffid');
+		$entrydate=$this->input->post('entrydate');		
+		$entrytime=$this->input->post('entrytime');
+		$exittime=$this->input->post('exittime');
+		$userid=$this->session->userdata('userid');
+		
+		
+		
+		
+		
+		$dtls=array(
+					'a_user_id'=>$staffid,
+					'entrydate'=>date("Y-m-d",strtotime($entrydate)),																				
+					'entrytime'=>date("H:i:s a",strtotime($entrytime)),
+					'exittime'=>date('H:i:s'),
+					'a_date'=>date('Y-m-d'), 
+					'a_time'=>date('H:i:s'), 
+					'a_flag'=>1,
+					'user_id'=>$userid
+					);
+		$this->Globalmodel->updatedata('user_attendance',$dtls);
 		$this->session->set_flashdata('successmsg','Attendance Successfully Saved');
 		redirect('Attendance/addAttendance');	
 	}

@@ -50,8 +50,7 @@
 					<tr>
 					  <th>Sl No.</th>
 					  <th>Class Name</th>					  
-					  <th>Fees Head</th>					  
-					  <th>Fees ( <i class="fa fa-inr"></i> )</th>
+					  <th>Fees Head</th>					  					  
 					  <th>Status</th>
 					  <th>Action</th>					  					  
 					</tr>
@@ -62,24 +61,12 @@
 					<tr>
 					  <td><?=$i++?></td>
 					  <td><?=$r->name?></td>
-					  
-					  <?php 
-					  
-					  print_r($fee[0][$r->cf_id]);
-					  
-					  ?>
-					  <td><?=$r->f_head?></td>	
-					  <td><?=$r->f_rs?></td>
-					  
-					  
-					  
+					  <td><?=$r->c_fee?></td>						  
 					  <?php if($r->class_flag==1){ ?>
 					  <td><span class="label label-success">Active</span></td>
 					  <?php }else {?>
 					  <td><span class="label label-danger">Deactive</span></td>
-					  <?php }?>					  
-					  
-					  
+					  <?php }?>	
 					  <td>
 					  <?php if($r->class_flag==1){ ?>
 					  <a href="<?php echo site_url('Fees/activateFees/'.$r->class_id); ?>" roll="button" class="btn btn-warning btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></a>					  					  

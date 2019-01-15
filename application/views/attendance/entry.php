@@ -15,6 +15,21 @@
     <!-- Main content -->
     <section class="content">
       <!-- Info boxes -->
+	  <?php if($this->session->userdata('successmsg')){?>
+			  <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                <h4><i class="icon fa fa-check"></i> Success!</h4>
+                <?php echo $this->session->userdata('successmsg'); ?>
+              </div>
+	<?php } ?>
+	<?php if($this->session->userdata('errmsg')){?>
+			  <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                <?php echo $this->session->userdata('errmsg'); ?>
+              </div>
+	<?php } ?>
+	
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
 		
@@ -46,21 +61,21 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="edate" name="edate" placeholder="Enter Date Of Birth" autocomplete="off" required value=<?=date('d-M-Y')?> />
+                  <input type="text" class="form-control pull-right" id="entrydate" name="entrydate" placeholder="Enter Date Of Birth" autocomplete="off" required value=<?=date('d-M-Y')?> />
                 </div>
                 <!-- /.input group -->
 				</div>
 				
-				<!-- time Picker -->
+			  <!-- time Picker -->
               <div class="bootstrap-timepicker">
                 <div class="form-group">
-                  <label>Entry Time</label>
+                  <label>Time</label>
 
                   <div class="input-group">
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
                     </div>
-					<input type="text" class="form-control timepicker" value="" />
+					<input type="text" class="form-control timepicker" value="" id="entrytime" name="entrytime"/>
                   </div>
                   <!-- /.input group -->
                 </div>

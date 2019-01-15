@@ -161,8 +161,6 @@ class Student extends CI_Controller
 					  <th>Admission Time</th>
 					  <th>Status</th>
 					  <th>Action</th>
-					  <th>Edit</th>
-					  <th>View</th>					  
 					</tr>
 					</thead>
 					<tbody>';
@@ -189,9 +187,9 @@ class Student extends CI_Controller
 					  } else {
 		$html.='<a href="'.site_url('Student/activateStudent/'.$r->stu_id).'" roll="button" class="btn btn-warning btn-xs"><i class="fa fa-check" aria-hidden="true"></i></a>';					  					  
 					  }					   
-		$html.='</td>					  
-					  <td><a href="'.site_url('Student/editStudent/'.$r->stu_id).'" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a></td>
-					  <td><a href="'.site_url('Student/viewStudent/'.$r->reg_no).'" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>
+		$html.='<a href="'.site_url('Student/editStudent/'.$r->stu_id).'" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+				<a href="'.site_url('Student/viewStudent/'.$r->reg_no).'" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
+				</td>
 				</tr>';
 					} 
 		$html.='</tbody></table>';		
@@ -221,8 +219,6 @@ class Student extends CI_Controller
 					  <th>Admission Time</th>
 					  <th>Status</th>
 					  <th>Action</th>
-					  <th>Edit</th>
-					  <th>View</th>					  
 					</tr>
 					</thead>
 					<tbody>';		
