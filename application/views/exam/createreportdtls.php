@@ -46,8 +46,8 @@
 					<tbody>
 
 						<tr>
-						  <td><?=$sturec[0]->classname[0]->cs_category?></td>
-						  <td><?=$sturec[0]->cs_category?></td>
+						  <td><?=$sturec[0]->class_name?></td>
+						  <td><?=$sturec[0]->csec_name?></td>
 						</tr> 
 
 					</tbody>	
@@ -76,9 +76,9 @@
 							<td style="padding:0;">	
 							<table id="example2" class="table table-bordered table-striped" style="margin:0;">
 							<?php foreach($stuexam as $r1){  ?>
-							  <?php if($r->reg_no==$r1->r_reg_no) { $tot+=$r1->totalmarks; $marksobtain+=$r1->r_marks;?>	
+							  <?php if($r->reg_no==$r1->r_reg_no) { $tot+=$r1->cterm_totalmarks; $marksobtain+=$r1->r_marks;?>	
 							  <tr>	
-							  <td><?=$r1->termname.' - '.$r1->subname.' ( '.$r1->totalmarks.' ) '?></td>
+							  <td><?=$r1->cterm_name.' - '.$r1->csub_name.' ( '.$r1->cterm_totalmarks.' ) '?></td>
 							  <td><?=$r1->r_marks?></td>						  					  
 							  </tr>
 							  <?php } ?>

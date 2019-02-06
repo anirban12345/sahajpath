@@ -569,12 +569,9 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo site_url('Exam/addExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Add Exam to Class</a></li>
-            <li><a href="<?php echo site_url('Exam/examDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Exam Details</a></li>
+          <ul class="treeview-menu">            
             <li><a href="<?php echo site_url('Exam/createExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Exam for Class</a></li>  			
-			<li><a href="<?php echo site_url('Exam/searchExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Exam</a></li>  
-			
+			<li><a href="<?php echo site_url('Exam/searchExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Exam</a></li>  			
 			<!--
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Export exam details</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Subject Wise Marks Search</a></li>

@@ -54,28 +54,28 @@
 						<select class="form-control select2" style="width: 100%;" id="classname" name="classname">	
 							<option value="Select">Select</option> 							
 							<?php foreach($class as $r){?>
-							<option value="<?=$r->cs_id?>"><?=$r->cs_category?></option>                  
+							<option value="<?=$r->class_id?>"><?=$r->class_name?></option>                  
 							<?php }?>
 					    </select>
 				</div>
 				
 				<div class="form-group">
 					<label>Select Section</label>
-					<select class="form-control select2" style="width: 100%;" id="section" name="section">
+					<select class="form-control select2" style="width: 100%;" id="section" name="sectionid">
 							
 					</select>
 				</div> 	
 				
 				<div class="form-group">
 					<label>Select Subject</label>
-					<select class="form-control select2" style="width: 100%;" id="subject" name="subject">
+					<select class="form-control select2" style="width: 100%;" id="subject" name="subjectid">
 							
 					</select>
 				</div> 	
 				
 				<div class="form-group">
 					<label>Select Exam</label>
-					<select class="form-control select2" style="width: 100%;" id="term" name="term">
+					<select class="form-control select2" style="width: 100%;" id="term" name="termid">
 							
 					</select>
 				</div> 

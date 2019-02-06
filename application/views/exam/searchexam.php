@@ -54,7 +54,7 @@
 						<select class="form-control select2" style="width: 100%;" id="classname" name="classname">	
 							<option value="Select">Select</option> 							
 							<?php foreach($class as $r){?>
-							<option value="<?=$r->cs_id?>"><?=$r->cs_category?></option>                  
+							<option value="<?=$r->class_id?>"><?=$r->class_name?></option>                  
 							<?php }?>
 					    </select>
 				</div>

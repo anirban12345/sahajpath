@@ -55,11 +55,11 @@
 					<?php $i=1; foreach($allrec as $r) { ?>
 					<tr>
 					  <input type="hidden" value="<?=$r->e_id?>" name="examid" id="examid" />					  
-					  <td><?=$r->cs_category?></td>
-					  <td><?=$section[0]->cs_category?></td>	
-					  <td><?=$r->subname?></td>						  
-					  <td><?=$r->termname?></td>
-					  <td><?=$r->totalmarks?></td>					  
+					  <td><?=$r->class_name?></td>
+					  <td><?=$r->csec_name?></td>	
+					  <td><?=$r->csub_name?></td>						  
+					  <td><?=$r->cterm_name?></td>
+					  <td><?=$r->cterm_totalmarks?></td>					  
 					  <td><?=date('d-M-Y',strtotime($r->e_date))?></td>
 					  <td><?=$r->e_desc?></td>		
 					</tr> 

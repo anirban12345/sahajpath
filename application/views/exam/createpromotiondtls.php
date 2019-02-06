@@ -46,8 +46,8 @@
 					<tbody>
 
 						<tr>
-						  <td><?=$sturec[0]->classname[0]->cs_category?></td>
-						  <td><?=$sturec[0]->cs_category?></td>
+						  <td><?=$sturec[0]->class_name?></td>
+						  <td><?=$sturec[0]->csec_name?></td>
 						</tr> 
 
 					</tbody>	
@@ -125,8 +125,9 @@
 				<div class="form-group">
 					<label>Select Class</label>
 						<select class="form-control select2" style="width: 100%;" id="classid" name="classid">		
+							<option value="Select">Select</option>                  
 							<?php foreach($class as $r){?>
-							<option value="<?=$r->cs_id?>"><?=$r->cs_category?></option>                  
+							<option value="<?=$r->class_id?>"><?=$r->class_name?></option>                  
 							<?php }?>
 					</select>
 				</div>

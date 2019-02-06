@@ -18,6 +18,7 @@ class Exam extends CI_Controller
 		
 	}
 	
+	/*
 	public function addExam()
 	{	
 		$username=$this->session->userdata('username');
@@ -138,13 +139,14 @@ class Exam extends CI_Controller
 		$this->session->set_flashdata('successmsg','Examination Successfully Saved');
 		redirect('Exam/examDtls');			
 	}
+	*/
 	
 	public function createExam()
 	{
 		$username=$this->session->userdata('username');
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');			
-		$data['class']=$this->Globalmodel->getdata_by_field('class_section','cs_parentid',0);		
+		$data['class']=$this->Globalmodel->getdata('class');		
 		$this->load->view('header',$data);
 		$this->load->view('exam/createexam',$data);
 		$this->load->view('exam/footer');
@@ -156,7 +158,7 @@ class Exam extends CI_Controller
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');
 		
-		$data['class']=$this->Globalmodel->getdata_by_field('class_section','cs_parentid',0);
+		$data['class']=$this->Globalmodel->getdata('class');
 		
 		$this->load->view('header',$data);
 		$this->load->view('exam/searchexam',$data);
@@ -169,17 +171,13 @@ class Exam extends CI_Controller
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');
 		
+		$session=$this->input->post('session');
 		$classid=$this->input->post('classname');
 		$sectionid=$this->input->post('section');
-		$session=$this->input->post('session');
+		
+		//print_r($session.$classid.$sectionid);
 		
 		$data['allrec']=$this->Exammodel->get_all_createdexam($session,$classid,$sectionid);
-		
-		foreach($data['allrec'] as $r)
-		{
-			$data['section']=$this->Globalmodel->getdata_by_field('class_section','cs_id',$r->e_sectionid);
-		}
-		
 		
 		//print_r($data['allrec']);
 		
@@ -192,9 +190,9 @@ class Exam extends CI_Controller
 	{
 		$session=$this->input->post('session');
 		$classid=$this->input->post('classname');
-		$section=$this->input->post('section');
-		$subject=$this->input->post('subject');
-		$examterm=$this->input->post('term');
+		$section=$this->input->post('sectionid');
+		$subject=$this->input->post('subjectid');
+		$examterm=$this->input->post('termid');
 		$edate=date('Y-m-d',strtotime($this->input->post('edate')));
 		$desc=$this->input->post('desc');
 		$userid=$this->session->userdata('userid');
@@ -225,7 +223,7 @@ class Exam extends CI_Controller
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');
 		
-		$data['class']=$this->Globalmodel->getdata_by_field('class_section','cs_parentid',0);
+		$data['class']=$this->Globalmodel->getdata('class');
 		
 		$this->load->view('header',$data);
 		$this->load->view('exam/searchmarks',$data);
@@ -242,13 +240,7 @@ class Exam extends CI_Controller
 		$sectionid=$this->input->post('section');
 		$session=$this->input->post('session');
 		
-		//$data['allrec']=$this->Exammodel->get_all_createdexam();
 		$data['sturec']=$this->Exammodel->get_all_createdexam($session,$classid,$sectionid);
-		
-		foreach($data['sturec'] as $r)
-		{
-			$data['section']=$this->Globalmodel->getdata_by_field('class_section','cs_id',$r->e_sectionid);
-		}
 		
 		$this->load->view('header',$data);
 		$this->load->view('exam/createmarksdtls',$data);
@@ -261,18 +253,14 @@ class Exam extends CI_Controller
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');
 		
-		$data['allrec']=$this->Exammodel->get_all_createdexam_by_id($id);		
+		$data['allrec']=$this->Exammodel->get_all_createdexam_by_id($id);
+		
 		//print_r($data['allrec'][0]->e_sectionid);		
 		$classid=$data['allrec'][0]->e_classid;
 		$sectionid=$data['allrec'][0]->e_sectionid;
 		$session=$data['allrec'][0]->e_session;
 		
 		$data['sturec']=$this->Exammodel->get_student_class_section($session,$classid,$sectionid);
-		
-		foreach($data['allrec'] as $r)
-		{
-			$data['section']=$this->Globalmodel->getdata_by_field('class_section','cs_id',$r->e_sectionid);
-		}
 		
 		$data['examrec']=$this->Exammodel->get_report_by_exam($id);
 		//print_r(count($data['examrec']));
@@ -351,7 +339,7 @@ class Exam extends CI_Controller
 		$username=$this->session->userdata('username');
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');			
-		$data['class']=$this->Globalmodel->getdata_by_field('class_section','cs_parentid',0);		
+		$data['class']=$this->Globalmodel->getdata('class');		
 		$this->load->view('header',$data);
 		$this->load->view('exam/searchpromotion',$data);
 		$this->load->view('exam/footer');
@@ -369,16 +357,11 @@ class Exam extends CI_Controller
 		
 		//$data['sturec']=$this->Exammodel->get_student_class_section($session,$classid,$sectionid);
 		
-		$data['class']=$this->Globalmodel->getdata_by_field('class_section','cs_parentid',0);		
+		$data['class']=$this->Globalmodel->getdata('class');		
 		
 		$data['sturec']=$this->Exammodel->get_student_class_section($session,$classid,$sectionid);
 		
 		$data['stumarks']=$this->Exammodel->get_student_exam_marks($session,$classid,$sectionid);	
-		
-		for($i=0;$i<count($data['sturec']);$i++)
-		{
-			$data['sturec'][$i]->classname=$this->Globalmodel->getdata_by_field('class_section','cs_id',$data['sturec'][$i]->cs_parentid);				
-		}
 		
 		$this->load->view('header',$data);
 		$this->load->view('exam/createpromotiondtls',$data);
@@ -421,8 +404,8 @@ class Exam extends CI_Controller
 					$dtls=array(
 								'reg_no'=>$regno[$i], 
 								'scm_session'=>$session,
-								'class_id'=>$classid, 
-								'section_id'=>0,
+								'scm_classid'=>$classid, 
+								'scm_sectionid'=>0,
 								'scm_date'=>date('Y-m-d'), 
 								'scm_time'=>date('H:i:s'), 
 								'scm_flag'=>1,
@@ -467,7 +450,7 @@ class Exam extends CI_Controller
 		$session=$this->input->post('session');
 		$classid=$this->input->post('classname');		
 		
-		$data['section']=$this->Globalmodel->getdata_by_field('section','class_id',$classid);		
+		$data['section']=$this->Globalmodel->getdata_by_field('class_section','csec_classid',$classid);		
 		
 		//print_r($session.'-'.$classid);
 		
@@ -491,13 +474,13 @@ class Exam extends CI_Controller
 		$sectionid=$this->input->post('sectionid');		
 		$selsec=$this->input->post('selsec');
 		
-		print_r($regno);
-		print_r($selsec);
-		print_r($session.'-'.$classid.'-'.$sectionid);
+		//print_r($regno);
+		//print_r($selsec);
+		//print_r($session.'-'.$classid.'-'.$sectionid);
 		
 		
 		$data=array(
-					'section_id'=>$sectionid
+					'scm_sectionid'=>$sectionid
 					);
 		
 		for($i=0;$i<count($selsec);$i++)
@@ -507,7 +490,7 @@ class Exam extends CI_Controller
 		
 		}
 		$this->session->set_flashdata('successmsg','Student Successfully Added to Section');
-		redirect('Exam/searchStudent');
+		redirect('Exam/searchStudent');		
 	}
 	
 	public function searchReport()
@@ -515,7 +498,7 @@ class Exam extends CI_Controller
 		$username=$this->session->userdata('username');
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');		
-		$data['class']=$this->Globalmodel->getdata_by_field('class_section','cs_parentid',0);		
+		$data['class']=$this->Globalmodel->getdata('class');		
 		$this->load->view('header',$data);
 		$this->load->view('exam/searchreport',$data);
 		$this->load->view('exam/footer');
@@ -539,14 +522,9 @@ class Exam extends CI_Controller
 		
 		$data['sturec']=$this->Exammodel->get_student_class_section($session,$classid,$sectionid);
 		
-		for($i=0;$i<count($data['sturec']);$i++)
-		{
-			$data['sturec'][$i]->classname=$this->Globalmodel->getdata_by_field('class_section','cs_id',$data['sturec'][$i]->cs_parentid);				
-		}
-		
 		//$data['stuexam']=$this->Exammodel->get_all_createdexam($session,$classid,$sectionid);
 		
-		$data['class']=$this->Globalmodel->getdata_by_field('class_section','cs_parentid',0);
+		$data['class']=$this->Globalmodel->getdata('class');
 		
 		$this->load->view('header',$data);
 		$this->load->view('exam/createreportdtls',$data);
@@ -592,26 +570,9 @@ class Exam extends CI_Controller
 	{
 	    $classid=$this->input->post('classid');
 		$data['subject']=$this->Subjectmodel->get_all_class_subject_by_id($classid);
-		
-		for($i=0; $i<count($data['subject']); $i++) 
+		foreach($data['subject'] as $r)
 		{
-			$sub_id = explode(",",$data['subject'][$i]->s_id);
-			$str = "";			
-			$d=array();
-			$d1=array();
-			for($j=0; $j<count($sub_id); $j++) 
-			{
-				$ur = $this->Globalmodel->getdata_by_field('subject','sub_id',$sub_id[$j]);
-				
-				if($j == count($sub_id)-1)
-				{
-					$str.='<option value="'.$ur[0]->sub_id.'">'.$ur[0]->subname.'</option>';
-				}
-				else
-				{
-					$str.='<option value="'.$ur[0]->sub_id.'">'.$ur[0]->subname.'</option>';
-				}
-			}
+			$str.='<option value="'.$r->csub_id.'">'.$r->csub_name.'</option>';
 		}
 		echo $str;
 	}
@@ -620,26 +581,9 @@ class Exam extends CI_Controller
 	{
 	    $classid=$this->input->post('classid');
 		$data['examterm']=$this->Exammodel->get_all_class_exam_by_id($classid);
-		
-		for($i=0; $i<count($data['examterm']); $i++) 
+		foreach($data['examterm'] as $r)
 		{
-			$sub_id = explode(",",$data['examterm'][$i]->cet_et_id);
-			$str = "";			
-			$d=array();
-			$d1=array();
-			for($j=0; $j<count($sub_id); $j++) 
-			{
-				$ur = $this->Globalmodel->getdata_by_field('examterm','et_id',$sub_id[$j]);
-				
-				if($j == count($sub_id)-1)
-				{
-					$str.='<option value="'.$ur[0]->et_id.'">'.$ur[0]->termname.'</option>';
-				}
-				else
-				{
-					$str.='<option value="'.$ur[0]->et_id.'">'.$ur[0]->termname.'</option>';
-				}
-			}
+			$str.='<option value="'.$r->cterm_id.'">'.$r->cterm_name.'</option>';
 		}
 		echo $str;
 	}
