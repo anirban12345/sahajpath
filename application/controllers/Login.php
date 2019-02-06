@@ -34,6 +34,7 @@ class Login extends CI_Controller
 			
 			if($data['userflag'][0]->Uflag==1)
 			{
+				$this->session->set_userdata('name',$data['userflag'][0]->Firstname.' '.$data['userflag'][0]->Lastname);
 				$this->session->set_userdata('username',$username);
 				$this->session->set_userdata('userid',$data['userflag'][0]->id);
 				$username=$this->session->userdata('username');			

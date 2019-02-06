@@ -31,8 +31,8 @@
             <form role="form" action="<?php echo site_url('Setup/updateClassDtls/'.$r->class_id);?>" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="firstname">Name</label>
-                  <input type="text" class="form-control" id="firstname" placeholder="Enter Class Name" name="schoolname" value="<?=$r->name?>" autocomplete="off"  />
+                  <label for="classname">Name</label>
+                  <input type="text" class="form-control" id="classname" placeholder="Enter Class Name" name="classname" value="<?=$r->class_name?>" autocomplete="off"  />
                 </div>								
               </div>
               <!-- /.box-body -->

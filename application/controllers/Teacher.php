@@ -184,47 +184,6 @@ class Teacher extends CI_Controller
 		redirect('Teacher/teacherList');	
 	}
 	
-	public function updateStudentDtls($id)
-	{
-		$sname=$this->input->post('sname');					
-		$fathersname=$this->input->post('fathersname');	
-		$mothersname=$this->input->post('mothersname');	
-		$address=$this->input->post('address');			
-		$state=$this->input->post('state');	
-		$district=$this->input->post('district');	
-		$pincode=$this->input->post('pincode');	
-		$dob=$this->input->post('dob');		
-	    $gender=$this->input->post('gender');		
-		$nationality=$this->input->post('nationality');	
-		$religion=$this->input->post('religion');
-		$caste=$this->input->post('caste');
-		$physicallychalleged=$this->input->post('physicallychalleged');	
-		$phoneno=$this->input->post('phoneno');
-		$userid=$this->session->userdata('userid');
-		
-		$dtls=array(
-					'stuname'=>$sname, 										
-					'fathersname'=>$fathersname, 
-					'mothersname'=>$mothersname,
-					'address'=>$address,
-					'state'=>$state,
-					'district'=>$district,
-					'pincode'=>$pincode,
-					'dob'=>date("Y-m-d",strtotime($dob)),
-					'gender'=>$gender,
-					'nationality'=>$nationality,
-					'religion_id'=>$religion,
-					'caste_id'=>$caste,
-					'physicallychalleged'=>$physicallychalleged,
-					'phoneno'=>$phoneno,															 
-					'stu_flag'=>1,
-					'user_id'=>$userid
-					);
-		$this->Globalmodel->updatedata('student','stu_id',$id,$dtls);
-		$this->session->set_flashdata('successmsg','Student Successfully Saved');
-		redirect('Student/studentlist');
-	}
-	
 	public function do_upload($regno)
     {
 			    $config['upload_path']     = './uploads/stuimg/';
@@ -298,6 +257,7 @@ class Teacher extends CI_Controller
                 }
     }
 	
+	/*
 	public function addStudenttoClass($regno)
 	{
 		$username=$this->session->userdata('username');
@@ -313,6 +273,7 @@ class Teacher extends CI_Controller
 		$this->load->view('student/footer');	
 	}
 	
+	
 	public function isStudentExisttoClass($sessionyear,$regno)
 	{
 		$filterdata=array('scm_session'=>$sessionyear,'reg_no'=>$regno);
@@ -324,5 +285,122 @@ class Teacher extends CI_Controller
 		}
 		return $c;
 	}
+	*/
 	
+	
+	public function findTeachertoClass()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		$data['class']=$this->Globalmodel->getdata('class');
+		
+		//$data['allrec']=$this->Teachermodel->getteacher_from_all();
+		
+		$this->load->view('header',$data);
+		$this->load->view('teacher/addteachertoclass',$data);
+		$this->load->view('teacher/footer');
+	}
+	public function findTeachertoClassList()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		
+		$data['class']=$this->Globalmodel->getdata('class');
+		
+		$this->load->view('header',$data);
+		$this->load->view('teacher/findteachertoclass',$data);
+		$this->load->view('teacher/footer');
+	}
+	public function searchTeachertoClass()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		
+		$session=$this->input->post('session');
+		$classid=$this->input->post('classid');
+		$section=$this->input->post('section');
+		
+		$data['allrec']=$this->Teachermodel->getteacher_from_all($session,$classid,$section);
+		
+		$this->load->view('header',$data);
+		$this->load->view('teacher/classtoteacherlist',$data);
+		$this->load->view('teacher/footer');
+		
+		
+	}
+	public function addTeachertoClass()
+	{
+		$session=$this->input->post('session');		
+		$classid=$this->input->post('classid');		
+		$sectionid=$this->input->post('section');
+		
+		$this->session->set_userdata('classsession',$session);		
+		$this->session->set_userdata('classid',$classid);		
+		$this->session->set_userdata('sectionid',$sectionid);
+		
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');		
+		//$data['subject']=$this->Globalmodel->getdata('subject');		
+		
+		$data['classsubject']=$this->Globalmodel->getdata_by_field_join('class','class_id','class_subject','csub_classid','csub_classid',$classid);
+		$data['classsection']=$this->Globalmodel->getdata_by_field_join('class','class_id','class_section','csec_classid','csec_classid',$classid);		
+		$data['teacher']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Title','Teaching Staff');				
+		
+		$this->load->view('header',$data);
+		$this->load->view('teacher/addteachertoclass2',$data);
+		$this->load->view('teacher/footer');
+	}
+	
+	public function saveTeachertoClass()
+	{
+		$session=$this->session->userdata('classsession');
+		$classid=$this->session->userdata('classid');		
+		$secid=$this->session->userdata('sectionid');				
+		$subject=$this->input->post('subject');
+		$teacher=$this->input->post('teacher');
+		$userid=$this->session->userdata('userid');
+		
+		//print_r($session.'-'.$classid.'-'.$secid);
+		//print_r($subject);
+		//print_r($teacher);
+		
+		for($i=0;$i<count($subject);$i++)
+		{
+			
+			$farray=array('tcm_session'=>$session,
+						  'tcm_classid'=>$classid,
+						  'tcm_sectionid'=>$secid,
+						  'tcm_subid'=>$subject[$i]
+						 );
+						 
+			$data2['rec']=$this->Teachermodel->getteacher_from_all_byfilter($farray);
+			
+			if(count($data2['rec'])==0)
+			{	
+				$data=array(
+							'tcm_session'=>$session,
+							'tcm_classid'=>$classid,
+							'tcm_sectionid'=>$secid,
+							'tcm_subid'=>$subject[$i],
+							'tcm_userid'=>$teacher[$i],
+							'tcm_date'=>date('Y-m-d'),
+							'tcm_time'=>date('H:i:s'),
+							'tcm_flag'=>1,
+							'user_id'=>$userid
+							);
+				$this->Globalmodel->savedata('teacher_class_map',$data);				
+			}
+			else
+			{
+				$this->session->set_flashdata('errmsg','Already Added');
+				redirect('Teacher/findTeachertoClass');		
+			}		
+		}
+		$this->session->set_flashdata('successmsg','Successfully Saved');
+		redirect('Teacher/findTeachertoClass');
+	}
 }

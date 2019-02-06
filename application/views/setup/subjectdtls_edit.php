@@ -28,15 +28,18 @@
             <!-- /.box-header -->
             <!-- form start -->	
 			<?php foreach($classsubject as $r) {?>	
-            <form role="form" action="<?php echo site_url('Setup/updateSubjectDtls/'.$r->sub_id);?>" method="post">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="firstname">Class</label>
-                  <input type="text" class="form-control" id="classname" placeholder="Enter Class Name" name="classname" value="<?=$r->name?>" autocomplete="off" readonly />
-                </div>								
+            <form role="form" action="<?php echo site_url('Setup/updateSubjectDtls/'.$r->csub_id);?>" method="post">
+              <div class="box-body">			
+				
 				<div class="form-group">
-                  <label for="subjectname">Section</label>
-				<input type="text" class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" value="<?=$r->subname?>" autocomplete="off"  />
+                  <label for="subjectname">Class</label>
+				  <input type="hidden" value="<?=$r->class_id?>" name="classname" id="classname" />
+				  <input type="text" class="form-control" placeholder="Enter Class Name" value="<?=$r->class_name?>" autocomplete="off" readonly  />
+				</div>
+				
+				<div class="form-group">
+                  <label for="subjectname">Subject Name</label>
+				<input type="text" class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" value="<?=$r->csub_name?>" autocomplete="off"  />
                 </div>
               </div>
               <!-- /.box-body -->

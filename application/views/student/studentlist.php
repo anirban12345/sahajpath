@@ -73,8 +73,8 @@
 					  <td><?=$r->gender?></td>
 					  <td><?=$r->rname?></td>
 					  <td><?=$r->cname?></td>
-					  <td><?=$r->name?></td>
-					  <td><?=$r->sname?></td>
+					  <td><?=$r->class_name?></td>
+					  <td><?=$r->csec_name?></td>
 					  <?php if($r->stu_flag==1){ ?>
 					  <td><span class="label label-success">Active</span></td>
 					  <?php }else {?>

@@ -22,17 +22,7 @@ class Student extends CI_Controller
 		$username=$this->session->userdata('username');
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');		
-		//$data['allrec']=$this->Globalmodel->getdata('student');
-		//$data['religion']=$this->Globalmodel->getdata_join('student','religion_id','religion','religion_id');		
-		//$data['caste']=$this->Globalmodel->getdata_join('student','caste_id','caste','caste_id');				
-		
-		//$data['allrec']=$this->Studentmodel->getstudenttocasteandreligion();
-		//$data['student']=$this->Globalmodel->getdata_by_field('student','reg_no','student_class_map','reg_no');
-		
-		
 		$data['allrec']=$this->Studentmodel->getstudent_by_join_regno();
-		
-		
 		//$data['allrec']=$this->Studentmodel->getstudent_class_caste_religion();
 		//print_r($data['countuser']);
 		//print_r($data['rec'][0]->id);
@@ -91,6 +81,7 @@ class Student extends CI_Controller
 		$data['allrec']=$this->Globalmodel->getdata_by_field('student','reg_no',$regno);		
 		$data['studoc']=$this->Globalmodel->getdata_by_field('student_docs','reg_no',$regno);				
 		$data['stuclass']=$this->Studentmodel->getstudenttoclass_by_regno($regno);
+		
 		$data['religion']=$this->Globalmodel->getdata_by_field_join('student','religion_id','religion','religion_id','reg_no',$regno);		
 		$data['caste']=$this->Globalmodel->getdata_by_field_join('student','caste_id','caste','caste_id','reg_no',$regno);				
 		//print_r($data['countuser']);
@@ -127,12 +118,38 @@ class Student extends CI_Controller
 		$this->load->view('student/footer');
 	}
 	
+	public function searchStudentClassSection()
+	{	
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');		
+		$data['class']=$this->Globalmodel->getdata('class');		
+		$this->load->view('header',$data);
+		$this->load->view('student/studentsearchclass',$data);
+		$this->load->view('student/footer');
+	}
+	
 	public function searchStudentListClass()
 	{
+		
 		$username=$this->session->userdata('username');
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
 		$data['setup']=$this->Globalmodel->getdata('setup');	
-		$data['allrec']=$this->Studentmodel->getstudent_class_caste_religion();		
+		//$data['allrec']=$this->Studentmodel->getstudent_class_caste_religion();
+
+		$session=$this->input->post('session');
+		$classid=$this->input->post('classname');
+		$sectionid=$this->input->post('section');
+		
+		$data['allrec']=$this->Studentmodel->get_student_class_section($session,$classid,$sectionid);
+		
+		/*
+		foreach($data['allrec'] as $r)
+		{
+			$data['class']=$this->Globalmodel->getdata_by_field('class_section','csec_id',$r->cs_parentid);		
+		}
+		*/
+		
 		//print_r($data['countuser']);
 		//print_r($data['rec'][0]->id);
 		$this->load->view('header',$data);
@@ -304,7 +321,7 @@ class Student extends CI_Controller
 					);
 		$this->Globalmodel->savedata('student',$dtls);		
 		$this->session->set_flashdata('successmsg','Student Successfully Saved - Student Registration No is: <strong>'.$regno.'</strong>');
-		redirect('Student/studentlist');	
+		redirect('Student/viewStudent/'.$regno);	
 	}
 	
 	public function updateStudentDtls($id)
@@ -428,7 +445,7 @@ class Student extends CI_Controller
 		$data['setup']=$this->Globalmodel->getdata('setup');		
 		$data['allrec']=$this->Globalmodel->getdata('student');
 		$data['class']=$this->Globalmodel->getdata('class');
-		$data['section']=$this->Globalmodel->getdata('section');
+		//$data['section']=$this->Globalmodel->getdata('section');
 		$data['regno']=$regno;
 		
 		$this->load->view('header',$data);
@@ -448,10 +465,16 @@ class Student extends CI_Controller
 		return $c;
 	}
 	
+	public function classStudentCount()
+	{
+		$data['studentcount']=$this->Studentmodel->class_countstudent();
+		print_r(json_encode($data['studentcount']));
+	}
+		
 	public function saveStudenttoClass($regno)
 	{
-		$sessionyear=$this->input->post('sessionyear');		
-		$classid=$this->input->post('classname');		
+		$sessionyear=$this->input->post('sessionyear');				
+		$classid=$this->input->post('classname');
 		$sectionid=$this->input->post('section');
 		$userid=$this->session->userdata('userid');
 		
@@ -467,8 +490,8 @@ class Student extends CI_Controller
 			$dtls=array(
 						'reg_no'=>$regno, 
 						'scm_session'=>$sessionyear,
-						'class_id'=>$classid, 
-						'section_id'=>$sectionid,
+						'scm_classid'=>$classid, 						
+						'scm_sectionid'=>$sectionid, 						
 						'scm_date'=>date('Y-m-d'), 
 						'scm_time'=>date('H:i:s'), 
 						'scm_flag'=>1,
@@ -491,13 +514,67 @@ class Student extends CI_Controller
 	public function getSection()
 	{
 		$classid=$this->input->post('classid');
-		$data['rec']=$this->Globalmodel->getdata_by_field('section','class_id',$classid);
+		$data['rec']=$this->Globalmodel->getdata_by_field('class_section','csec_classid',$classid);
 		//echo $sectionid;
 		$str='';		
 		foreach($data['rec'] as $r)
 		{
-			$str.='<option value="'.$r->section_id.'">'.$r->sname.'</option>';
+			$str.='<option value="'.$r->csec_id.'">'.$r->csec_name.'</option>';
 		}
 		echo $str;		
 	}
+	
+	
+	public function getSection2()
+	{
+		$classid=$this->input->post('classid');
+		$data['rec']=$this->Globalmodel->getdata_by_field('class_section','csec_classid',$classid);
+		
+		$data['class']=$this->Globalmodel->getdata_by_field('class','class_id',$classid);
+		
+		$class='';
+		foreach($data['class'] as $r)
+		{
+			$class=$r->class_name;	
+		}
+		$str='';		
+		
+		$str.='<table id="example1" class="table table-bordered table-striped">			  
+					<thead>
+					<tr><th colspan=4 class="text-primary text-center"><h3>'.$class.'</h3></th></tr>
+					<tr>
+					  <th>Sl No.</th>					  
+					  <th>Section Name</th>					  
+					  <th>Status</th>
+					  <th>Action</th>					  
+					</tr>
+					</thead>
+					<tbody>
+					';
+		$i=1;			
+		foreach($data['rec'] as $r)
+		{
+			$str.='<tr>
+					  <td>'.$i++.'</td>					  
+					  <td>'.$r->csec_name.'</td>';					  
+					  if($r->csec_flag==1)
+					  {
+						$str.='<td><span class="label label-success">Active</span></td>';
+					  }else {
+						$str.='<td><span class="label label-danger">Deactive</span></td>';
+					  }
+					  $str.='<td>';
+					  if($r->csec_flag==1)
+					  {
+					  $str.='<a href="'.site_url('Setup/activateSection/'.$r->csec_id).'" roll="button" class="btn btn-warning btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></a>';					  					  
+					  }else {
+					  $str.='<a href="'.site_url('Setup/activateSection/'.$r->csec_id).'" roll="button" class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i></a>';  
+					  }
+					  $str.='<a href="'.site_url('Setup/editSectiondtls/'.$r->csec_id).'" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>';
+					  $str.='</td>'; 					
+					  $str.='</tr>';						
+		}
+		$str.='</tbody></table>';		
+		echo $str;
+	}			  
 }

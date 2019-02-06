@@ -17,8 +17,7 @@ class Attendance extends CI_Controller
 		
 	}
 	
-	
-	public function addAttendance()
+	public function addStaffAttendance()
 	{	
 		$username=$this->session->userdata('username');
 		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
@@ -26,6 +25,16 @@ class Attendance extends CI_Controller
 		$data['user']=$this->Globalmodel->getdata_join('users','levelid','user_level','id');				
 		$this->load->view('header',$data);		
 		$this->load->view('attendance/entry',$data);
+		$this->load->view('attendance/footer');	
+	}
+	
+	public function addStdentAttendance()
+	{	
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		$this->load->view('header',$data);		
+		$this->load->view('attendance/searchstudent',$data);
 		$this->load->view('attendance/footer');	
 	}
 	
@@ -78,10 +87,6 @@ class Attendance extends CI_Controller
 		$entrytime=$this->input->post('entrytime');
 		$exittime=$this->input->post('exittime');
 		$userid=$this->session->userdata('userid');
-		
-		
-		
-		
 		
 		$dtls=array(
 					'a_user_id'=>$staffid,

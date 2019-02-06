@@ -27,7 +27,7 @@
 	
       <!-- Info boxes -->
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-6">
 		
 			<div class="box box-primary">
             <div class="box-header with-border">
@@ -37,16 +37,17 @@
             <!-- form start -->	
 			
             <form role="form" action="<?php echo site_url('Setup/saveSubjectDtls');?>" method="post">
-              <div class="box-body">			    
-			    <div class="form-group">
+              <div class="box-body">			    			    
+                <div class="form-group">
 					<label>Select Class</label>
-						<select class="form-control select2" style="width: 100%;" id="classname" name="classname">				  
+						<select class="form-control select2" style="width: 100%;" id="classname" name="classname">
+							<option value="Select">Select</option> 							
 							<?php foreach($class as $r){?>
-							<option value="<?=$r->class_id?>"><?=$r->name?></option> 							
+							<option value="<?=$r->class_id?>"><?=$r->class_name?></option> 							
 							<?php }?>
 					    </select>
 				</div>
-                <div class="form-group">
+				<div class="form-group">
                   <label for="firstname">Subject Name</label>
                   <input type="text" class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" autocomplete="off"  />
                 </div>								
@@ -58,13 +59,9 @@
             </form>			
 			
           </div>	
-        </div>  
-      </div>
-      <!-- /.row --> 
-
-	  <!-- Info boxes -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        </div>
+			
+		<div class="col-md-6 col-sm-6 col-xs-6">
 		
 			<div class="box">
 				<div class="box-header">
@@ -72,46 +69,18 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-				  <table id="example1" class="table table-bordered table-striped">			  
-					<thead>
-					<tr>
-					  <th>Sl No.</th>
-					  <th>Class Name</th>
-					  <th>Subject Name</th>					  
-					  <th>Status</th>
-					  <th>Action</th>					  
-					</tr>
-					</thead>
-					<tbody>
+				  
+				  <div id="subject">
 					
-					<?php $i=1; foreach($allrec as $r) { ?>
-					<tr>
-					  <td><?=$i++?></td>
-					  <td><?=$r->name?></td>					  
-					  <td><?=$r->subname?></td>					  
-					  <?php if($r->sub_flag==1){ ?>
-					  <td><span class="label label-success">Active</span></td>
-					  <?php }else {?>
-					  <td><span class="label label-danger">Deactive</span></td>
-					  <?php }?>
-
-					  <td>
-					  <?php if($r->sub_flag==1){ ?>
-					  <a href="<?php echo site_url('Setup/activateSubject/'.$r->sub_id); ?>" roll="button" class="btn btn-warning btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></a>					  					  
-					  <?php }else {?>
-					  <a href="<?php echo site_url('Setup/activateSubject/'.$r->sub_id); ?>" roll="button" class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i></a>  
-					  <?php }?>
-					  <a href="<?php echo site_url('Setup/editSubjectdtls/'.$r->sub_id); ?>" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-					  </td>
-					</tr>
-					<?php } ?>
-					</tbody>
-				  </table>	
+				  </div>
+				  
+				  
 				</div>	
 			</div>	
-        </div>  
+        </div>  	
+		
       </div>
-      <!-- /.row -->	  
+      <!-- /.row --> 
 
       <!-- Main row -->
       

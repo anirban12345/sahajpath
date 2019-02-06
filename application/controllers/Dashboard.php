@@ -25,6 +25,10 @@ class Dashboard extends CI_Controller
 		$this->load->view('dashboard/index',$data);
 		$this->load->view('dashboard/footer');
 	}
-		
 	
+	public function countUser()
+	{
+		$data['usercount']=$this->Loginmodel->countuser();
+		print_r(json_encode($data['usercount']));
+	}
 }

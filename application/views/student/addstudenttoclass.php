@@ -34,14 +34,12 @@
 			    
 				<div class="form-group">
 					<label>Select Session Year</label>
-					<select class="form-control select2" style="width: 100%;" id="sessionyear" name="sessionyear">	
-							<option value="Select">Select</option>					
-					        <option value="2016-2017">2016-2017</option>                  
-							<option value="2017-2018">2017-2018</option>                  
-							<option value="2018-2019">2018-2019</option>                  
-							<option value="2019-2020">2019-2020</option>                  
-							<option value="2020-2021">2020-2021</option>                  
-							<option value="2021-2022">2021-2022</option>                  
+					<select class="form-control select2" style="width: 100%;" id="sessionyear" name="sessionyear">								
+								<option value="2017" <?php if(date('Y')=="2017"){ echo "selected"; } ?>>2017</option>                  
+								<option value="2018" <?php if(date('Y')=="2018"){ echo "selected"; } ?>>2018</option>                  
+								<option value="2019" <?php if(date('Y')=="2019"){ echo "selected"; } ?>>2019</option>                  
+								<option value="2020" <?php if(date('Y')=="2020"){ echo "selected"; } ?>>2020</option>                  
+								<option value="2021" <?php if(date('Y')=="2021"){ echo "selected"; } ?>>2021</option>                  
 					</select>
 				</div>
 				
@@ -50,7 +48,7 @@
 					<select class="form-control select2" style="width: 100%;" id="classname" name="classname">	
 							<option value="Select">Select</option>					
 					        <?php foreach($class as $r){?>
-								<option value="<?=$r->class_id?>"><?=$r->name?></option>                  
+								<option value="<?=$r->class_id?>"><?=$r->class_name?></option>                  
 							<?php }?>
 					</select>
 				</div>

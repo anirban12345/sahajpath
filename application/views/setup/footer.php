@@ -239,6 +239,90 @@
   
   $('.select2').select2()
 </script>
-
+<script>
+$(document).ready(function(){				
+			//alert('a');			
+			var classid;
+				$('#classname').on('change',function(){					
+					classid = $(this).val();					
+					//alert(classid);					
+					if(classid){
+						$.ajax({
+							type:'POST',
+							url:'<?php echo base_url('Student/getSection2'); ?>',
+							data:{'classid':classid},
+							success:function(data){
+								//alert(data);
+								$('#section').html(data);
+							}
+						}); 
+					}else{
+						$('#section').html('');
+							
+					}					
+				});
+				
+				
+				$('#classname').on('change',function(){					
+					classid = $(this).val();					
+					//alert(classid);					
+					if(classid){
+						$.ajax({
+							type:'POST',
+							url:'<?php echo base_url('Subject/getSubject'); ?>',
+							data:{'classid':classid},
+							success:function(data){
+								//alert(data);
+								$('#subject').html(data);
+							}
+						}); 
+					}else{
+						$('#subject').html('');
+							
+					}					
+				});
+				
+				$('#classname').on('change',function(){					
+					classid = $(this).val();					
+					//alert(classid);					
+					if(classid){
+						$.ajax({
+							type:'POST',
+							url:'<?php echo base_url('Fees/getFees'); ?>',
+							data:{'classid':classid},
+							success:function(data){
+								//alert(data);
+								$('#fees').html(data);
+							}
+						}); 
+					}else{
+						$('#fees').html('');
+							
+					}					
+				});
+				
+				$('#classname').on('change',function(){					
+					classid = $(this).val();					
+					//alert(classid);					
+					if(classid){
+						$.ajax({
+							type:'POST',
+							url:'<?php echo base_url('Term/getTerm'); ?>',
+							data:{'classid':classid},
+							success:function(data){
+								//alert(data);
+								$('#term').html(data);
+							}
+						}); 
+					}else{
+						$('#fees').html('');
+							
+					}					
+				});
+				
+				
+				
+});
+</script>
 </body>
 </html>

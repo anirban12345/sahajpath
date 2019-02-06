@@ -211,7 +211,7 @@
     $.material.init();
 </script>
 <!-- ChartJS -->
-<script src="<?php echo base_url().'assets/';?>bower_components/chart.js/Chart.js"></script>
+<script src="<?php echo base_url().'assets/';?>dist/js/Chart.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url().'assets/';?>bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -230,91 +230,95 @@
 </body>
 </html>
 <script>
-  $(function () {
-    /* ChartJS
-     * -------
-     * Here we will create a few charts using ChartJS
-     */
 
-    //--------------
-    //- AREA CHART -
-    //--------------
-
-    var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label               : 'Electronics',
-          fillColor           : 'rgba(210, 214, 222, 1)',
-          strokeColor         : 'rgba(210, 214, 222, 1)',
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label               : 'Digital Goods',
-          fillColor           : 'rgba(60,141,188,0.9)',
-          strokeColor         : 'rgba(60,141,188,0.8)',
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        }
-      ]
+$(document).ready(function(){
+  $.ajax({
+    url: "<?php echo site_url('Student/classStudentCount'); ?>",
+    method: "GET",
+    success: function(data) {
+	  data1=JSON.parse(data);
+      var cname = [];
+      var stucount = [];
+      for(i=0;i<data1.length;i++) 
+	  {	
+        cname.push(data1[i].classname);
+        stucount.push(data1[i].countstudent);				
+      }	  
+      var chartdata = {
+        labels:cname,
+        datasets : [
+          {
+            label: 'No Of Students',
+            backgroundColor: '#00c0ef',
+            borderColor: '#00c0ef',
+            hoverBackgroundColor: '#00c0ef',
+            hoverBorderColor: '#00c0ef',
+            data: stucount
+          }
+        ]
+      };
+      var ctx = $("#barChart");
+      var barGraph = new Chart(ctx, {
+        type: 'bar',
+        data: chartdata,		
+		options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+      });
     }
-
-    var areaChartOptions = {
-      //Boolean - If we should show the scale at all
-      showScale               : true,
-      //Boolean - Whether grid lines are shown across the chart
-      scaleShowGridLines      : false,
-      //String - Colour of the grid lines
-      scaleGridLineColor      : 'rgba(0,0,0,.05)',
-      //Number - Width of the grid lines
-      scaleGridLineWidth      : 1,
-      //Boolean - Whether to show horizontal lines (except X axis)
-      scaleShowHorizontalLines: true,
-      //Boolean - Whether to show vertical lines (except Y axis)
-      scaleShowVerticalLines  : true,
-      //Boolean - Whether the line is curved between points
-      bezierCurve             : true,
-      //Number - Tension of the bezier curve between points
-      bezierCurveTension      : 0.3,
-      //Boolean - Whether to show a dot for each point
-      pointDot                : false,
-      //Number - Radius of each point dot in pixels
-      pointDotRadius          : 4,
-      //Number - Pixel width of point dot stroke
-      pointDotStrokeWidth     : 1,
-      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-      pointHitDetectionRadius : 20,
-      //Boolean - Whether to show a stroke for datasets
-      datasetStroke           : true,
-      //Number - Pixel width of dataset stroke
-      datasetStrokeWidth      : 2,
-      //Boolean - Whether to fill the dataset with a color
-      datasetFill             : true,
-      //String - A legend template
-      legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-      //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-      maintainAspectRatio     : true,
-      //Boolean - whether to make the chart responsive to window resizing
-      responsive              : true
+  });
+  
+  $.ajax({
+    url: "<?php echo site_url('Dashboard/countUser'); ?>",
+    method: "GET",
+    success: function(data) {
+	  data1=JSON.parse(data);
+      var title = [];
+      var cuser = [];
+      for(i=0;i<data1.length;i++) 
+	  {	
+        title.push(data1[i].Title);
+        cuser.push(data1[i].cuser);				
+      }	  
+      var chartdata = {
+        labels:title,
+        datasets : [
+          {
+            label: 'No Of Users',
+            backgroundColor: '#f39c12',
+            borderColor: '#f39c12',
+            hoverBackgroundColor: '#f39c12',
+            hoverBorderColor: '#f39c12',
+            data: cuser
+          }
+        ]
+      };
+      var ctx = $("#barChart2");
+      var barGraph = new Chart(ctx, {
+        type: 'bar',
+        data: chartdata,		
+		options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+      });
     }
+  });
+  
+  
+});
 
-	
-    //-------------
-    //- LINE CHART -
-    //--------------
-    var lineChartCanvas          = $('#lineChart').get(0).getContext('2d')
-    var lineChart                = new Chart(lineChartCanvas)
-    var lineChartOptions         = areaChartOptions
-    lineChartOptions.datasetFill = false
-    lineChart.Line(areaChartData, lineChartOptions)
-	
-	})
-	
+
+
 </script>

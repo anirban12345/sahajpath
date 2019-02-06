@@ -5,11 +5,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Setup
+        Fee
         <!-- <small>Version 2.0</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-wrench"></i>Setup</a></li>
+        <li><a href="#"><i class="fa fa-inr"></i>Fee</a></li>
         <li class="active">Fees Details</li>
       </ol>
     </section>

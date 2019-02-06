@@ -28,15 +28,16 @@
             <!-- /.box-header -->
             <!-- form start -->	
 			<?php foreach($classsection as $r) {?>	
-            <form role="form" action="<?php echo site_url('Setup/updateSectionDtls/'.$r->section_id);?>" method="post">
+            <form role="form" action="<?php echo site_url('Setup/updateSectionDtls/'.$r->csec_id);?>" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="firstname">Class</label>
-                  <input type="text" class="form-control" id="classname" placeholder="Enter Class Name" name="classname" value="<?=$r->name?>" autocomplete="off" readonly />
+                  <label for="classname">Class</label>				  
+				  <input type="hidden" id="classname" name="classname" value="<?=$r->class_id?>" autocomplete="off" readonly />
+                  <input type="text" class="form-control" id="" placeholder="Enter Class Name" value="<?=$r->class_name?>" autocomplete="off" readonly />
                 </div>								
 				<div class="form-group">
-                  <label for="firstname">Section</label>
-				<input type="text" class="form-control" id="sectioname" placeholder="Enter Section Name" name="sectioname" value="<?=$r->sname?>" autocomplete="off"  />
+                  <label for="sectioname">Section</label>
+				<input type="text" class="form-control" id="sectioname" placeholder="Enter Section Name" name="sectioname" value="<?=$r->csec_name?>" autocomplete="off"  />
                 </div>
               </div>
               <!-- /.box-body -->

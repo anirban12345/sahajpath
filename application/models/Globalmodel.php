@@ -8,15 +8,13 @@ class Globalmodel extends CI_Model {
 	
 	public function savedata($table,$data)
 	{
-		$this->db->insert($table,$data); 
+		$this->db->insert($table,$data); 		
 	}
 	
 	public function updatedata($table,$filer,$value,$data)
 	{
-	   $this->db->select('*');
-	   $this->db->from($table);	   
 	   $this->db->where($filer,$value);
-	   $this->db->update($table,$data);	
+	   $this->db->update($table,$data);	   
 	}
 	
 	public function deletedata($table,$filer,$value)

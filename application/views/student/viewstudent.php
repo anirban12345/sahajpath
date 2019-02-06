@@ -134,11 +134,11 @@
 					  <th>Section</th>                                    				  
 					</tr>
 						
-					<?php foreach($stuclass as $r) {?>
+					<?php $i=0; foreach($stuclass as $r) {?>
 					<tr>
 					  <td><?=$r->scm_session?></td>
-					  <td><?=$r->name?></td>
-					  <td><?=$r->sname?></td>                                    				  
+					  <td><?=$r->class_name?></td>
+					  <td><?=$r->csec_name?></td>					  
 					</tr>
 					<?php } ?>
 				</table>

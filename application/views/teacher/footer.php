@@ -240,7 +240,41 @@
   })
   
   $('.select2').select2()
+  
+  $(document).ready(function(){
+				
+			//alert('a');
+			
+			var classid,sessionyr;
+				$('#classid').on('change',function(){
+					
+					classid = $(this).val();
+					//alert(sectionid);
+					if(classid){
+						$.ajax({
+							type:'POST',
+							url:'<?php echo base_url('Student/getSection'); ?>',
+							data:{'classid':classid},
+							success:function(data){
+								//alert(data);
+								$('#section').html('<option value="">Select</option>'+data);
+							}
+						}); 
+						
+					}else{
+						$('#section').html('<option value="">Select Input</option>');
+							
+					}
+				});
+			
+				
+				
+				
+				
+  });  
 </script>
+
+
 
 </body>
 </html>

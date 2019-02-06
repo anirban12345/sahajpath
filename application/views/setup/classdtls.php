@@ -39,8 +39,8 @@
             <form role="form" action="<?php echo site_url('Setup/saveClassDtls');?>" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="firstname">Name</label>
-                  <input type="text" class="form-control" id="firstname" placeholder="Enter Class Name" name="schoolname" autocomplete="off"  />
+                  <label for="classname">Name</label>
+                  <input type="text" class="form-control" id="classname" placeholder="Enter Class Name" name="classname" autocomplete="off"  />
                 </div>								
               </div>
               <!-- /.box-body -->
@@ -78,7 +78,7 @@
 					<?php $i=1; foreach($allrec as $r) { ?>
 					<tr>
 					  <td><?=$i++?></td>
-					  <td><?=$r->name?></td>					  
+					  <td><?=$r->class_name?></td>					  
 					  <?php if($r->class_flag==1){ ?>
 					  <td><span class="label label-success">Active</span></td>
 					  <?php }else {?>

@@ -66,13 +66,15 @@
 	.btn
 	{
 	  margin:0;
-	}	
-	.content-wrapper,.wrapper
+	}
+
+	.wrapper
 	{
 		overflow:hidden;
-	}
+	}	
 	
   </style>
+  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -96,7 +98,7 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
+          <!-- Messages: style can be found in dropdown.less--
           <li class="dropdown messages-menu">
             <a href="<?php echo base_url(); ?>#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
@@ -105,9 +107,9 @@
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
               <li>
-                <!-- inner menu: contains the actual data -->
+                <!-- inner menu: contains the actual data --
                 <ul class="menu">
-                  <li><!-- start message -->
+                  <li><!-- start message --
                     <a href="<?php echo base_url(); ?>#">
                       <div class="pull-left">
                         <img src="<?php echo base_url().'assets/'; ?>dist/img/user-160x160.jpg" class="img-circle" alt="User Image">
@@ -119,7 +121,7 @@
                       <p>Why not buy a new awesome theme?</p>
                     </a>
                   </li>
-                  <!-- end message -->
+                  <!-- end message --
                   <li>
                     <a href="<?php echo base_url(); ?>#">
                       <div class="pull-left">
@@ -173,7 +175,7 @@
               <li class="footer"><a href="<?php echo base_url(); ?>#">See All Messages</a></li>
             </ul>
           </li>
-          <!-- Notifications: style can be found in dropdown.less -->
+          <!-- Notifications: style can be found in dropdown.less --
           <li class="dropdown notifications-menu">
             <a href="<?php echo base_url(); ?>#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
@@ -182,7 +184,7 @@
             <ul class="dropdown-menu">
               <li class="header">You have 10 notifications</li>
               <li>
-                <!-- inner menu: contains the actual data -->
+                <!-- inner menu: contains the actual data --
                 <ul class="menu">
                   <li>
                     <a href="<?php echo base_url(); ?>#">
@@ -215,7 +217,7 @@
               <li class="footer"><a href="<?php echo base_url(); ?>#">View all</a></li>
             </ul>
           </li>
-          <!-- Tasks: style can be found in dropdown.less -->
+          <!-- Tasks: style can be found in dropdown.less --
           <li class="dropdown tasks-menu">
             <a href="<?php echo base_url(); ?>#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
@@ -224,9 +226,9 @@
             <ul class="dropdown-menu">
               <li class="header">You have 9 tasks</li>
               <li>
-                <!-- inner menu: contains the actual data -->
+                <!-- inner menu: contains the actual data --
                 <ul class="menu">
-                  <li><!-- Task item -->
+                  <li><!-- Task item --
                     <a href="<?php echo base_url(); ?>#">
                       <h3>
                         Design some buttons
@@ -241,7 +243,7 @@
                     </a>
                   </li>
                   <!-- end task item -->
-                  <li><!-- Task item -->
+                  <li><!-- Task item --
                     <a href="<?php echo base_url(); ?>#">
                       <h3>
                         Create a nice theme
@@ -256,7 +258,7 @@
                     </a>
                   </li>
                   <!-- end task item -->
-                  <li><!-- Task item -->
+                  <li><!-- Task item --
                     <a href="<?php echo base_url(); ?>#">
                       <h3>
                         Some task I need to do
@@ -271,7 +273,7 @@
                     </a>
                   </li>
                   <!-- end task item -->
-                  <li><!-- Task item -->
+                  <li><!-- Task item --
                     <a href="<?php echo base_url(); ?>#">
                       <h3>
                         Make beautiful transitions
@@ -285,7 +287,7 @@
                       </div>
                     </a>
                   </li>
-                  <!-- end task item -->
+                  <!-- end task item --
                 </ul>
               </li>
               <li class="footer">
@@ -352,7 +354,7 @@
 		
 		<li>
           <a href="<?php echo site_url('Dashboard'); ?>">
-            <i class="fa fa-book"></i> <span>Dashboard</span>            
+            <i class="fa fa-home"></i> <span>Dashboard</span>            
           </a>
         </li>
 		<!-- 
@@ -386,14 +388,23 @@
             </span>
           </a>
           <ul class="treeview-menu">
+		  
+			<!--
+				<li><a href="<?php echo site_url('Dashboard/countUser'); ?>"><i class="fa fa-circle-o text-aqua"></i>test</a></li>
+				<li><a href="<?php echo site_url('Student/classStudentCount'); ?>"><i class="fa fa-circle-o text-aqua"></i>test</a></li> 
+			-->	
+			
 			<li><a href="<?php echo site_url('Setup/schoolDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>School Details</a></li>
 		    <li><a href="<?php echo site_url('Administration/addUsertype'); ?>"><i class="fa fa-circle-o text-aqua"></i>User Type</a></li>
 			<li><a href="<?php echo site_url('Setup/religionDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Religion</a></li>  
 			<li><a href="<?php echo site_url('Setup/casteDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Caste</a></li>            
             <li><a href="<?php echo site_url('Setup/classDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Class</a></li>  			
 			<li><a href="<?php echo site_url('Setup/sectionDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Sections</a></li>  			
-			<li><a href="<?php echo site_url('Setup/subjectDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Subject</a></li>
+			<li><a href="<?php echo site_url('Setup/subjectDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Subjects</a></li>
 			<li><a href="<?php echo site_url('Setup/feesDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Fees</a></li>
+			<li><a href="<?php echo site_url('Setup/termDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Exam Term</a></li>
+			
+			
 			<!--<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Group / Class / Subject</a></li>
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Pick-Up Point</a></li>  -->
           </ul>
@@ -430,7 +441,6 @@
           </a>
         </li>
 		
-		
 		<li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
@@ -442,15 +452,14 @@
           <ul class="treeview-menu">
             <!-- <li><a href=""><i class="fa fa-circle-o text-aqua"></i>Sections / Roll Numbers</a></li> -->
             <li><a href="<?php echo site_url('Student/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Student Record</a></li>  
-			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Update class record</a></li>  
+			<!--<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Update class record</a></li>  
 			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Boy-Girl Student</a></li>  
 			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Transferred student details</a></li>  
 			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Caste Categories wise details</a></li>
-            <li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Age wise Student details</a></li>  
-			<li><a href="<?php echo site_url('Student/searchStudentListClass'); ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise student list</a></li>  
+            <li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Age wise Student details</a></li>  -->
+			<li><a href="<?php echo site_url('Student/searchStudentClassSection'); ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise Student</a></li>  
           </ul>
         </li>
-		
 		
 		<li class="treeview">
           <a href="#">
@@ -464,9 +473,10 @@
 			<!-- <li><a href=""><i class="fa fa-circle-o text-aqua"></i>Sections / Roll Numbers</a></li> -->			
 			<li><a href="<?php echo site_url('Teacher/teacherList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Teachers</a></li>  
 			<li><a href="<?php echo site_url('Teacher/addTeacher'); ?>"><i class="fa fa-circle-o text-aqua"></i>Add Teachers</a></li>			
+			<li><a href="<?php echo site_url('Teacher/findTeachertoClass'); ?>"><i class="fa fa-circle-o text-aqua"></i>Assign Teacher to Class</a></li>
+			<li><a href="<?php echo site_url('Teacher/findTeachertoClassList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Teacher to Class Details</a></li>
           </ul>
         </li>
-	
 		
 		<li class="treeview">
           <a href="#">
@@ -476,14 +486,14 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo site_url('Fees/addFees'); ?>"><i class="fa fa-circle-o text-aqua"></i>Add Fee</a></li>
-            <li><a href="<?php echo site_url('Fees/feesDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Fee Details</a></li>  
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Pay / Taken Fee</a></li>  
+          <ul class="treeview-menu">            
+			<li><a href="<?php echo site_url('Fees/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Pay / Taken Fee</a></li>
+			<!--	
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Print Receipts</a></li>  
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Generate Student Fee Card</a></li>  
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise Students Fee status</a></li>
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Check Paid Fee List with date range</a></li>  			
+			-->
           </ul>
         </li>
 		
@@ -549,28 +559,42 @@
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Check free staff details</a></li>  			
           </ul>
         </li>
+		-->
 		
 		<li class="treeview">
           <a href="#">
-            <i class="fa fa-pencil"></i>
+            <i class="fa fa-file"></i>
             <span>Examination</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Term wise Add Exam</a></li>
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Create Exam for classes</a></li>  			
+            <li><a href="<?php echo site_url('Exam/addExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Add Exam to Class</a></li>
+            <li><a href="<?php echo site_url('Exam/examDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Exam Details</a></li>
+            <li><a href="<?php echo site_url('Exam/createExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Exam for Class</a></li>  			
+			<li><a href="<?php echo site_url('Exam/searchExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Exam</a></li>  
+			
+			<!--
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Export exam details</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Subject Wise Marks Search</a></li>
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student wise marks search</a></li>  			
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student report card</a></li>  			
+            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student wise marks search</a></li> 
+			--> 
+			
+			<li><a href="<?php echo site_url('Exam/searchMarks'); ?>"><i class="fa fa-circle-o text-aqua"></i>Marks Entry</a></li> 
+			
+			<li><a href="<?php echo site_url('Exam/searchReport'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Report Card</a></li> 
+			<li><a href="<?php echo site_url('Exam/searchPromotion'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Promotion</a></li> 
+			<li><a href="<?php echo site_url('Exam/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Unassigned Student List</a></li> 
+			
+			<!-- 
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise report</a></li>
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Academic Year wise report</a></li>  			
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Rank</a></li>  			
+			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Rank</a></li> 
+			--> 			
+			
           </ul>
         </li>
-		-->
 		
 		<li class="treeview">
           <a href="#">
@@ -581,9 +605,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Students Attendance</a></li>
-            <li><a href="<?php echo site_url('Attendance/addAttendance'); ?>"><i class="fa fa-circle-o text-aqua"></i>Staff Attendance</a></li>  			
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Edit Students Attendance</a></li>  			
+            <li><a href="<?php echo site_url('Attendance/addStdentAttendance'); ?>"><i class="fa fa-circle-o text-aqua"></i>Students Attendance</a></li>
+            <li><a href="<?php echo site_url('Attendance/addStaffAttendance'); ?>"><i class="fa fa-circle-o text-aqua"></i>Staff Attendance</a></li>  			
+		    <li><a href=""><i class="fa fa-circle-o text-aqua"></i>Edit Students Attendance</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Edit Staff Attendance</a></li>
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student wise report</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise Report</a></li>  			
@@ -591,9 +615,7 @@
           </ul>
         </li>
 		
-	  
       </ul>
-	  
     </section>
     <!-- /.sidebar -->
   </aside>

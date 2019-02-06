@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2019 at 07:41 PM
+-- Generation Time: Feb 06, 2019 at 02:30 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -42,11 +42,10 @@ CREATE TABLE `caste` (
 --
 
 INSERT INTO `caste` (`caste_id`, `cname`, `caste_date`, `caste_time`, `caste_flag`, `user_id`) VALUES
-(1, 'SC', '2019-01-08', '14:02:34', 0, 6),
-(2, 'ST', '2019-01-08', '15:23:23', 1, 6),
-(3, 'OBC - A', '2019-01-08', '15:21:45', 0, 6),
-(4, 'General', '2019-01-08', '15:30:38', 1, 6),
-(5, 'OBC - B', '2019-01-09', '09:12:08', 1, 6);
+(1, 'General', '2019-02-03', '10:48:11', 1, 1),
+(2, 'SC', '2019-02-03', '10:48:15', 1, 1),
+(3, 'ST', '2019-02-03', '10:48:18', 1, 1),
+(4, 'OBC - A', '2019-02-03', '10:48:26', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -56,7 +55,7 @@ INSERT INTO `caste` (`caste_id`, `cname`, `caste_date`, `caste_time`, `caste_fla
 
 CREATE TABLE `class` (
   `class_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `class_name` varchar(255) NOT NULL,
   `class_date` date NOT NULL,
   `class_time` time NOT NULL,
   `class_flag` int(11) NOT NULL,
@@ -67,11 +66,10 @@ CREATE TABLE `class` (
 -- Dumping data for table `class`
 --
 
-INSERT INTO `class` (`class_id`, `name`, `class_date`, `class_time`, `class_flag`, `user_id`) VALUES
-(1, 'Class I', '2019-01-08', '08:55:32', 1, 6),
-(2, 'Class II', '2019-01-08', '11:22:23', 1, 6),
-(3, 'Class III', '2019-01-09', '09:10:04', 1, 6),
-(4, 'Class IV', '2019-01-09', '09:09:45', 1, 6);
+INSERT INTO `class` (`class_id`, `class_name`, `class_date`, `class_time`, `class_flag`, `user_id`) VALUES
+(1, 'Class I', '2019-02-04', '21:47:36', 1, 1),
+(2, 'Class II', '2019-02-04', '21:47:43', 1, 1),
+(3, 'Class III', '2019-02-04', '22:36:54', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -80,12 +78,14 @@ INSERT INTO `class` (`class_id`, `name`, `class_date`, `class_time`, `class_flag
 --
 
 CREATE TABLE `class_fees` (
-  `cf_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `fees_id` varchar(255) NOT NULL,
-  `cf_date` date NOT NULL,
-  `cf_time` time NOT NULL,
-  `cf_flag` int(11) NOT NULL,
+  `cfees_id` int(11) NOT NULL,
+  `cfees_classid` int(11) NOT NULL,
+  `cfees_name` varchar(255) NOT NULL,
+  `cfees_fees` varchar(255) NOT NULL,
+  `cfees_parentid` int(11) NOT NULL,
+  `cfees_date` date NOT NULL,
+  `cfees_time` time NOT NULL,
+  `cfees_flag` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -93,36 +93,127 @@ CREATE TABLE `class_fees` (
 -- Dumping data for table `class_fees`
 --
 
-INSERT INTO `class_fees` (`cf_id`, `class_id`, `fees_id`, `cf_date`, `cf_time`, `cf_flag`, `user_id`) VALUES
-(1, 1, '1,2,3', '2019-01-12', '21:30:47', 1, 6),
-(4, 2, '1,2,3,4', '2019-01-12', '22:10:41', 1, 6),
-(10, 3, '2,4', '2019-01-15', '22:35:20', 1, 6);
+INSERT INTO `class_fees` (`cfees_id`, `cfees_classid`, `cfees_name`, `cfees_fees`, `cfees_parentid`, `cfees_date`, `cfees_time`, `cfees_flag`, `user_id`) VALUES
+(1, 1, 'Tution Fees', '500', 0, '2019-02-04', '00:03:15', 1, 1),
+(2, 1, 'Examination Fees', '200', 0, '2019-02-04', '00:11:24', 1, 1),
+(3, 2, 'Tution Fees', '600', 0, '2019-02-04', '09:31:36', 1, 1),
+(4, 1, 'Library Fees', '200', 0, '2019-02-06', '09:46:59', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fees`
+-- Table structure for table `class_section`
 --
 
-CREATE TABLE `fees` (
-  `f_id` int(11) NOT NULL,
-  `f_head` varchar(255) NOT NULL,
-  `f_rs` varchar(255) NOT NULL,
-  `f_date` date NOT NULL,
-  `f_time` time NOT NULL,
-  `f_flag` int(11) NOT NULL,
+CREATE TABLE `class_section` (
+  `csec_id` int(11) NOT NULL,
+  `csec_classid` int(11) NOT NULL,
+  `csec_name` varchar(255) NOT NULL,
+  `csec_parentid` int(11) NOT NULL,
+  `csec_date` date NOT NULL,
+  `csec_time` time NOT NULL,
+  `csec_flag` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `fees`
+-- Dumping data for table `class_section`
 --
 
-INSERT INTO `fees` (`f_id`, `f_head`, `f_rs`, `f_date`, `f_time`, `f_flag`, `user_id`) VALUES
-(1, 'Tution Fee', '500', '2019-01-15', '22:04:50', 1, 6),
-(2, 'Examination Fees', '150', '2019-01-12', '20:44:17', 1, 6),
-(3, 'Development Fees', '50', '2019-01-12', '20:44:47', 1, 6),
-(4, 'Library', '25', '2019-01-12', '20:44:56', 1, 6);
+INSERT INTO `class_section` (`csec_id`, `csec_classid`, `csec_name`, `csec_parentid`, `csec_date`, `csec_time`, `csec_flag`, `user_id`) VALUES
+(1, 1, 'Section A', 0, '2019-02-04', '22:07:43', 1, 1),
+(2, 2, 'Section A', 0, '2019-02-04', '21:59:45', 1, 1),
+(3, 2, 'Section B', 0, '2019-02-04', '22:25:02', 1, 1),
+(4, 1, 'Section B', 0, '2019-02-04', '22:19:31', 1, 1),
+(5, 2, 'Section C', 0, '2019-02-04', '22:31:19', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_subject`
+--
+
+CREATE TABLE `class_subject` (
+  `csub_id` int(11) NOT NULL,
+  `csub_classid` int(11) NOT NULL,
+  `csub_name` varchar(255) NOT NULL,
+  `csub_parentid` int(11) NOT NULL,
+  `csub_date` date NOT NULL,
+  `csub_time` time NOT NULL,
+  `csub_flag` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `class_subject`
+--
+
+INSERT INTO `class_subject` (`csub_id`, `csub_classid`, `csub_name`, `csub_parentid`, `csub_date`, `csub_time`, `csub_flag`, `user_id`) VALUES
+(1, 1, 'General Knowledge', 0, '2019-02-03', '19:31:41', 1, 1),
+(2, 2, 'General Knowledge', 0, '2019-02-03', '20:39:15', 1, 1),
+(3, 1, 'English', 0, '2019-02-03', '20:40:11', 1, 1),
+(4, 2, 'English', 0, '2019-02-05', '09:02:49', 1, 1),
+(5, 1, 'Poribesh', 0, '2019-02-04', '23:51:24', 1, 1),
+(6, 2, 'Amader Poribesh', 0, '2019-02-03', '21:32:41', 1, 1),
+(7, 3, 'Learning English', 0, '2019-02-03', '21:34:32', 1, 1),
+(8, 3, 'Mathematics', 0, '2019-02-04', '23:45:34', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_term`
+--
+
+CREATE TABLE `class_term` (
+  `cterm_id` int(11) NOT NULL,
+  `cterm_classid` int(11) NOT NULL,
+  `cterm_name` varchar(255) NOT NULL,
+  `cterm_totalmarks` varchar(255) NOT NULL,
+  `cterm_passmarks` varchar(255) NOT NULL,
+  `cterm_parentid` int(11) NOT NULL,
+  `cterm_date` date NOT NULL,
+  `cterm_time` time NOT NULL,
+  `cterm_flag` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `class_term`
+--
+
+INSERT INTO `class_term` (`cterm_id`, `cterm_classid`, `cterm_name`, `cterm_totalmarks`, `cterm_passmarks`, `cterm_parentid`, `cterm_date`, `cterm_time`, `cterm_flag`, `user_id`) VALUES
+(1, 1, 'Term 1', '50', '20', 0, '2019-02-05', '00:34:53', 1, 1),
+(2, 1, 'Term 2', '50', '20', 0, '2019-02-05', '00:29:02', 1, 1),
+(3, 1, 'Annual', '100', '40', 0, '2019-02-05', '00:29:20', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam`
+--
+
+CREATE TABLE `exam` (
+  `e_id` int(11) NOT NULL,
+  `e_session` varchar(255) NOT NULL,
+  `e_classid` int(11) NOT NULL,
+  `e_sectionid` int(11) NOT NULL,
+  `e_subjectid` int(11) NOT NULL,
+  `e_termid` int(11) NOT NULL,
+  `e_date` date NOT NULL,
+  `e_desc` varchar(255) NOT NULL,
+  `e_crt_date` date NOT NULL,
+  `e_crt_time` time NOT NULL,
+  `e_crt_flag` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `exam`
+--
+
+INSERT INTO `exam` (`e_id`, `e_session`, `e_classid`, `e_sectionid`, `e_subjectid`, `e_termid`, `e_date`, `e_desc`, `e_crt_date`, `e_crt_time`, `e_crt_flag`, `user_id`) VALUES
+(1, '2019', 1, 4, 1, 1, '2019-04-17', 'Term ! Exam', '2019-02-03', '13:26:04', 1, 1),
+(2, '2019', 1, 5, 1, 1, '2019-05-15', 'Term 1', '2019-02-03', '14:03:40', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -144,35 +235,32 @@ CREATE TABLE `religion` (
 --
 
 INSERT INTO `religion` (`religion_id`, `rname`, `religion_date`, `religion_time`, `religion_flag`, `user_id`) VALUES
-(1, 'Hindu', '2019-01-09', '09:11:52', 1, 6),
-(2, 'Islam', '2019-01-08', '13:56:33', 1, 6),
-(3, 'Jainism', '2019-01-09', '09:10:58', 0, 6);
+(1, 'Hinduism', '2019-02-03', '10:47:50', 1, 1),
+(2, 'Islam', '2019-02-03', '10:47:58', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `section`
+-- Table structure for table `report`
 --
 
-CREATE TABLE `section` (
-  `section_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `sname` varchar(255) NOT NULL,
-  `section_date` date NOT NULL,
-  `section_time` time NOT NULL,
-  `section_flag` int(11) NOT NULL,
+CREATE TABLE `report` (
+  `report_id` int(11) NOT NULL,
+  `r_e_id` int(11) NOT NULL,
+  `r_reg_no` varchar(255) NOT NULL,
+  `r_marks` varchar(255) NOT NULL,
+  `r_date` date NOT NULL,
+  `r_time` time NOT NULL,
+  `r_flag` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `section`
+-- Dumping data for table `report`
 --
 
-INSERT INTO `section` (`section_id`, `class_id`, `sname`, `section_date`, `section_time`, `section_flag`, `user_id`) VALUES
-(1, 1, 'Sec A', '2019-01-08', '16:49:00', 0, 6),
-(2, 2, 'Sec A', '2019-01-09', '09:10:27', 1, 6),
-(3, 1, 'Sec B', '2019-01-09', '09:10:39', 1, 6),
-(4, 2, 'Sec B', '2019-01-09', '16:42:58', 1, 6);
+INSERT INTO `report` (`report_id`, `r_e_id`, `r_reg_no`, `r_marks`, `r_date`, `r_time`, `r_flag`, `user_id`) VALUES
+(1, 1, '190203104917', '40', '2019-02-03', '16:30:13', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -197,7 +285,7 @@ CREATE TABLE `setup` (
 --
 
 INSERT INTO `setup` (`setup_id`, `name`, `address`, `emailid`, `phoneno`, `setup_date`, `setup_time`, `setup_flag`, `user_id`) VALUES
-(1, 'Name', 'Address', 'name@gmail.com', '9999999999', '2019-01-09', '11:16:27', 1, 6);
+(1, 'ABCDEF', '11,ABC Road,Malda,West Bengal,Pincode: 789456', 'abcdef@abcdef.com', '9999999999', '0000-00-00', '00:00:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -235,11 +323,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`stu_id`, `reg_no`, `stuname`, `fathersname`, `mothersname`, `address`, `state`, `district`, `pincode`, `dob`, `gender`, `nationality`, `religion_id`, `caste_id`, `physicallychalleged`, `phoneno`, `image`, `scm_id`, `stu_date`, `stu_time`, `stu_flag`, `user_id`) VALUES
-(1, '190108174315', 'a', 'd', 'e', 'f', 'West Bengal', 'Bardhaman', 'i', '2019-01-08', 'Male', 'Indian', 2, 3, 'Yes', '99', '190108174315.jpg', 0, '2019-01-08', '10:00:00', 1, 6),
-(2, '190108173615', 'Anirban Seth', 'demo4', 'demo5', 'demo6', 'West Bengal', 'Kolkata', '99999999', '2019-01-08', 'Male', 'Indian', 1, 1, 'No', '7755339955', '190108173615.jpg', 5, '2019-01-08', '17:23:34', 1, 6),
-(3, '190108171535', 'qq', 'Fathers Name', 'tt', 'yy', 'West Bengal', 'Bardhaman', '99', '2005-01-15', 'Female', 'Indian', 1, 1, 'Yes', '996633', '190108171535.jpg', 3, '2019-01-08', '17:36:42', 1, 6),
-(4, '190108220637', 'Somrat', 'Ashok Mondal', 'Mira Mondal', 'Belghoria', 'West Bengal', 'Kolkata', '715402', '1999-02-16', 'Male', 'Indian', 1, 1, 'No', '9517538525', '190108220637.jpg', 4, '2019-01-08', '22:06:37', 1, 6),
-(6, '190110093007', 'Sutopa', 'Manish Roy', 'Tapasi Roy', 'Malda', 'West Bengal', 'Malda', '774455', '2014-06-10', 'Female', 'Indian', 1, 4, 'No', '9988776655', 'user.jpg', 0, '2019-01-10', '09:30:07', 1, 6);
+(1, '190203104917', 'Arijit  Ghosh', 'Rajib Ghosh', 'Mina Ghosh', 'Bandal, Hooghly', 'West Bengal', 'Hooghly', '744445', '2016-07-20', 'Male', 'Indian', 1, 1, 'No', '9999999999', '190203104917.jpg', 1, '2019-02-03', '10:49:17', 1, 1),
+(2, '190206000621', 'Rahul  Mondal', 'Sisir Mondal', 'Tapasi Mondal', 'Noihati,North 24 Pargana', 'West Bengal', 'Uttar 24 Parganas', '744445', '2016-08-17', 'Male', 'Indian', 1, 1, 'No', '9638521595', 'user.jpg', 3, '2019-02-06', '00:06:21', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -251,8 +336,8 @@ CREATE TABLE `student_class_map` (
   `scm_id` int(11) NOT NULL,
   `scm_session` varchar(255) NOT NULL,
   `reg_no` varchar(255) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `section_id` int(11) NOT NULL,
+  `scm_classid` int(11) NOT NULL,
+  `scm_sectionid` int(11) NOT NULL,
   `scm_date` date NOT NULL,
   `scm_time` time NOT NULL,
   `scm_flag` int(11) NOT NULL,
@@ -263,11 +348,11 @@ CREATE TABLE `student_class_map` (
 -- Dumping data for table `student_class_map`
 --
 
-INSERT INTO `student_class_map` (`scm_id`, `scm_session`, `reg_no`, `class_id`, `section_id`, `scm_date`, `scm_time`, `scm_flag`, `user_id`) VALUES
-(1, '2018', '190108220637', 1, 1, '2019-01-09', '15:58:53', 1, 6),
-(3, '2019', '190108171535', 1, 1, '2019-01-09', '16:43:36', 1, 6),
-(4, '2020', '190108220637', 1, 1, '2019-01-09', '21:38:20', 1, 6),
-(5, '2021', '190108173615', 2, 2, '2019-01-10', '10:09:59', 1, 6);
+INSERT INTO `student_class_map` (`scm_id`, `scm_session`, `reg_no`, `scm_classid`, `scm_sectionid`, `scm_date`, `scm_time`, `scm_flag`, `user_id`) VALUES
+(1, '2019', '190203104917', 1, 1, '2019-02-03', '11:54:41', 1, 1),
+(2, '2020', '190203104917', 2, 2, '2019-02-03', '11:54:41', 1, 1),
+(3, '2019', '190206000621', 1, 4, '2019-02-06', '00:10:17', 1, 1),
+(4, '2020', '190206000621', 2, 2, '2019-02-06', '09:08:24', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -286,45 +371,93 @@ CREATE TABLE `student_docs` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `student_docs`
---
-
-INSERT INTO `student_docs` (`sd_id`, `reg_no`, `description`, `filename`, `sd_date`, `sd_time`, `sd_flag`, `user_id`) VALUES
-(1, '190108220637', 'Addhar Card', '1546974553.jpg', '2019-01-09', '00:39:25', 1, 6),
-(2, '190108220637', 'Birth Certiificate', '1546974578.jpg', '2019-01-09', '00:39:53', 1, 6),
-(3, '190108171535', 'Voter card', '1547034337.jpg', '2019-01-09', '17:15:46', 1, 6),
-(4, '190108171535', 'Aadhar Card', '1547034392.jpg', '2019-01-09', '17:16:42', 1, 6),
-(5, '190108220637', 'Ration Card', '1547035037.jpg', '2019-01-09', '17:27:27', 1, 6),
-(6, '190108220637', 'Aadhar', '1547036936.jpg', '2019-01-09', '17:59:03', 1, 6);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subject`
+-- Table structure for table `student_fee`
 --
 
-CREATE TABLE `subject` (
-  `sub_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `subname` varchar(255) NOT NULL,
-  `sub_date` date NOT NULL,
-  `sub_time` time NOT NULL,
-  `sub_flag` int(11) NOT NULL,
+CREATE TABLE `student_fee` (
+  `sf_id` int(11) NOT NULL,
+  `sf_reg_no` varchar(255) NOT NULL,
+  `sf_billno` varchar(255) NOT NULL,
+  `sf_classid` int(11) NOT NULL,
+  `sf_month` varchar(255) NOT NULL,
+  `sf_year` varchar(255) NOT NULL,
+  `sf_date` date NOT NULL,
+  `sf_time` time NOT NULL,
+  `sf_flag` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `subject`
+-- Dumping data for table `student_fee`
 --
 
-INSERT INTO `subject` (`sub_id`, `class_id`, `subname`, `sub_date`, `sub_time`, `sub_flag`, `user_id`) VALUES
-(1, 1, 'Enlgish', '2019-01-11', '15:54:05', 1, 6),
-(2, 1, 'Mathematics', '2019-01-11', '16:00:30', 1, 6),
-(3, 1, 'General Knowledge', '2019-01-11', '16:00:39', 1, 6),
-(7, 2, 'Mathematics', '2019-01-11', '16:01:17', 1, 6),
-(8, 2, 'English', '2019-01-11', '16:05:31', 1, 6),
-(9, 1, 'Memory Games', '2019-01-11', '17:10:50', 1, 6);
+INSERT INTO `student_fee` (`sf_id`, `sf_reg_no`, `sf_billno`, `sf_classid`, `sf_month`, `sf_year`, `sf_date`, `sf_time`, `sf_flag`, `user_id`) VALUES
+(4, '190203104917', '181905025406', 1, 'March', '2019', '2019-02-05', '18:06:54', 1, 1),
+(5, '190203104917', '231905024942', 1, 'January', '2019', '2019-02-05', '23:42:49', 1, 1),
+(6, '190206000621', '001906020413', 1, 'January', '2019', '2019-02-06', '00:13:04', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_fee_bill`
+--
+
+CREATE TABLE `student_fee_bill` (
+  `sfb_id` int(11) NOT NULL,
+  `sfb_billno` varchar(255) NOT NULL,
+  `sfb_feesid` int(11) NOT NULL,
+  `sfb_total` int(11) NOT NULL,
+  `sfb_total_word` varchar(1000) NOT NULL,
+  `sfb_date` date NOT NULL,
+  `sfb_time` time NOT NULL,
+  `sfb_flag` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_fee_bill`
+--
+
+INSERT INTO `student_fee_bill` (`sfb_id`, `sfb_billno`, `sfb_feesid`, `sfb_total`, `sfb_total_word`, `sfb_date`, `sfb_time`, `sfb_flag`, `user_id`) VALUES
+(1, '181905025406', 4, 400, 'Rupees Four Hundred Only', '2019-02-05', '18:06:54', 1, 1),
+(2, '181905025406', 2, 400, 'Rupees Four Hundred Only', '2019-02-05', '18:06:54', 1, 1),
+(3, '231905024942', 2, 900, 'Rupees Nine Hundred  only', '2019-02-05', '23:42:49', 1, 1),
+(4, '231905024942', 1, 900, 'Rupees Nine Hundred  only', '2019-02-05', '23:42:49', 1, 1),
+(5, '231905024942', 4, 900, 'Rupees Nine Hundred  only', '2019-02-05', '23:42:50', 1, 1),
+(6, '001906020413', 2, 900, 'Rupees Nine Hundred  only', '2019-02-06', '00:13:04', 1, 1),
+(7, '001906020413', 1, 900, 'Rupees Nine Hundred  only', '2019-02-06', '00:13:04', 1, 1),
+(8, '001906020413', 4, 900, 'Rupees Nine Hundred  only', '2019-02-06', '00:13:04', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_class_map`
+--
+
+CREATE TABLE `teacher_class_map` (
+  `tcm_id` int(11) NOT NULL,
+  `tcm_session` varchar(255) NOT NULL,
+  `tcm_classid` int(11) NOT NULL,
+  `tcm_sectionid` int(11) NOT NULL,
+  `tcm_subid` int(11) NOT NULL,
+  `tcm_userid` int(11) NOT NULL,
+  `tcm_date` date NOT NULL,
+  `tcm_time` time NOT NULL,
+  `tcm_flag` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher_class_map`
+--
+
+INSERT INTO `teacher_class_map` (`tcm_id`, `tcm_session`, `tcm_classid`, `tcm_sectionid`, `tcm_subid`, `tcm_userid`, `tcm_date`, `tcm_time`, `tcm_flag`, `user_id`) VALUES
+(1, '2019', 1, 1, 1, 3, '2019-02-05', '09:25:32', 1, 1),
+(2, '2019', 1, 1, 3, 3, '2019-02-05', '09:25:32', 1, 1),
+(3, '2019', 1, 1, 5, 5, '2019-02-05', '09:25:32', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -353,14 +486,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `Firstname`, `Lastname`, `Address`, `Phoneno`, `Username`, `Password`, `Image`, `Levelid`, `Udate`, `Utime`, `Uflag`, `user_id`) VALUES
-(1, 'user1', 'user1', 'dd', '9963688525', 'user1', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2019-01-06', '17:07:40', 1, 0),
-(2, 'Admin', 'Admin', 'dd', '9963688525', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 1, '2018-08-07', '11:05:31', 1, 0),
-(3, 'user2', 'user2', 'swdd', '9963688526', 'user2', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2018-08-07', '13:44:15', 1, 0),
-(4, 'Sajal', 'Das', 'Patuli', '9963688526', 'sajal', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 3, '2019-01-05', '13:44:15', 1, 6),
-(5, 'non-teaching', 'non-teaching', 'swdd', '9963688526', 'nonteaching', 'e10adc3949ba59abbe56e057f20f883e', '1533629805.jpg', 4, '2019-01-05', '13:44:15', 1, 0),
-(6, 'Anirban', 'Seth', 'Kolkata 700007', '9996663335', 'anirban', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 1, '2019-01-06', '15:55:03', 1, 0),
-(7, 'Rahul', 'Ghosh', 'West Bengal', '8885552225', 'rahul', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 2, '2019-01-06', '23:18:26', 1, 0),
-(8, 'Tapan', 'Halder', 'Bagnan', '9966335522', 'tapan', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 3, '2019-01-11', '14:21:18', 1, 6);
+(1, 'Anirban', 'Seth', 'Kolkata', '9966332255', 'anirban', 'e10adc3949ba59abbe56e057f20f883e', 'user.jpg', 1, '2018-12-06', '00:00:00', 1, 0),
+(2, 'User', 'User', 'User', '9999999999', 'user', 'e10adc3949ba59abbe56e057f20f883e', 'user.jpg', 2, '2019-02-07', '01:00:00', 1, 1),
+(3, 'Sajal', 'Das', 'Kolkata', '8888885555', 'sajal', 'e10adc3949ba59abbe56e057f20f883e', 'user.jpd', 3, '2019-02-07', '00:00:00', 1, 1),
+(4, 'Tapan', 'Pal', 'Kolkata', '7777774444', 'tapan', 'e10adc3949ba59abbe56e057f20f883e', 'user.jpg', 4, '2019-02-08', '00:00:00', 1, 1),
+(5, 'Tapas', 'Bhattacharya', 'Kolkata', '9966335588', 'tapas', 'e10adc3949ba59abbe56e057f20f883e', 'abc.jpg', 3, '2019-02-01', '12:13:07', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -380,94 +510,22 @@ CREATE TABLE `users_log` (
 --
 
 INSERT INTO `users_log` (`id`, `User_Id`, `Log_Date`, `Log_Time`) VALUES
-(1, 4, '2019-01-05', '18:50:41'),
-(2, 1, '2019-01-05', '18:50:59'),
-(3, 1, '2019-01-05', '20:57:05'),
-(4, 4, '2019-01-05', '20:57:23'),
-(5, 1, '2019-01-05', '20:57:50'),
-(6, 4, '2019-01-05', '20:59:47'),
-(7, 5, '2019-01-05', '21:20:48'),
-(8, 1, '2019-01-05', '21:41:04'),
-(9, 1, '2019-01-05', '21:43:38'),
-(10, 1, '2019-01-05', '21:50:31'),
-(11, 1, '2019-01-05', '22:09:14'),
-(12, 1, '2019-01-05', '22:12:09'),
-(13, 1, '2019-01-05', '22:17:08'),
-(14, 1, '2019-01-06', '00:27:24'),
-(15, 1, '2019-01-06', '09:28:32'),
-(16, 1, '2019-01-06', '11:54:05'),
-(17, 1, '2019-01-06', '12:02:15'),
-(18, 1, '2019-01-06', '12:16:59'),
-(19, 1, '2019-01-06', '12:17:49'),
-(20, 1, '2019-01-06', '12:18:39'),
-(21, 1, '2019-01-06', '12:19:00'),
-(22, 1, '2019-01-06', '12:20:31'),
-(23, 1, '2019-01-06', '12:21:00'),
-(24, 1, '2019-01-06', '12:30:04'),
-(25, 1, '2019-01-06', '12:32:59'),
-(26, 1, '2019-01-06', '15:12:00'),
-(27, 1, '2019-01-06', '15:13:19'),
-(28, 2, '2019-01-06', '23:15:22'),
-(29, 4, '2019-01-06', '23:32:59'),
-(30, 1, '2019-01-06', '23:34:43'),
-(31, 1, '2019-01-07', '00:22:07'),
-(32, 6, '2019-01-07', '00:25:45'),
-(33, 6, '2019-01-07', '00:30:55'),
-(34, 6, '2019-01-07', '00:32:22'),
-(35, 7, '2019-01-07', '00:32:39'),
-(36, 6, '2019-01-07', '00:32:59'),
-(37, 6, '2019-01-07', '00:36:05'),
-(38, 1, '2019-01-07', '09:13:14'),
-(39, 6, '2019-01-07', '09:13:25'),
-(40, 6, '2019-01-07', '09:18:51'),
-(41, 7, '2019-01-07', '09:20:16'),
-(42, 6, '2019-01-07', '09:20:26'),
-(43, 6, '2019-01-07', '09:20:53'),
-(44, 6, '2019-01-07', '09:31:58'),
-(45, 6, '2019-01-07', '22:55:55'),
-(46, 6, '2019-01-07', '23:11:03'),
-(47, 1, '2019-01-07', '23:51:47'),
-(48, 6, '2019-01-07', '23:51:57'),
-(49, 2, '2019-01-08', '00:18:49'),
-(50, 6, '2019-01-08', '00:19:50'),
-(51, 6, '2019-01-08', '08:37:01'),
-(52, 6, '2019-01-08', '11:14:33'),
-(53, 6, '2019-01-08', '14:04:28'),
-(54, 6, '2019-01-08', '15:21:33'),
-(55, 6, '2019-01-08', '16:23:59'),
-(56, 6, '2019-01-08', '17:57:29'),
-(57, 6, '2019-01-08', '21:12:07'),
-(58, 6, '2019-01-09', '08:47:00'),
-(59, 6, '2019-01-09', '08:50:36'),
-(60, 6, '2019-01-09', '09:08:51'),
-(61, 6, '2019-01-09', '09:09:29'),
-(62, 6, '2019-01-09', '09:19:51'),
-(63, 6, '2019-01-09', '11:16:20'),
-(64, 6, '2019-01-09', '14:59:14'),
-(65, 6, '2019-01-09', '17:34:27'),
-(66, 6, '2019-01-09', '18:23:48'),
-(67, 6, '2019-01-09', '18:43:50'),
-(68, 6, '2019-01-09', '20:48:49'),
-(69, 6, '2019-01-09', '21:25:56'),
-(70, 6, '2019-01-10', '08:38:02'),
-(71, 6, '2019-01-10', '21:01:23'),
-(72, 6, '2019-01-11', '07:53:07'),
-(73, 6, '2019-01-11', '09:40:56'),
-(74, 6, '2019-01-11', '10:43:51'),
-(75, 6, '2019-01-11', '11:30:32'),
-(76, 6, '2019-01-11', '15:32:42'),
-(77, 6, '2019-01-11', '16:10:37'),
-(78, 6, '2019-01-11', '17:55:59'),
-(79, 6, '2019-01-11', '23:14:11'),
-(80, 6, '2019-01-12', '12:16:16'),
-(81, 6, '2019-01-12', '08:52:55'),
-(82, 6, '2019-01-12', '20:08:17'),
-(83, 6, '2019-01-13', '18:30:13'),
-(84, 6, '2019-01-14', '08:59:53'),
-(85, 6, '2019-01-14', '23:42:40'),
-(86, 6, '2019-01-15', '09:21:00'),
-(87, 6, '2019-01-15', '21:08:20'),
-(88, 6, '2019-01-15', '22:18:51');
+(1, 1, '2019-02-03', '10:14:35'),
+(2, 1, '2019-02-04', '09:21:43'),
+(3, 1, '2019-02-04', '21:14:27'),
+(4, 1, '2019-02-05', '08:28:49'),
+(5, 1, '2019-02-05', '11:26:12'),
+(6, 1, '2019-02-05', '13:59:07'),
+(7, 1, '2019-02-05', '17:46:10'),
+(8, 1, '2019-02-05', '20:51:30'),
+(9, 1, '2019-02-05', '23:42:24'),
+(10, 1, '2019-02-06', '08:26:37'),
+(11, 1, '2019-02-06', '11:16:37'),
+(12, 1, '2019-02-06', '12:00:12'),
+(13, 4, '2019-02-06', '12:01:54'),
+(14, 4, '2019-02-06', '12:04:59'),
+(15, 1, '2019-02-06', '18:58:10'),
+(16, 4, '2019-02-06', '18:59:51');
 
 -- --------------------------------------------------------
 
@@ -486,14 +544,6 @@ CREATE TABLE `user_attendance` (
   `a_flag` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_attendance`
---
-
-INSERT INTO `user_attendance` (`a_id`, `a_user_id`, `entrydate`, `entrytime`, `exittime`, `a_date`, `a_time`, `a_flag`, `user_id`) VALUES
-(3, 2, '2019-01-16', '00:01:00', '00:09:00', '2019-01-16', '00:09:45', 1, 6),
-(5, 6, '2019-01-16', '00:06:00', '00:09:00', '2019-01-16', '00:09:53', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -515,11 +565,10 @@ CREATE TABLE `user_level` (
 --
 
 INSERT INTO `user_level` (`Id`, `Title`, `ut_date`, `ut_time`, `ut_flag`, `user_id`) VALUES
-(1, 'Admin', '0000-00-00', '00:00:00', 0, 6),
-(2, 'User', '0000-00-00', '00:00:00', 0, 6),
-(3, 'Teaching Staff', '0000-00-00', '00:00:00', 1, 6),
-(4, 'Non Teaching Staff', '2019-01-11', '10:12:15', 1, 6),
-(5, 'Group D', '2019-01-11', '16:44:38', 1, 6);
+(1, 'Admin', '0000-00-00', '00:00:00', 1, 0),
+(2, 'User', '0000-00-00', '00:00:00', 1, 0),
+(3, 'Teaching Staff', '0000-00-00', '00:00:00', 1, 0),
+(4, 'Non Teaching Staff', '0000-00-00', '00:00:00', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -541,13 +590,31 @@ ALTER TABLE `class`
 -- Indexes for table `class_fees`
 --
 ALTER TABLE `class_fees`
-  ADD PRIMARY KEY (`cf_id`);
+  ADD PRIMARY KEY (`cfees_id`);
 
 --
--- Indexes for table `fees`
+-- Indexes for table `class_section`
 --
-ALTER TABLE `fees`
-  ADD PRIMARY KEY (`f_id`);
+ALTER TABLE `class_section`
+  ADD PRIMARY KEY (`csec_id`);
+
+--
+-- Indexes for table `class_subject`
+--
+ALTER TABLE `class_subject`
+  ADD PRIMARY KEY (`csub_id`);
+
+--
+-- Indexes for table `class_term`
+--
+ALTER TABLE `class_term`
+  ADD PRIMARY KEY (`cterm_id`);
+
+--
+-- Indexes for table `exam`
+--
+ALTER TABLE `exam`
+  ADD PRIMARY KEY (`e_id`);
 
 --
 -- Indexes for table `religion`
@@ -556,10 +623,10 @@ ALTER TABLE `religion`
   ADD PRIMARY KEY (`religion_id`);
 
 --
--- Indexes for table `section`
+-- Indexes for table `report`
 --
-ALTER TABLE `section`
-  ADD PRIMARY KEY (`section_id`);
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`report_id`);
 
 --
 -- Indexes for table `setup`
@@ -586,10 +653,22 @@ ALTER TABLE `student_docs`
   ADD PRIMARY KEY (`sd_id`);
 
 --
--- Indexes for table `subject`
+-- Indexes for table `student_fee`
 --
-ALTER TABLE `subject`
-  ADD PRIMARY KEY (`sub_id`);
+ALTER TABLE `student_fee`
+  ADD PRIMARY KEY (`sf_id`);
+
+--
+-- Indexes for table `student_fee_bill`
+--
+ALTER TABLE `student_fee_bill`
+  ADD PRIMARY KEY (`sfb_id`);
+
+--
+-- Indexes for table `teacher_class_map`
+--
+ALTER TABLE `teacher_class_map`
+  ADD PRIMARY KEY (`tcm_id`);
 
 --
 -- Indexes for table `users`
@@ -623,37 +702,55 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT for table `caste`
 --
 ALTER TABLE `caste`
-  MODIFY `caste_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `caste_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `class_fees`
 --
 ALTER TABLE `class_fees`
-  MODIFY `cf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cfees_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `fees`
+-- AUTO_INCREMENT for table `class_section`
 --
-ALTER TABLE `fees`
-  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `class_section`
+  MODIFY `csec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `class_subject`
+--
+ALTER TABLE `class_subject`
+  MODIFY `csub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `class_term`
+--
+ALTER TABLE `class_term`
+  MODIFY `cterm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `exam`
+--
+ALTER TABLE `exam`
+  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `religion`
 --
 ALTER TABLE `religion`
-  MODIFY `religion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `religion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `section`
+-- AUTO_INCREMENT for table `report`
 --
-ALTER TABLE `section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `report`
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `setup`
@@ -665,49 +762,61 @@ ALTER TABLE `setup`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `stu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `stu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `student_class_map`
 --
 ALTER TABLE `student_class_map`
-  MODIFY `scm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `scm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `student_docs`
 --
 ALTER TABLE `student_docs`
-  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `subject`
+-- AUTO_INCREMENT for table `student_fee`
 --
-ALTER TABLE `subject`
-  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `student_fee`
+  MODIFY `sf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `student_fee_bill`
+--
+ALTER TABLE `student_fee_bill`
+  MODIFY `sfb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `teacher_class_map`
+--
+ALTER TABLE `teacher_class_map`
+  MODIFY `tcm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users_log`
 --
 ALTER TABLE `users_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user_attendance`
 --
 ALTER TABLE `user_attendance`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_level`
 --
 ALTER TABLE `user_level`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

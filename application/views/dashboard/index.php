@@ -9,7 +9,7 @@
         <!-- <small>Version 2.0</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
         <li class="active">Dashboard</li>
       </ol>
     </section>
@@ -93,7 +93,7 @@
           
 		  <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Line Chart</h3>
+              <h3 class="box-title">Class Wise Student Count</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -103,23 +103,44 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="lineChart" style="height:250px"></canvas>
+                <canvas id="barChart" style="height:250px"></canvas>
               </div>
             </div>
             <!-- /.box-body -->
           </div>
-		  
-		  
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
 	  
 	  
-	  
+	   <div class="row">
+        <div class="col-md-12">
+          
+		  <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">User Count</h3>
 
-      <!-- Main row -->
-      
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChart2" style="height:250px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+	  
+      <!-- Main row -->      
+	  
       <!-- /.row -->
     </section>
     <!-- /.content -->

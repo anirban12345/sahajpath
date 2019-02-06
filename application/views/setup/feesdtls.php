@@ -27,7 +27,7 @@
 	
       <!-- Info boxes -->
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-6">
 		
 			<div class="box box-primary">
             <div class="box-header with-border">
@@ -38,9 +38,18 @@
 			
             <form role="form" action="<?php echo site_url('Setup/saveFeesDtls');?>" method="post">
               <div class="box-body">
-                <div class="form-group">
+				<div class="form-group">
+					<label>Select Class</label>
+						<select class="form-control select2" style="width: 100%;" id="classname" name="classname">		
+							<option value="Select">Select</option>                  
+							<?php foreach($class as $r){?>
+							<option value="<?=$r->class_id?>"><?=$r->class_name?></option>                  
+							<?php }?>
+					    </select>
+				</div>
+                <div class="form-group">				
                   <label for="fhead">Fees Head</label>
-                  <input type="text" class="form-control" id="fhead" placeholder="Enter Fees Name" name="fhead" autocomplete="off"  />
+                  <input type="text" class="form-control" id="fhead" placeholder="Enter Fees Head" name="fhead" autocomplete="off"  />
                 </div>								
 				<div class="form-group">
                   <label for="frs">Fees ( <i class="fa fa-inr"></i> )</label>
@@ -54,61 +63,25 @@
             </form>			
 			
           </div>	
-        </div>  
-      </div>
-      <!-- /.row --> 
+        </div> 
 
-	  <!-- Info boxes -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-6 col-sm-6 col-xs-6">
 		
 			<div class="box">
 				<div class="box-header">
-				  <h3 class="box-title">Fees List</h3>
+				  <h3 class="box-title">Class and Fees List</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-				  <table id="example1" class="table table-bordered table-striped">			  
-					<thead>
-					<tr>
-					  <th>Sl No.</th>
-					  <th>Fees Head</th>					  
-					  <th>Fees ( <i class="fa fa-inr"></i> )</th>					  
-					  <th>Status</th>
-					  <th>Action</th>					  					  
-					</tr>
-					</thead>
-					<tbody>
-					
-					<?php $i=1; foreach($allrec as $r) { ?>
-					<tr>
-					  <td><?=$i++?></td>
-					  <td><?=$r->f_head?></td>	
-					  <td><?=$r->f_rs?></td>	
-					  <?php if($r->f_flag==1){ ?>
-					  <td><span class="label label-success">Active</span></td>
-					  <?php }else {?>
-					  <td><span class="label label-danger">Deactive</span></td>
-					  <?php }?>					  
-					  
-					  <td>
-					  <?php if($r->f_flag==1){ ?>
-					  <a href="<?php echo site_url('Setup/activateFees/'.$r->f_id); ?>" roll="button" class="btn btn-warning btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></a>					  					  
-					  <?php }else {?>
-					  <a href="<?php echo site_url('Setup/activateFees/'.$r->f_id); ?>" roll="button" class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i></a>  
-					  <?php }?>
-					  <a href="<?php echo site_url('Setup/editFeesdtls/'.$r->f_id); ?>" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-					  </td>
-					</tr>
-					<?php } ?>
-					</tbody>
-				  </table>	
+				  <div id="fees">
+				  
+				  </div>
 				</div>	
 			</div>	
-        </div>  
+        </div>		
       </div>
-      <!-- /.row -->	  
-
+      <!-- /.row --> 
+	  
       <!-- Main row -->
       
       <!-- /.row -->

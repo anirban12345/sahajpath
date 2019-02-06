@@ -27,16 +27,21 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->	
-			<?php foreach($allrec as $r) {?>	
-            <form role="form" action="<?php echo site_url('Setup/updateFeesDtls/'.$r->f_id);?>" method="post">
+			<?php foreach($classfees as $r) {?>	
+            <form role="form" action="<?php echo site_url('Setup/updateFeesDtls/'.$r->cfees_id);?>" method="post">
               <div class="box-body">
+				<div class="form-group">
+                  <label for="fhead">Class</label>
+				  <input type="hidden" id="classname" name="classname" value="<?=$r->class_id?>" />
+                  <input type="text" class="form-control" id="class" placeholder="Enter Fees Head" name="class" value="<?=$r->class_name?>" autocomplete="off" readonly  />				  
+                </div>	
                 <div class="form-group">
                   <label for="fhead">Fees Head</label>
-                  <input type="text" class="form-control" id="fhead" placeholder="Enter Fees Head" name="fhead" value="<?=$r->f_head?>" autocomplete="off"  />
+                  <input type="text" class="form-control" id="fhead" placeholder="Enter Fees Head" name="fhead" value="<?=$r->cfees_name?>" autocomplete="off"  />
                 </div>	
 				<div class="form-group">
                   <label for="frs">Fees ( <i class="fa fa-inr"></i> )</label>
-                  <input type="text" class="form-control" id="frs" placeholder="Enter Fees" name="frs" value="<?=$r->f_rs?>" autocomplete="off"  />
+                  <input type="text" class="form-control" id="frs" placeholder="Enter Fees" name="frs" value="<?=$r->cfees_fees?>" autocomplete="off"  />
                 </div>				
               </div>
               <!-- /.box-body -->

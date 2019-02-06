@@ -69,8 +69,8 @@
 					  <td><?=$r->reg_no?></td>
 					  <td><?=$r->stuname?></td>					  
 					  <td><?=$r->scm_session?></td>
-					  <td><?=$r->name?></td>
-					  <td><?=$r->sname?></td>
+					  <td><?=$r->class_name?></td>
+					  <td><?=$r->csec_name?></td>
 					  <?php if($r->stu_flag==1){ ?>
 					  <td><span class="label label-success">Active</span></td>
 					  <?php }else {?>
