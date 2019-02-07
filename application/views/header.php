@@ -388,12 +388,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-		  
 			<!--
 				<li><a href="<?php echo site_url('Dashboard/countUser'); ?>"><i class="fa fa-circle-o text-aqua"></i>test</a></li>
 				<li><a href="<?php echo site_url('Student/classStudentCount'); ?>"><i class="fa fa-circle-o text-aqua"></i>test</a></li> 
-			-->	
-			
+			-->
 			<li><a href="<?php echo site_url('Setup/schoolDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>School Details</a></li>
 		    <li><a href="<?php echo site_url('Administration/addUsertype'); ?>"><i class="fa fa-circle-o text-aqua"></i>User Type</a></li>
 			<li><a href="<?php echo site_url('Setup/religionDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Religion</a></li>  
@@ -403,8 +401,6 @@
 			<li><a href="<?php echo site_url('Setup/subjectDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Subjects</a></li>
 			<li><a href="<?php echo site_url('Setup/feesDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Fees</a></li>
 			<li><a href="<?php echo site_url('Setup/termDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Exam Term</a></li>
-			
-			
 			<!--<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Group / Class / Subject</a></li>
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Pick-Up Point</a></li>  -->
           </ul>
@@ -570,7 +566,7 @@
             </span>
           </a>
           <ul class="treeview-menu">            
-            <li><a href="<?php echo site_url('Exam/createExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Exam for Class</a></li>  			
+            <li><a href="<?php echo site_url('Exam/createExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Exam Schedule</a></li>  			
 			<li><a href="<?php echo site_url('Exam/searchExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Exam</a></li>  			
 			<!--
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Export exam details</a></li>  			
@@ -581,7 +577,7 @@
 			<li><a href="<?php echo site_url('Exam/searchMarks'); ?>"><i class="fa fa-circle-o text-aqua"></i>Marks Entry</a></li> 
 			
 			<li><a href="<?php echo site_url('Exam/searchReport'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Report Card</a></li> 
-			<li><a href="<?php echo site_url('Exam/searchPromotion'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Promotion</a></li> 
+			<li><a href="<?php echo site_url('Exam/searchPromotion'); ?>"><i class="fa fa-circle-o text-aqua"></i>Make Promotion</a></li> 
 			<li><a href="<?php echo site_url('Exam/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Unassigned Student List</a></li> 
 			
 			<!-- 
