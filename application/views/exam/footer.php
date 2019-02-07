@@ -322,9 +322,6 @@ $(document).ready(function(){
 					}
 				});
 				
-				
-				//alert('a');
-				
 				$('#searchstudent').click(function(){
 					
 					//alert('a');
@@ -381,16 +378,13 @@ $(document).ready(function(){
 					classid = $('#classname').val();
 					section = $('#section').val();
 					session = $('#session').val();
-					
-					//alert(classid+'-'+section);
-					
+					//alert(classid+'-'+section+'-'+session);
 					if(classid){
-						$.ajax({
+						$.ajax({						
 							type:'POST',
 							url:'<?php echo base_url('Exam/get_student_class_section_ajax'); ?>',
 							data:{'class':classid,'section':section,'session':session},
-							success:function(data){
-							
+							success:function(data){							
 								//alert(data);
 								if(data=="1")
 								{
@@ -404,6 +398,7 @@ $(document).ready(function(){
 								}
 							}  
 						}); 
+						
 					}else{
 						//$('#rectable').html('Please Enter Input');
 					}
@@ -411,6 +406,5 @@ $(document).ready(function(){
 				
 	});
 </script>
-
 </body>
 </html>

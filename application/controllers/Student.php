@@ -84,8 +84,21 @@ class Student extends CI_Controller
 		
 		$data['religion']=$this->Globalmodel->getdata_by_field_join('student','religion_id','religion','religion_id','reg_no',$regno);		
 		$data['caste']=$this->Globalmodel->getdata_by_field_join('student','caste_id','caste','caste_id','reg_no',$regno);				
-		//print_r($data['countuser']);
-		//print_r($data['rec'][0]->id);
+		
+		/*gen qr code*/
+		$regno=$regno;
+		$stuname=$data['allrec'][0]->stuname;
+		$fname=$data['allrec'][0]->fathersname;		
+		$address=$data['allrec'][0]->address;
+		$phone=$data['allrec'][0]->phoneno;		
+		$this->load->library('ciqrcode');
+		$params['data'] = 'Registraion No: '.$regno.' Student Name: '.$stuname.' Father\'s Name: '.$fname.' Address: '.$address.' Phone No: '.$phone;
+		$params['level'] = 'H';
+		$params['size'] = 10;
+		$params['savename'] = FCPATH.'tes.png';
+		$this->ciqrcode->generate($params);		
+		/*gen qr code*/
+
 		$this->load->view('header',$data);
 		$this->load->view('student/viewstudent',$data);
 		$this->load->view('student/footer');
@@ -476,6 +489,7 @@ class Student extends CI_Controller
 		$sessionyear=$this->input->post('sessionyear');				
 		$classid=$this->input->post('classname');
 		$sectionid=$this->input->post('section');
+		$rollno=$this->input->post('rollno');
 		$userid=$this->session->userdata('userid');
 		
 		$flag=$this->isStudentExisttoClass($sessionyear,$regno);
@@ -491,7 +505,8 @@ class Student extends CI_Controller
 						'reg_no'=>$regno, 
 						'scm_session'=>$sessionyear,
 						'scm_classid'=>$classid, 						
-						'scm_sectionid'=>$sectionid, 						
+						'scm_sectionid'=>$sectionid, 
+						'scm_rollno'=>$rollno, 
 						'scm_date'=>date('Y-m-d'), 
 						'scm_time'=>date('H:i:s'), 
 						'scm_flag'=>1,
@@ -511,6 +526,27 @@ class Student extends CI_Controller
 		}
 	}
 	
+	public function gen_qr_code()
+	{
+		/*$this->load->library('ciqrcode');
+		header("Content-Type: image/png");
+		$params['data'] = 'anirban seth';
+		$this->ciqrcode->generate($params);
+		*/
+		
+		$this->load->library('ciqrcode');
+		$params['data'] = '<html><body><table><tr><td>This is a </td><td>text to encode become QR Code</td></tr></table></body></html>';
+		
+		//$params['data'] = 'This is a text to encode become QR Code';
+		$params['level'] = 'H';
+		$params['size'] = 10;
+		$params['savename'] = FCPATH.'tes.png';
+		$this->ciqrcode->generate($params);
+		
+		echo '<img src="'.base_url().'tes.png" />';
+	}
+	
+	
 	public function getRollno()
 	{
 		$session=$this->input->post('session');				
@@ -524,7 +560,7 @@ class Student extends CI_Controller
 		}
 		else
 		{
-			echo $data['rec'][0]->roll;
+			echo $data['rec'][0]->roll+1;
 		}
 	}
 	

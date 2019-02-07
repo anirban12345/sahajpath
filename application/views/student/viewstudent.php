@@ -49,16 +49,20 @@
             <!-- /.box-header -->
             <div class="box-body">
 			<?php foreach($allrec as $r) {?>
-              <table class="table table-bordered">                			  
-			    
-                <tr>
-                  <th>Registration No</th>
-                  <td><strong><?=$r->reg_no?></strong></td>                                    				  
-                </tr>
+              <table class="table table-bordered">                			  			    
 				<tr>
-                  <th>Name</th>
-                  <td><?=$r->stuname?></td>                                    				  
-                </tr>
+                  <td rowspan=3 style="vertical-align:middle;width:250px;">
+				  <a class="example-image-link" href="<?php echo base_url().'tes.png'; ?>" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="img-responsive" src="<?php echo base_url().'tes.png'; ?>" alt="Image Not Found" width="200" /></a>
+				  </td>	
+				  <th style="vertical-align:middle;width:250px;"><h3>Registration No</h3></th>
+				  <td style="vertical-align:middle"><h3><?=$r->reg_no?></h3></td>                                    				  
+				</tr>
+				<tr>
+				  <th style="vertical-align:middle"><h3>Name</h3></th>
+				  <td style="vertical-align:middle"><h3><?=$r->stuname?></h3></td>                                    				  
+				</tr>				
+			  </table>	
+			  <table class="table table-bordered">                			  			                    
 				<tr>
                   <th>Father's Name</th>
                   <td><?=$r->fathersname?></td>                                    				  

@@ -447,7 +447,7 @@
           </a>
           <ul class="treeview-menu">
             <!-- <li><a href=""><i class="fa fa-circle-o text-aqua"></i>Sections / Roll Numbers</a></li> -->
-            <li><a href="<?php echo site_url('Student/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Student Record</a></li>  
+            <li><a href="<?php echo site_url('Student/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Student Record</a></li>  			
 			<!--<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Update class record</a></li>  
 			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Boy-Girl Student</a></li>  
 			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Transferred student details</a></li>  

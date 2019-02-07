@@ -57,8 +57,8 @@
 							  <input type="hidden" value="<?=$r->reg_no?>" name="regno[]" id="regno[]" />
 							  <td><?=$r->scm_session?></td>
 							  <input type="hidden" value="<?=$r->scm_session?>" name="session" id="session" />
-							  <td><?=$r->class_name?></td>
-							  <input type="hidden" value="<?=$r->class_id?>" name="classid" id="classid" />
+							  <td><?=$r->class_name?></td>							  
+							  <input type="hidden" value="<?=$r->class_id?>" name="classname" id="classname" />
 							  <td><?=$r->reg_no?></td>
 							  <td><?=$r->stuname?></td>
 								<td>
@@ -89,14 +89,13 @@
 				
 				<div class="form-group">
 					<label>Select Class</label>
-						<select class="form-control select2" style="width: 100%;" id="sectionid" name="sectionid">		
+						<select class="form-control select2" style="width: 100%;" id="section" name="section">		
 							<option value="Select">Select</option>
 							<?php foreach($section as $r){?>
 							<option value="<?=$r->csec_id?>"><?=$r->csec_name?></option>                  
 							<?php }?>
 						</select>
 				</div>
-				
 				
               </div>
               <!-- /.box-body -->

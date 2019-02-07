@@ -301,14 +301,8 @@ $(document).ready(function(){
 							data:{'session':session,'classid':classid,'sectionid':sectionid},
 							success:function(data){
 								//alert(data);
-								if(data=='1')
-								{
 									$('#rollno').val(data);
-								}
-								else
-								{
-									$('#rollno').val(parseInt(data)+1);
-								}
+								
 							}
 						}); 
 					}else{
