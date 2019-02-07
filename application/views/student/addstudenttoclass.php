@@ -58,7 +58,12 @@
 					<select class="form-control select2" style="width: 100%;" id="section" name="section">
 							
 					</select>
-				</div> 				
+				</div>
+				
+				<div class="form-group">
+                  <label for="rollno">Roll No</label>
+                  <input type="text" class="form-control" id="rollno" placeholder="Roll No" name="rollno" autocomplete="off" required readonly />
+                </div>				
 				
               </div>
               <!-- /.box-body -->

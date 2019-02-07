@@ -511,6 +511,23 @@ class Student extends CI_Controller
 		}
 	}
 	
+	public function getRollno()
+	{
+		$session=$this->input->post('session');				
+		$classid=$this->input->post('classid');
+		$sectionid=$this->input->post('sectionid');
+		$data['rec']=$this->Studentmodel->find_rollno($session,$classid,$sectionid);
+		
+		if(empty($data['rec'][0]->roll))
+		{
+			echo "1";
+		}
+		else
+		{
+			echo $data['rec'][0]->roll;
+		}
+	}
+	
 	public function getSection()
 	{
 		$classid=$this->input->post('classid');
@@ -523,7 +540,6 @@ class Student extends CI_Controller
 		}
 		echo $str;		
 	}
-	
 	
 	public function getSection2()
 	{

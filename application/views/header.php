@@ -467,8 +467,8 @@
           </a>
           <ul class="treeview-menu">            
 			<!-- <li><a href=""><i class="fa fa-circle-o text-aqua"></i>Sections / Roll Numbers</a></li> -->			
-			<li><a href="<?php echo site_url('Teacher/teacherList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Teachers</a></li>  
 			<li><a href="<?php echo site_url('Teacher/addTeacher'); ?>"><i class="fa fa-circle-o text-aqua"></i>Add Teachers</a></li>			
+			<li><a href="<?php echo site_url('Teacher/teacherList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Teachers</a></li>
 			<li><a href="<?php echo site_url('Teacher/findTeachertoClass'); ?>"><i class="fa fa-circle-o text-aqua"></i>Assign Teacher to Class</a></li>
 			<li><a href="<?php echo site_url('Teacher/findTeachertoClassList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Teacher to Class Details</a></li>
           </ul>
@@ -572,20 +572,16 @@
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Export exam details</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Subject Wise Marks Search</a></li>
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student wise marks search</a></li> 
-			--> 
-			
-			<li><a href="<?php echo site_url('Exam/searchMarks'); ?>"><i class="fa fa-circle-o text-aqua"></i>Marks Entry</a></li> 
-			
+			-->			
+			<li><a href="<?php echo site_url('Exam/searchMarks'); ?>"><i class="fa fa-circle-o text-aqua"></i>Marks Entry</a></li> 			
 			<li><a href="<?php echo site_url('Exam/searchReport'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Report Card</a></li> 
 			<li><a href="<?php echo site_url('Exam/searchPromotion'); ?>"><i class="fa fa-circle-o text-aqua"></i>Make Promotion</a></li> 
-			<li><a href="<?php echo site_url('Exam/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Unassigned Student List</a></li> 
-			
+			<li><a href="<?php echo site_url('Exam/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Unassigned Student List</a></li> 			
 			<!-- 
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise report</a></li>
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Academic Year wise report</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Rank</a></li> 
-			--> 			
-			
+			-->
           </ul>
         </li>
 		

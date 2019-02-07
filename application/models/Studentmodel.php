@@ -66,6 +66,21 @@ class Studentmodel extends CI_Model {
 		return $this->query->result();  
 	}
 	
+	public function find_rollno($session,$classid,$sectionid)
+	{
+		$this->db->select('max(scm_rollno) as roll');
+		$this->db->from('student_class_map');						
+		$this->db->join('class_section','student_class_map.scm_sectionid=class_section.csec_id');		
+		$this->db->join('class','student_class_map.scm_classid=class.class_id');
+		$this->db->join('student','student_class_map.reg_no=student.reg_no');
+		$this->db->where('scm_session',$session);		
+		$this->db->where('scm_classid',$classid);
+		$this->db->where('scm_sectionid',$sectionid);
+		$this->db->order_by('stuname','asc');		
+		$this->query=$this->db->get();		
+		return $this->query->result();   
+	}
+	
 	/* used in fees controller*/
 	public function getstudenttoclass_by_regno($regno)
 	{

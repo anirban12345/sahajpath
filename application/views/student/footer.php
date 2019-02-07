@@ -263,7 +263,7 @@ $(document).ready(function(){
 				
 			//alert('a');
 			
-			var classid,stuname,regno;
+			var classid,sectionid,session,stuname,regno;
 				$('#classname').on('change',function(){
 					
 					classid = $(this).val();
@@ -286,6 +286,36 @@ $(document).ready(function(){
 					}
 				});
 				
+				$('#section').on('change',function(){
+					
+					session = $('#sessionyear').val();
+					classid = $('#classname').val();
+					sectionid=$('#section').val();
+					
+					//alert(session+"-"+classid+"-"+sectionid);
+					
+					if(classid){
+						$.ajax({
+							type:'POST',
+							url:'<?php echo base_url('Student/getRollno'); ?>',
+							data:{'session':session,'classid':classid,'sectionid':sectionid},
+							success:function(data){
+								//alert(data);
+								if(data=='1')
+								{
+									$('#rollno').val(data);
+								}
+								else
+								{
+									$('#rollno').val(parseInt(data)+1);
+								}
+							}
+						}); 
+					}else{
+						$('#section').html('<option value="">Select country first</option>');
+							
+					}
+				});
 				
 				//alert('a');
 				

@@ -132,6 +132,7 @@
 					  <th>Session</th>
 					  <th>Class</th>
 					  <th>Section</th>                                    				  
+					  <th>Roll No</th>                                    				  
 					</tr>
 						
 					<?php $i=0; foreach($stuclass as $r) {?>
@@ -139,6 +140,7 @@
 					  <td><?=$r->scm_session?></td>
 					  <td><?=$r->class_name?></td>
 					  <td><?=$r->csec_name?></td>					  
+					  <td><?=$r->scm_rollno?></td>					  
 					</tr>
 					<?php } ?>
 				</table>

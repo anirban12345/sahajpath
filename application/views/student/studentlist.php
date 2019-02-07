@@ -59,6 +59,7 @@
 					  <th>Caste</th>
 					  <th>Class</th>
 					  <th>Section</th>
+					  <th>Roll No</th>
 					  <th>Status</th>
 					  <th>Action</th>					  				  
 					</tr>
@@ -75,6 +76,7 @@
 					  <td><?=$r->cname?></td>
 					  <td><?=$r->class_name?></td>
 					  <td><?=$r->csec_name?></td>
+					  <td><?=$r->scm_rollno?></td>
 					  <?php if($r->stu_flag==1){ ?>
 					  <td><span class="label label-success">Active</span></td>
 					  <?php }else {?>
