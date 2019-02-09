@@ -41,17 +41,22 @@
 		
 			<div class="box">
 				<div class="box-header">				
-				  <h3 class="box-title">Fees List</h3>				
+				 <?php foreach($studentclasssection as $r)
+				  {				  
+					  $session=$r->scm_session;
+					  $class=$r->class_name;
+					  $section=$r->csec_name;
+				  }?>
+				  
+				  <h3 class="box-title">Fees List of Academic Year: <strong><?=$session?></strong>, Class: <strong><?=$class?></strong>, Section: <strong><?=$section?></strong></h3>
+				  				  
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 				  <table id="example1" class="table table-bordered table-striped">			  
 					<thead>
 					<tr>
-					  <th>Sl No.</th>					  
-					  <th>Academic year</th>					  
-					  <th>Class</th>
-					  <th>Section</th>
+					  <th>Roll No.</th>					  					  
 					  <th>Student Registration No</th>					  
 					  <th>Name</th>					  					  
 					  <th>Action</th>					  					  
@@ -61,10 +66,7 @@
 					
 					<?php $i=1; foreach($studentclasssection as $r) { ?>
 					<tr>
-					  <td><?=$i++?></td>
-					  <td><?=$r->scm_session?></td>
-					  <td><?=$r->class_name?></td>
-					  <td><?=$r->csec_name?></td>
+					  <td><?=$r->scm_rollno?></td>
 					  <td><?=$r->reg_no?></td>
 					  <td><?=$r->stuname?></td>
 					  <td>

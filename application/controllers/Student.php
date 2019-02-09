@@ -142,6 +142,28 @@ class Student extends CI_Controller
 		$this->load->view('student/footer');
 	}
 	
+	public function searchStudentGender()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');		
+		$data['class']=$this->Globalmodel->getdata('class');		
+		$this->load->view('header',$data);
+		$this->load->view('student/studentsearchgender',$data);
+		$this->load->view('student/footer');
+	}
+	
+	public function searchStudentCaste()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');		
+		$data['class']=$this->Globalmodel->getdata('class');		
+		$this->load->view('header',$data);
+		$this->load->view('student/studentsearchcaste',$data);
+		$this->load->view('student/footer');
+	}
+	
 	public function searchStudentListClass()
 	{
 		
@@ -167,7 +189,7 @@ class Student extends CI_Controller
 		//print_r($data['rec'][0]->id);
 		$this->load->view('header',$data);
 		$this->load->view('student/studentlistclass',$data);
-		$this->load->view('student/footer');
+		$this->load->view('student/footer',$data);
 		
 	}
 	
@@ -478,12 +500,66 @@ class Student extends CI_Controller
 		return $c;
 	}
 	
+	/*for chart */
 	public function classStudentCount()
 	{
 		$data['studentcount']=$this->Studentmodel->class_countstudent();
 		print_r(json_encode($data['studentcount']));
 	}
-		
+	public function countStudentAllSession()
+	{
+		$data['studentcount']=$this->Studentmodel->count_student_all_session();
+		print_r(json_encode($data['studentcount']));
+	}
+	public function countStudentGenderSession()
+	{
+		$session=$this->input->post('session');
+		$data['studentcount']=$this->Studentmodel->count_student_gender_session($session);
+		print_r(json_encode($data['studentcount']));
+	}
+	public function countStudentGenderSessionClass()
+	{
+		$session=$this->input->post('session');
+		$class=$this->input->post('classid');
+		$data['studentcount']=$this->Studentmodel->count_student_gender_session_class($session,$class);
+		print_r(json_encode($data['studentcount']));
+	}	
+	public function countStudentGenderSessionClassSection()
+	{
+		$session=$this->input->post('session');
+		$class=$this->input->post('classid');
+		$section=$this->input->post('section');
+		$data['studentcount']=$this->Studentmodel->count_student_gender_session_class_section($session,$class,$section);
+		print_r(json_encode($data['studentcount']));
+	}
+	public function countStudentAllCaste()
+	{
+		$data['studentcount']=$this->Studentmodel->count_student_all_caste();
+		print_r(json_encode($data['studentcount']));
+	}
+	public function countStudentCasteSession()
+	{
+		$session=$this->input->post('session');
+		$data['studentcount']=$this->Studentmodel->count_student_caste_session($session);
+		print_r(json_encode($data['studentcount']));
+	}
+	public function countStudentCasteSessionClass()
+	{
+		$session=$this->input->post('session');
+		$class=$this->input->post('classid');		
+		$data['studentcount']=$this->Studentmodel->count_student_caste_session_class($session,$class);
+		print_r(json_encode($data['studentcount']));
+	}
+	public function countStudentCasteSessionClassSection()
+	{
+		$session=$this->input->post('session');
+		$class=$this->input->post('classid');		
+		$section=$this->input->post('section');
+		$data['studentcount']=$this->Studentmodel->count_student_caste_session_class_section($session,$class,$section);
+		print_r(json_encode($data['studentcount']));
+	}
+	/* for chart */
+	
 	public function saveStudenttoClass($regno)
 	{
 		$sessionyear=$this->input->post('sessionyear');				

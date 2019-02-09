@@ -48,21 +48,21 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-			<?php foreach($allrec as $r) {?>
-              <table class="table table-bordered">                			  			    
-				<tr>
-                  <td rowspan=3 style="vertical-align:middle;width:250px;">
-				  <a class="example-image-link" href="<?php echo base_url().'tes.png'; ?>" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="img-responsive" src="<?php echo base_url().'tes.png'; ?>" alt="Image Not Found" width="200" /></a>
-				  </td>	
-				  <th style="vertical-align:middle;width:250px;"><h3>Registration No</h3></th>
-				  <td style="vertical-align:middle"><h3><?=$r->reg_no?></h3></td>                                    				  
+			<?php foreach($allrec as $r) {?>              
+			  <table class="table table-bordered">                			  			                    
+				<tr>                  
+				  <td colspan=2 align=center>
+					<a class="example-image-link" href="<?php echo base_url().'tes.png'; ?>" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="img-responsive" src="<?php echo base_url().'tes.png'; ?>" alt="Image Not Found" width="200" /></a>
+				  </td>					  
 				</tr>
 				<tr>
-				  <th style="vertical-align:middle"><h3>Name</h3></th>
-				  <td style="vertical-align:middle"><h3><?=$r->stuname?></h3></td>                                    				  
-				</tr>				
-			  </table>	
-			  <table class="table table-bordered">                			  			                    
+                  <th>Registration No</th>
+                  <td><?=$r->reg_no?></td>
+                </tr>
+				<tr>
+                  <th>Name</th>
+                  <td><?=$r->stuname?></td>                                    				  
+                </tr>
 				<tr>
                   <th>Father's Name</th>
                   <td><?=$r->fathersname?></td>                                    				  
@@ -116,11 +116,12 @@
                   <td><?=$r->phoneno?></td>                                    				  
                 </tr>
 				<tr>
-                  <th>Image</th>
-                  <td>
+                  <th>Contact No</th>
+				  <td>
 					<a class="example-image-link" href="<?php echo base_url().'uploads/stuimg/'.$r->image; ?>" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="img-responsive" src="<?php echo base_url().'uploads/stuimg/'.$r->image; ?>" alt="Image Not Found" width="100" /></a>
 			      </td>
-                </tr>				
+				</tr>				
+				
 				<?php } ?>
 				
 				<?php foreach($studoc as $r) {?>

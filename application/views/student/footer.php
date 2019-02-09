@@ -213,9 +213,20 @@
 <script>
     $.material.init();
 </script>
+<!-- ChartJS -->
+<script src="<?php echo base_url().'assets/';?>dist/js/Chart.min.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url().'assets/'; ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url().'assets/'; ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+
 <!-- FastClick -->
 <script src="<?php echo base_url().'assets/';?>bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -229,44 +240,240 @@
 <script src="<?php echo base_url().'assets/';?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url().'assets/';?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<!-- ChartJS -->
-<script src="<?php echo base_url().'assets/';?>bower_components/chart.js/Chart.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url().'assets/';?>dist/js/pages/dashboard2.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url().'assets/';?>dist/js/demo.js"></script>
 
-
-
 <!-- Select2 -->
 <script src="<?php echo base_url().'assets/'; ?>bower_components/select2/dist/js/select2.full.min.js"></script>
+
 <script>
-	
-  $(function () {
-    $('#example1').DataTable();    
-  });
-  
+ 
   $('.select2').select2();
-  
+ 
   //Date picker
   $('#dob').datepicker({
      autoclose: true,
 	 format: 'dd-M-yyyy' 
   });
-	
   
+  $('#example1').DataTable( {
+        dom: 'Bfrtip',
+		buttons: [	
+					{ 	"extend": 'pdf', 
+						"text":'Export PDF',
+						"className": 'btn btn-primary btn-sm',
+						"title": '<?php echo $setup[0]->name; ?>',
+						"messageTop": '<?php if(isset($allrec)){echo 'Academic Year: '.$allrec[0]->scm_session.'\n Class: '.$allrec[0]->class_name.'\n Section: '.$allrec[0]->csec_name;} ?>',
+						"filename": '<?php echo $setup[0]->name.'_'.date('d-M-Y'); ?>'
+					},
+					{ 	"extend": 'excel', 
+						"text":'Export Excel',
+						"className": 'btn btn-primary btn-sm',
+						"title": '<?php echo $setup[0]->name; ?>',
+						"messageTop": '<?php if(isset($allrec)){echo 'Academic Year: '.$allrec[0]->scm_session.'\n Class: '.$allrec[0]->class_name.'\n Section: '.$allrec[0]->csec_name;} ?>'
+					}
+				]
+    });
 	
 </script>
 
 <script>
 $(document).ready(function(){
-				
+
+
+			/* for chart */
+			$.ajax({
+				url: "<?php echo site_url('Student/countStudentAllSession'); ?>",
+				method: "GET",
+				success: function(data) {	
+				  data1=JSON.parse(data);
+				  var cname = [];
+				  var stucount = [];
+				  for(i=0;i<data1.length;i++) 
+				  {	
+					cname.push(data1[i].gender);
+					stucount.push(data1[i].countstudent);				
+				  }	  
+				  var chartdata = {
+					labels:cname,
+					datasets : [
+					  {
+						label: 'No Of Students',
+						backgroundColor: '#00c0ef',
+						borderColor: '#00c0ef',
+						hoverBackgroundColor: '#00c0ef',
+						hoverBorderColor: '#00c0ef',
+						data: stucount
+					  }
+					]
+				  };
+				  var ctx = $("#barChart");				  
+				  var barGraph = new Chart(ctx, {
+					type: 'bar',
+					data: chartdata,		
+					options: {
+								scales: {
+									yAxes: [{
+										ticks: {
+											beginAtZero: true
+										}
+									}]
+								}
+							}
+				  });
+				}
+			  });
+			  
+			  $.ajax({
+				url: "<?php echo site_url('Student/countStudentAllCaste'); ?>",
+				method: "GET",
+				success: function(data) {	
+				  data1=JSON.parse(data);
+				  var cname = [];
+				  var stucount = [];
+				  for(i=0;i<data1.length;i++) 
+				  {	
+					cname.push(data1[i].cname);
+					stucount.push(data1[i].countstudent);				
+				  }	  
+				  var chartdata = {
+					labels:cname,
+					datasets : [
+					  {
+						label: 'No Of Students',
+						backgroundColor: '#00c0ef',
+						borderColor: '#00c0ef',
+						hoverBackgroundColor: '#00c0ef',
+						hoverBorderColor: '#00c0ef',
+						data: stucount
+					  }
+					]
+				  };
+				  var ctx = $("#barChart2");				  
+				  var barGraph = new Chart(ctx, {
+					type: 'bar',
+					data: chartdata,		
+					options: {
+								scales: {
+									yAxes: [{
+										ticks: {
+											beginAtZero: true
+										}
+									}]
+								}
+							}
+				  });
+				}
+			  });
+			  
+			 /*for chart*/
+ 
 			//alert('a');
+			var classid,sectionid,session,stuname,regno;			
+			/* for chart*/
 			
-			var classid,sectionid,session,stuname,regno;
+			$('#sessionyear').on('change',function(){
+			
+					session = $(this).val();
+					
+					//alert(session);
+					
+					$.ajax({
+						url: "<?php echo site_url('Student/countStudentGenderSession'); ?>",
+						method: 'POST',
+						data:{'session':session},
+						success: function(data) {	
+							//alert(data);
+						  data1=JSON.parse(data);
+						  var cname = [];
+						  var stucount = [];
+						  for(i=0;i<data1.length;i++) 
+						  {	
+							cname.push(data1[i].gender);
+							stucount.push(data1[i].countstudent);				
+						  }	  
+						  var chartdata = {
+							labels:cname,
+							datasets : [
+							  {
+								label: 'No Of Students',
+								backgroundColor: '#00c0ef',
+								borderColor: '#00c0ef',
+								hoverBackgroundColor: '#00c0ef',
+								hoverBorderColor: '#00c0ef',
+								data: stucount
+							  }
+							]
+						  };
+						  var ctx = $("#barChart");
+						  var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: chartdata,		
+							options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+						  });
+						}
+					  });
+					  
+					  $.ajax({
+						url: "<?php echo site_url('Student/countStudentCasteSession'); ?>",
+						method: 'POST',
+						data:{'session':session},
+						success: function(data) {	
+							//alert(data);
+						  data1=JSON.parse(data);
+						  var cname = [];
+						  var stucount = [];
+						  for(i=0;i<data1.length;i++) 
+						  {	
+							cname.push(data1[i].cname);
+							stucount.push(data1[i].countstudent);				
+						  }	  
+						  var chartdata = {
+							labels:cname,
+							datasets : [
+							  {
+								label: 'No Of Students',
+								backgroundColor: '#00c0ef',
+								borderColor: '#00c0ef',
+								hoverBackgroundColor: '#00c0ef',
+								hoverBorderColor: '#00c0ef',
+								data: stucount
+							  }
+							]
+						  };
+						  var ctx = $("#barChart2");
+						  var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: chartdata,		
+							options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+						  });
+						}
+					  });
+			});
+			/* for chart*/
+			
 				$('#classname').on('change',function(){
 					
 					classid = $(this).val();
+					session = $('#sessionyear').val();
 					
 					//alert(sectionid);
 					
@@ -279,9 +486,100 @@ $(document).ready(function(){
 								//alert(data);
 								$('#section').html('<option value="">Select</option>'+data);
 							}
-						}); 
+						});
+						
+						/* for chart*/	
+						$.ajax({
+						url: "<?php echo site_url('Student/countStudentGenderSessionClass'); ?>",
+						method: 'POST',
+						data:{'session':session,'classid':classid},
+						success: function(data) {	
+							//alert(data);
+						  data1=JSON.parse(data);
+						  var cname = [];
+						  var stucount = [];
+						  for(i=0;i<data1.length;i++) 
+						  {	
+							cname.push(data1[i].gender);
+							stucount.push(data1[i].countstudent);				
+						  }	  
+						  var chartdata = {
+							labels:cname,
+							datasets : [
+							  {
+								label: 'No Of Students',
+								backgroundColor: '#00c0ef',
+								borderColor: '#00c0ef',
+								hoverBackgroundColor: '#00c0ef',
+								hoverBorderColor: '#00c0ef',
+								data: stucount
+							  }
+							]
+						  };
+						  var ctx = $("#barChart");
+						  var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: chartdata,		
+							options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+						  });
+						}
+					  });
+					  
+						$.ajax({
+						url: "<?php echo site_url('Student/countStudentCasteSessionClass'); ?>",
+						method: 'POST',
+						data:{'session':session,'classid':classid},
+						success: function(data) {	
+							//alert(data);
+						  data1=JSON.parse(data);
+						  var cname = [];
+						  var stucount = [];
+						  for(i=0;i<data1.length;i++) 
+						  {	
+							cname.push(data1[i].cname);
+							stucount.push(data1[i].countstudent);				
+						  }	  
+						  var chartdata = {
+							labels:cname,
+							datasets : [
+							  {
+								label: 'No Of Students',
+								backgroundColor: '#00c0ef',
+								borderColor: '#00c0ef',
+								hoverBackgroundColor: '#00c0ef',
+								hoverBorderColor: '#00c0ef',
+								data: stucount
+							  }
+							]
+						  };
+						  var ctx = $("#barChart2");
+						  var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: chartdata,		
+							options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+						  });
+						}
+					  });
+						/* for chart*/		
+						
 					}else{
-						$('#section').html('<option value="">Select country first</option>');
+						$('#section').html('--');
 							
 					}
 				});
@@ -290,7 +588,7 @@ $(document).ready(function(){
 					
 					session = $('#sessionyear').val();
 					classid = $('#classname').val();
-					sectionid=$('#section').val();
+					sectionid = $('#section').val();
 					
 					//alert(session+"-"+classid+"-"+sectionid);
 					
@@ -305,6 +603,99 @@ $(document).ready(function(){
 								
 							}
 						}); 
+						
+						
+						/* for chart*/						
+						$.ajax({
+						url: "<?php echo site_url('Student/countStudentGenderSessionClassSection'); ?>",
+						method: 'POST',
+						data:{'session':session,'classid':classid,'section':sectionid},
+						success: function(data) {	
+							//alert(data);
+						  data1=JSON.parse(data);
+						  var cname = [];
+						  var stucount = [];
+						  for(i=0;i<data1.length;i++) 
+						  {	
+							cname.push(data1[i].gender);
+							stucount.push(data1[i].countstudent);				
+						  }	  
+						  var chartdata = {
+							labels:cname,
+							datasets : [
+							  {
+								label: 'No Of Students',
+								backgroundColor: '#00c0ef',
+								borderColor: '#00c0ef',
+								hoverBackgroundColor: '#00c0ef',
+								hoverBorderColor: '#00c0ef',
+								data: stucount
+							  }
+							]
+						  };
+						  var ctx = $("#barChart");
+						  var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: chartdata,		
+							options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+						  });
+						}
+					  });
+					  
+					  $.ajax({
+						url: "<?php echo site_url('Student/countStudentCasteSessionClassSection'); ?>",
+						method: 'POST',
+						data:{'session':session,'classid':classid,'section':sectionid},
+						success: function(data) {	
+							//alert(data);
+						  data1=JSON.parse(data);
+						  var cname = [];
+						  var stucount = [];
+						  for(i=0;i<data1.length;i++) 
+						  {	
+							cname.push(data1[i].cname);
+							stucount.push(data1[i].countstudent);				
+						  }	  
+						  var chartdata = {
+							labels:cname,
+							datasets : [
+							  {
+								label: 'No Of Students',
+								backgroundColor: '#00c0ef',
+								borderColor: '#00c0ef',
+								hoverBackgroundColor: '#00c0ef',
+								hoverBorderColor: '#00c0ef',
+								data: stucount
+							  }
+							]
+						  };
+						  var ctx = $("#barChart2");
+						  var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: chartdata,		
+							options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+						  });
+						}
+					  });
+						/* for chart*/
+						
+						
 					}else{
 						$('#section').html('<option value="">Select country first</option>');
 							
@@ -362,10 +753,6 @@ $(document).ready(function(){
 							
 					}
 				});
-				
-				
-				
-				
 	});
 </script>
 

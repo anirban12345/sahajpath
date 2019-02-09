@@ -53,18 +53,108 @@ class Studentmodel extends CI_Model {
 		return $this->query->result();  
 	}
 	
+	/*For chart start*/
 	public function class_countstudent()
 	{
-		$this->db->select('name as classname,count(stuname) as countstudent');
-		$this->db->from('student');		
-		$this->db->join('student_class_map','student.scm_id=student_class_map.scm_id');		
-		$this->db->join('class','student_class_map.class_id=class.class_id');
-		$this->db->join('section','student_class_map.section_id=section.section_id');				
+		$this->db->select('class_name as classname,count(reg_no) as countstudent');		
+		$this->db->from('student_class_map');				
+		$this->db->join('class','student_class_map.scm_classid=class.class_id');
 		$this->db->where('scm_session',date("Y"));
-		$this->db->group_by('student_class_map.class_id');
+		$this->db->group_by('student_class_map.scm_classid');
 		$this->query=$this->db->get();		
 		return $this->query->result();  
 	}
+	public function count_student_all_session()
+	{
+		$this->db->select('gender,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');			
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');						
+		$this->db->group_by('gender');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	public function count_student_gender_session($session)
+	{
+		$this->db->select('gender,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');			
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');				
+		$this->db->where('scm_session',$session);
+		$this->db->group_by('gender');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	public function count_student_gender_session_class($session,$class)
+	{
+		$this->db->select('gender,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');				
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');				
+		$this->db->join('class','student_class_map.scm_classid=class.class_id');
+		$this->db->where('scm_session',$session);
+		$this->db->where('scm_classid',$class);
+		$this->db->group_by('gender');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	public function count_student_gender_session_class_section($session,$class,$section)
+	{
+		$this->db->select('gender,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');	
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');						
+		$this->db->join('class','student_class_map.scm_classid=class.class_id');
+		$this->db->where('scm_session',$session);
+		$this->db->where('scm_classid',$class);
+		$this->db->where('scm_sectionid',$section);
+		$this->db->group_by('gender');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	public function count_student_all_caste()
+	{
+		$this->db->select('cname,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');			
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');						
+		$this->db->join('caste','student.caste_id=caste.caste_id');						
+		$this->db->group_by('cname');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	public function count_student_caste_session($session)
+	{
+		$this->db->select('cname,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');			
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');			
+		$this->db->join('caste','student.caste_id=caste.caste_id');								
+		$this->db->where('scm_session',$session);
+		$this->db->group_by('cname');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	public function count_student_caste_session_class($session,$class)
+	{
+		$this->db->select('cname,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');			
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');			
+		$this->db->join('caste','student.caste_id=caste.caste_id');								
+		$this->db->where('scm_session',$session);
+		$this->db->where('scm_classid',$class);
+		$this->db->group_by('cname');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	public function count_student_caste_session_class_section($session,$class,$section)
+	{
+		$this->db->select('cname,count(student.reg_no) as countstudent');				
+		$this->db->from('student_class_map');			
+		$this->db->join('student','student.reg_no=student_class_map.reg_no');			
+		$this->db->join('caste','student.caste_id=caste.caste_id');								
+		$this->db->where('scm_session',$session);
+		$this->db->where('scm_classid',$class);
+		$this->db->where('scm_sectionid',$section);
+		$this->db->group_by('cname');
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	/*For chart end*/
 	
 	public function find_rollno($session,$classid,$sectionid)
 	{
@@ -149,6 +239,8 @@ class Studentmodel extends CI_Model {
 		$this->db->from('student_fee');								
 		$this->db->join('class','student_fee.sf_classid=class.class_id');
 		$this->db->join('student','student_fee.sf_reg_no=student.reg_no');
+		$this->db->join('student_class_map','student.scm_id=student_class_map.scm_id');
+		$this->db->join('class_section','class_section.csec_id=student_class_map.scm_sectionid');
 		$this->db->where('sf_year',$session);		
 		$this->db->where('sf_classid',$classid);
 		$this->db->where('sf_reg_no',$regno);

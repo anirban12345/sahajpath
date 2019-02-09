@@ -30,6 +30,65 @@ class Fees extends CI_Controller
 		$this->load->view('fee/footer');
 	}
 	
+	public function searchStudentFeesCard()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		
+		$data['class']=$this->Globalmodel->getdata('class');
+		
+		$this->load->view('header',$data);
+		$this->load->view('fee/searchstudentfeescard',$data);
+		$this->load->view('fee/footer');
+	}
+	
+	public function searchStudentFeesStatus()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		
+		$data['class']=$this->Globalmodel->getdata('class');
+		
+		$this->load->view('header',$data);
+		$this->load->view('fee/searchstudentfeesstatus',$data);
+		$this->load->view('fee/footer');
+	}
+	
+	public function searchStudentFeesDate()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		
+		$data['class']=$this->Globalmodel->getdata('class');
+		
+		$this->load->view('header',$data);
+		$this->load->view('fee/searchstudentfeesdate',$data);
+		$this->load->view('fee/footer');
+	}
+	
+	
+	
+	public function viewFeesStatus()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		
+		$session=$this->input->post('session');
+		$classid=$this->input->post('classname');
+		$sectionid=$this->input->post('section');
+		
+		$data['sturec']=$this->Studentmodel->get_student_class_section($session,$classid,$sectionid);
+		$data['feessstat']=$this->Feesmodel->getfees_status($session,$classid,$sectionid);
+		
+		$this->load->view('header',$data);
+		$this->load->view('fee/viewfeesstatus',$data);
+		$this->load->view('fee/footer',$data);
+	}
+	
 	public function searchStudentFees()
 	{	
 		$username=$this->session->userdata('username');
@@ -62,6 +121,23 @@ class Fees extends CI_Controller
 		$this->load->view('fee/footer');
 	}
 	
+	public function searchStudentClassSectionFeesCard()
+	{	
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+
+		$session=$this->input->post('session');
+		$classid=$this->input->post('classname');
+		$sectionid=$this->input->post('section');
+		
+		$data['studentclasssection']=$this->Studentmodel->get_student_class_section($session,$classid,$sectionid);
+		
+		$this->load->view('header',$data);
+		$this->load->view('fee/searchstudentfeesclassfeescard',$data);
+		$this->load->view('fee/footer');
+	}
+	
 	public function viewFees($session,$class,$regno)
 	{
 		$username=$this->session->userdata('username');
@@ -74,7 +150,7 @@ class Fees extends CI_Controller
 		
 		$this->load->view('header',$data);
 		$this->load->view('fee/viewfees',$data);
-		$this->load->view('fee/footer');
+		$this->load->view('fee/footer',$data);
 	}
 	
 	public function viewPaidFees($session,$class,$regno)
@@ -87,8 +163,133 @@ class Fees extends CI_Controller
 		
 		$this->load->view('header',$data);
 		$this->load->view('fee/paidfeesdtls',$data);
-		$this->load->view('fee/footer');
+		$this->load->view('fee/footer',$data);
 	}
+	
+	public function generateFeesCard($session,$class,$regno)
+	{
+		/* Export PDF */
+		
+		//load library
+        $this->load->library('pdf');
+        $mpdf = $this->pdf->load();
+        //retrieve data from model
+		
+        //$data['rec'] = $this->Studentmodel->get_paidbill($billno);
+		//$data['setup']=$this->Globalmodel->getdata('setup');
+		//$data['sturec'] = $this->Studentmodel->getstudenttoclass_by_regno($data['rec'][0]->reg_no);
+		
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		$data['rec']=$this->Studentmodel->get_student_class_section_by_regno($session,$class,$regno);
+		//$data['rec']=$this->Studentmodel->get_student_paid_fees_by_regno($session,$class,$regno);
+		
+		$username=$this->session->userdata('name');
+		
+        ini_set('memory_limit', '256M'); 
+        //boost the memory limit if it's low ;)
+	     
+	    $html='<html>
+		<head>
+			<style>
+					body
+					{
+						font-size:9px;
+					}
+					
+					table 
+					{
+						font-family: verdana;
+						border: 1px solid #ccc;
+						border-collapse: collapse;
+						width:100%;
+					}
+					td,th 
+					{
+						padding: 5px;
+						border: 1px solid #ccc;
+						vertical-align: middle;
+					}
+					div
+					{
+						text-align:center;
+					}
+					.div1{font-size:24px;}
+			</style>
+			<title>'.$data['setup'][0]->name.'_'.$data['rec'][0]->reg_no.'_'.$data['rec'][0]->stuname.'_Fees Card_' . date('d_M_Y') . '_.pdf</title>
+		</head>
+		<body>';
+		
+		$html.='<div class="div1">'.$data['setup'][0]->name.'</div>';
+		$html.='<div>'.$data['setup'][0]->address.'</div>';
+		$html.='<div>Emailid: '.$data['setup'][0]->emailid.'  Phone No: '.$data['setup'][0]->phoneno.'</div>';
+		
+		$html.='<table>';		
+		$html.='<tr><td>Student Registration No: </td><td>'.$data['rec'][0]->reg_no.'</strong></td></tr>';				
+		$html.='<tr><td>Student Name: </td><td>'.$data['rec'][0]->stuname.'</strong></td></tr>';
+		$html.='<tr><td>Academic Year: </td><td>'.$data['rec'][0]->scm_session.'</strong></td></tr>';		
+		$html.='<tr><td>Class: </td><td>'.$data['rec'][0]->class_name.'</strong></td></tr>';
+		$html.='<tr><td>Section: </td><td>'.$data['rec'][0]->csec_name.'</strong></td></tr>';
+		$html.='<tr><td>Roll No: </td><td>'.$data['rec'][0]->scm_rollno.'</strong></td></tr>';
+		$html.='</table>';
+		
+		$html.='<table>			  
+					<thead>
+					<tr>				
+					  <th width="50">Sl. No</th>					
+					  <th width="70">Month</th>	
+					  <th>Bill No</th>
+					  <th>Date</th>
+					  <th>Time</th>					  
+					  <th>Signature</th>					  
+					</tr>
+					</thead>
+					<tbody>';
+					
+		$month=array('January','February','March','April','May','June','July','August','Sepectember','October','November','December');
+		for($i=0;$i<count($month);$i++)
+		{	
+            /*$html.='<tr>';
+					  $html.='<td>'.$i++.'</td>					  
+					  <td>'.$r->sf_billno.'</td>					  
+					  <td>'.$r->sf_month.'</td>
+					  <td>'.date("d-M-Y",strtotime($r->sf_date)).'</td>						  
+					  <td>'.$r->sf_time.'</td>						  					  
+					  </td>
+					</tr>';
+			*/		
+			$html.='<tr>
+					<td>'.$j=($i+1).'</td>
+				    <td>'.$month[$i].'</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>					
+					</tr>';
+		}	
+		
+		$html.='</tbody></table>';
+		
+		$html.='<span style="font-size:8px;">** Printed By '.$username.' At: '.date('d/M/Y-H:i:s').'</span><hr>';
+		
+        $html.='</body></html>';
+		
+		$mpdf->SetHTMLHeader('<div style="border-bottom: 1px solid #000000;">My document</div>','E');
+
+
+		
+        $mpdf->WriteHTML($html); // write the HTML into the PDF
+        $output = $data['rec'][0]->reg_no.'_'.$data['rec'][0]->sf_billno.'_Bill_' . date('d-M-Y') . '_.pdf';
+		$mpdf->SetWatermarkText($data['setup'][0]->name);
+		$mpdf->showWatermarkText = true;
+		$mpdf->watermarkTextAlpha = 0.1;
+        $mpdf->Output("$output", 'I'); // save to file because we can
+        exit();
+		
+		
+		/* Export PDF */
+	}
+	
+	
 	
 	public function saveStudentFees()
 	{

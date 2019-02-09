@@ -10,7 +10,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-inr"></i>Fee</a></li>
-        <li class="active">Paid Fees Details</li>
+        <li class="active">Fees Details</li>
       </ol>
     </section>
 
@@ -35,49 +35,44 @@
 	<!-- Info boxes -->
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-			
-			 
-			
 		
 			<div class="box">
 				<div class="box-header">				
-				  <h3 class="box-title">Paid Fees List</h3>				
+				 <?php foreach($studentclasssection as $r)
+				  {				  
+					  $session=$r->scm_session;
+					  $class=$r->class_name;
+					  $section=$r->csec_name;
+				  }?>
+				  
+				  <h3 class="box-title">Fees List of Academic Year: <strong><?=$session?></strong>, Class: <strong><?=$class?></strong>, Section: <strong><?=$section?></strong></h3>
+				  				  
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 				  <table id="example1" class="table table-bordered table-striped">			  
 					<thead>
 					<tr>
-					  <th>Sl No.</th>
-					  <th>Reg No</th>
-					  <th>Name</th>
-					  <th>Bill No</th>
-					  <th>Class</th>					  
-					  <th>Month</th>					  
-					  <th>Academic Year</th>
-					  <th>Date</th>
-					  <th>Time</th>
-					  <th>Action</th>
+					  <th>Roll No.</th>					  					  
+					  <th>Student Registration No</th>					  
+					  <th>Name</th>					  					  
+					  <th>Action</th>					  					  
 					</tr>
 					</thead>
 					<tbody>
 					
-					<?php $i=1; foreach($studentpaidfees as $r) { ?>
+					<?php $i=1; foreach($studentclasssection as $r) { ?>
 					<tr>
-					  <td><?=$i++?></td>
+					  <td><?=$r->scm_rollno?></td>
 					  <td><?=$r->reg_no?></td>
 					  <td><?=$r->stuname?></td>
-					  <td><?=$r->sf_billno?></td>
-					  <td><?=$r->class_name?></td>
-					  <td><?=$r->sf_month?></td>
-					  <td><?=$r->sf_year?></td>						  
-					  <td><?=date("d-M-Y",strtotime($r->sf_date))?></td>						  
-					  <td><?=$r->sf_time?></td>						  
 					  <td>
-					  <a href="<?php echo site_url('Fees/viewBill/'.$r->sf_billno); ?>" target="_blank" roll="button" class="btn btn-primary btn-sm">View Bill</a>
-					  </td>
+					  <a href="<?php echo site_url('Fees/generateFeesCard/'.$r->scm_session.'/'.$r->class_id.'/'.$r->reg_no); ?>" roll="button" class="btn btn-info btn-sm" target="_blank">Generate Fees Card</a>
+					  <a href="<?php echo site_url('Fees/viewPaidFees/'.$r->scm_session.'/'.$r->class_id.'/'.$r->reg_no); ?>" roll="button" class="btn btn-info btn-sm">Paid Fees</a>
+					  </td>				  
 					</tr>
 					<?php } ?>
+					
 					</tbody>
 				  </table>	
 				</div>	

@@ -387,11 +387,7 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-			<!--
-				<li><a href="<?php echo site_url('Dashboard/countUser'); ?>"><i class="fa fa-circle-o text-aqua"></i>test</a></li>
-				<li><a href="<?php echo site_url('Student/classStudentCount'); ?>"><i class="fa fa-circle-o text-aqua"></i>test</a></li> 
-			-->
+          <ul class="treeview-menu">			
 			<li><a href="<?php echo site_url('Setup/schoolDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>School Details</a></li>
 		    <li><a href="<?php echo site_url('Administration/addUsertype'); ?>"><i class="fa fa-circle-o text-aqua"></i>User Type</a></li>
 			<li><a href="<?php echo site_url('Setup/religionDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Religion</a></li>  
@@ -400,9 +396,8 @@
 			<li><a href="<?php echo site_url('Setup/sectionDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Sections</a></li>  			
 			<li><a href="<?php echo site_url('Setup/subjectDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Subjects</a></li>
 			<li><a href="<?php echo site_url('Setup/feesDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Fees</a></li>
-			<li><a href="<?php echo site_url('Setup/termDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Exam Term</a></li>
-			<!--<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Group / Class / Subject</a></li>
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Pick-Up Point</a></li>  -->
+			<li><a href="<?php echo site_url('Setup/termDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Exam Term</a></li>			
+			<!-- <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Pick-Up Point</a></li>  -->
           </ul>
         </li>
 		
@@ -445,15 +440,15 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <!-- <li><a href=""><i class="fa fa-circle-o text-aqua"></i>Sections / Roll Numbers</a></li> -->
-            <li><a href="<?php echo site_url('Student/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Student Record</a></li>  			
-			<!--<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Update class record</a></li>  
-			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Boy-Girl Student</a></li>  
-			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Transferred student details</a></li>  
-			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Caste Categories wise details</a></li>
+          <ul class="treeview-menu">            
+            <li><a href="<?php echo site_url('Student/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Student Record</a></li>  						  
+			<li><a href="<?php echo site_url('Student/searchStudentClassSection'); ?>"><i class="fa fa-circle-o text-aqua"></i>Class Wise Student</a></li>  
+			<li><a href="<?php echo site_url('Student/searchStudentGender'); ?>"><i class="fa fa-circle-o text-aqua"></i>Gender Wise Student</a></li>  
+			<li><a href="<?php echo site_url('Student/searchStudentCaste'); ?>"><i class="fa fa-circle-o text-aqua"></i>Caste Wise Student</a></li>			
+			<!--
+			<li><a href="<?php echo site_url('Student/searchStudentReligion'); ?>"><i class="fa fa-circle-o text-aqua"></i>Religion Wise Student</a></li>
+			<li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Transferred student details</a></li>
             <li><a href="<?php echo site_url('Student/studentList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Age wise Student details</a></li>  -->
-			<li><a href="<?php echo site_url('Student/searchStudentClassSection'); ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise Student</a></li>  
           </ul>
         </li>
 		
@@ -465,8 +460,7 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">            
-			<!-- <li><a href=""><i class="fa fa-circle-o text-aqua"></i>Sections / Roll Numbers</a></li> -->			
+          <ul class="treeview-menu">            			
 			<li><a href="<?php echo site_url('Teacher/addTeacher'); ?>"><i class="fa fa-circle-o text-aqua"></i>Add Teachers</a></li>			
 			<li><a href="<?php echo site_url('Teacher/teacherList'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Teachers</a></li>
 			<li><a href="<?php echo site_url('Teacher/findTeachertoClass'); ?>"><i class="fa fa-circle-o text-aqua"></i>Assign Teacher to Class</a></li>
@@ -484,12 +478,10 @@
           </a>
           <ul class="treeview-menu">            
 			<li><a href="<?php echo site_url('Fees/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Pay / Taken Fee</a></li>
-			<!--	
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Print Receipts</a></li>  
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Generate Student Fee Card</a></li>  
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise Students Fee status</a></li>
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Check Paid Fee List with date range</a></li>  			
-			-->
+			<li><a href="<?php echo site_url('Fees/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Print Receipts</a></li>
+			<li><a href="<?php echo site_url('Fees/searchStudentFeesCard'); ?>"><i class="fa fa-circle-o text-aqua"></i>Generate Student Fee Card</a></li>  
+			<li><a href="<?php echo site_url('Fees/searchStudentFeesStatus'); ?>"><i class="fa fa-circle-o text-aqua"></i>Students Fee status</a></li>
+            <li><a href="<?php echo site_url('Fees/searchStudentFeesDate'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Paid Fees</a></li>  	
           </ul>
         </li>
 		
@@ -567,17 +559,14 @@
           </a>
           <ul class="treeview-menu">            
             <li><a href="<?php echo site_url('Exam/createExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Exam Schedule</a></li>  			
-			<li><a href="<?php echo site_url('Exam/searchExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Exam</a></li>  			
-			<!--
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Export exam details</a></li>  			
-			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Subject Wise Marks Search</a></li>
-            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student wise marks search</a></li> 
-			-->			
+			<li><a href="<?php echo site_url('Exam/searchExam'); ?>"><i class="fa fa-circle-o text-aqua"></i>Search Exam</a></li>
 			<li><a href="<?php echo site_url('Exam/searchMarks'); ?>"><i class="fa fa-circle-o text-aqua"></i>Marks Entry</a></li> 			
 			<li><a href="<?php echo site_url('Exam/searchReport'); ?>"><i class="fa fa-circle-o text-aqua"></i>Create Report Card</a></li> 
 			<li><a href="<?php echo site_url('Exam/searchPromotion'); ?>"><i class="fa fa-circle-o text-aqua"></i>Make Promotion</a></li> 
 			<li><a href="<?php echo site_url('Exam/searchStudent'); ?>"><i class="fa fa-circle-o text-aqua"></i>Unassigned Student List</a></li> 			
-			<!-- 
+			<!--			
+			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Subject Wise Marks Search</a></li>
+            <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student wise marks search</a></li> 			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Class wise report</a></li>
             <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Academic Year wise report</a></li>  			
 			<li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Rank</a></li> 

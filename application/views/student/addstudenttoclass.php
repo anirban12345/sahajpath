@@ -29,9 +29,7 @@
 			
             <form role="form" action="<?php echo site_url('Student/saveStudenttoClass/'.$regno);?>" method="post">
               <div class="box-body">
-			    
-				 
-			    
+			  
 				<div class="form-group">
 					<label>Select Session Year</label>
 					<select class="form-control select2" style="width: 100%;" id="sessionyear" name="sessionyear">								

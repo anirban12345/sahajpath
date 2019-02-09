@@ -216,6 +216,16 @@
 <!-- DataTables -->
 <script src="<?php echo base_url().'assets/'; ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url().'assets/'; ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+
+
 <!-- FastClick -->
 <script src="<?php echo base_url().'assets/';?>bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -244,9 +254,17 @@
 <!-- Select2 -->
 <script src="<?php echo base_url().'assets/'; ?>bower_components/select2/dist/js/select2.full.min.js"></script>
 <script>
+
+
 	
   $(function () {
-    $('#example1').DataTable();    
+    $('#example1').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            { "extend": 'pdf', "text":'Export PDF',"className": 'btn btn-primary btn-sm',"title": '<?php echo $setup[0]->name.'_'.date('d-M-Y');?>',"filename": '<?php echo $setup[0]->name.'_'.date('d-M-Y');?>' },
+			{ "extend": 'excel', "text":'Export Excel',"className": 'btn btn-primary btn-sm' }
+        ]
+    });    
   });
   
   $('.select2').select2();

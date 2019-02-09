@@ -39,7 +39,16 @@
 		
 			<div class="box">
 				<div class="box-header">
-				  <h3 class="box-title">Student List</h3>
+				  
+				  
+				  <?php foreach($allrec as $r)
+				  {				  
+					  $session=$r->scm_session;
+					  $class=$r->class_name;
+					  $section=$r->csec_name;
+				  }?>
+				  
+				  <h3 class="box-title">Student List of Academic Year: <strong><?=$session?></strong>, Class: <strong><?=$class?></strong>, Section: <strong><?=$section?></strong></h3>
 				  
 				  <div class="pull-right"><a href="<?php echo site_url('Student/addStudent'); ?>" roll="button" class="btn btn-info btn-lg">Add New Student</a></div>
 				  
@@ -51,12 +60,9 @@
 				  <table id="example1" class="table table-bordered table-striped">			  
 					<thead>
 					<tr>
-					  <th>Sl No.</th>
+					  <th>Roll No</th>					  
 					  <th>Reg No.</th>
-					  <th>Name</th>					  				  
-					  <th>Session</th>
-					  <th>Class</th>
-					  <th>Section</th>
+					  <th>Name</th>					  				  					  
 					  <th>Status</th>
 					  <th>Action</th>					  				  
 					</tr>
@@ -65,12 +71,9 @@
 					
 					<?php $i=1; foreach($allrec as $r) { ?>
 					<tr>
-					  <td><?=$i++?></td>
+					  <td><?=$r->scm_rollno?></td>
 					  <td><?=$r->reg_no?></td>
-					  <td><?=$r->stuname?></td>					  
-					  <td><?=$r->scm_session?></td>
-					  <td><?=$r->class_name?></td>
-					  <td><?=$r->csec_name?></td>
+					  <td><?=$r->stuname?></td>
 					  <?php if($r->stu_flag==1){ ?>
 					  <td><span class="label label-success">Active</span></td>
 					  <?php }else {?>

@@ -23,6 +23,7 @@
               </div>
 	  <?php } ?>
 	  
+	  <form role="form" action="<?php echo site_url('Exam/updateMarksDtls/'.$allrec[0]->e_id);?>" method="post">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
 		
@@ -35,7 +36,7 @@
             <!-- /.box-header -->
             <!-- form start -->
 			
-            <form role="form" action="<?php echo site_url('Exam/updateMarksDtls/'.$allrec[0]->e_id);?>" method="post">
+            
               <div class="box-body">
 			  
 				<table id="example2" class="table table-bordered table-striped">			  
@@ -66,39 +67,49 @@
 					  <td><?=$r->e_desc?></td>		
 					</tr> 
 					<?php }?>
-					</tbody>
+					</tbody>				
 				  </table>	
 				</div>	
 				
 				<div class="box-body">
-				<table id="example2" class="table table-bordered table-striped">			  
+				<table id="example1" class="table table-bordered table-striped">			  
 					<thead>
 					<tr>
-					  <th>Sl No.</th>
+					  <th>Roll No.</th>
 					  <th>Reg No.</th>
 					  <th>Name</th>					  
-					  <th>Marks</th>					  					  				  
+					  <th>Marks</th>
+					  <th>Marks</th>
 					</tr>
 					</thead>
 					<tbody>
 				
-				<?php $i=0; foreach($sturec as $r){?>
+				<?php foreach($sturec as $r){?>
 					
 					<tr>
-					  <td><?=++$i?></td>
+					  <td><?=$r->scm_rollno?></td>
 					  <input type="hidden" value="<?=$r->reg_no?>" name="regno[]" id="regno[]" />
 					  <td><?=$r->reg_no?></td>
 					  <td><?=$r->stuname?></td>	
 					  <td>
+						<?php foreach($examrec as $r1){?>	
+							<?php if($r1->r_reg_no==$r->reg_no){?>
+								<?=$r1->r_marks?>
+						<?php } } ?>
+					  </td>
+					  <td>
 						<div class="form-group" style="margin:0;padding:0;width:100%;">
-						<?php foreach($examrec as $r1){?>
-						
+						<?php foreach($examrec as $r1){?>						
 						<input type="hidden" value="<?=$r1->report_id?>" name="reportid[]" id="reportid[]" />
 						<?php if($r1->r_reg_no==$r->reg_no){?>
 						<input type="text" class="form-control" id="marks[]" placeholder="Enter Marks" name="marks[]" autocomplete="off" required value="<?=$r1->r_marks?>" />
+						<?php 
+						} else { ?>
+						<input type="text" class="form-control" id="marks[]" placeholder="Enter Marks" name="marks[]" autocomplete="off" required value="" />
 						<?php } } ?>
 						</div>
-					  </td>	
+						</td>	
+					  
 					</tr>
 					
 				<?php }?>
@@ -112,12 +123,16 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
-            </form>
+            
           </div>	
-        </div>  
+        </div> 
       </div>
+	  
       <!-- /.row -->
+	  
       <!-- /.row -->
+	  
+	  </form>
       <!-- Main row -->      
       <!-- /.row -->
     </section>
