@@ -17,11 +17,18 @@
     <!-- Main content -->
     <section class="content">
 	
-	<?php if($this->session->userdata('successmsg')){?>
+			<?php if($this->session->userdata('successmsg')){?>
 			  <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
                 <h4><i class="icon fa fa-check"></i> Success!</h4>
                 <?php echo $this->session->userdata('successmsg'); ?>
+              </div>
+			<?php } ?>
+			<?php if($this->session->userdata('errmsg')){?>
+			  <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                <?php echo $this->session->userdata('errmsg'); ?>
               </div>
 			<?php } ?> 
 	
@@ -40,7 +47,7 @@
               <div class="box-body">			    			    
                 <div class="form-group">
 					<label>Select Class</label>
-						<select class="form-control select2" style="width: 100%;" id="classname" name="classname">
+						<select class="form-control select2" style="width: 100%;" id="classname4" name="classname">
 							<option value="Select">Select</option> 							
 							<?php foreach($class as $r){?>
 							<option value="<?=$r->class_id?>"><?=$r->class_name?></option> 							

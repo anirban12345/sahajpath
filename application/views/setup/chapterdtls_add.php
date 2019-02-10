@@ -31,14 +31,14 @@
 		
 			<div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Add Chapters of Class: <?=$class[0]->class_name?> Subject: <?=$subject[0]->csub_name?></h3>
+              <h3 class="box-title">Add Chapters of Class: <strong><?=$class[0]->class_name?></strong> Subject: <strong><?=$subject[0]->csub_name?></strong></h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->	
 			
             <!--<form role="form" action="<?php echo site_url('Setup/saveChapterDtls');?>" method="post"> -->
 			
-			<?php echo form_open_multipart('Student/saveChapterDtls/'.$class[0]->class_id.'/'.$subject[0]->csub_id);?> 
+			<?php echo form_open_multipart('Setup/saveChapterDtls/'.time().'/'.$subject[0]->csub_id);?> 
 			
               <div class="box-body">			    			    
                 <div class="form-group">
@@ -103,11 +103,12 @@
 					  <?php }?>
 					  <td>
 					  <?php if($r->chap_flag==1){ ?>
-					  <a href="<?php echo site_url('Administration/activateChapter/'.$r->chap_id); ?>" roll="button" class="btn btn-warning btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></a>				  					  
+					  <a href="<?php echo site_url('Setup/activateChapter/'.$r->chap_id); ?>" roll="button" class="btn btn-warning btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></a>				  					  
 					  <?php }else {?>
-					  <a href="<?php echo site_url('Administration/activateChapter/'.$r->chap_id); ?>" roll="button" class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i></a>
+					  <a href="<?php echo site_url('Setup/activateChapter/'.$r->chap_id); ?>" roll="button" class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i></a>
 					  <?php }?>
-					  <a href="<?php echo site_url('Administration/editChapter/'.$r->chap_id); ?>" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+					  <a href="<?php echo site_url('Setup/editChapter/'.$r->chap_id); ?>" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+					  <a href="<?php echo site_url('Setup/viewChapter/'.$r->chap_id); ?>" roll="button" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
 					  </td>
 					</tr>
 					<?php } ?>

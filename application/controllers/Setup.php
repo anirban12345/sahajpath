@@ -7,8 +7,8 @@ class Setup extends CI_Controller
     {
         parent::__construct(); 
 		$this->load->helper(array('url','html','form','download')); 
-		ini_set('post_max_size', '64M');
-		ini_set('upload_max_filesize', '500M');
+		ini_set('post_max_size', '1000M');
+		ini_set('upload_max_filesize', '1000M');
 		date_default_timezone_set('Asia/Kolkata');		
     }
 	
@@ -465,24 +465,42 @@ class Setup extends CI_Controller
 		$this->load->view('setup/footer');	
 	}
 	
-	public function saveChapterDtls()
+	public function saveChapterDtls($time,$subid)
 	{
-	    $classid=$this->input->post('classname');		
-		$subjectname=$this->input->post('subjectname');		
-		$userid=$this->session->userdata('userid');
+				$config['upload_path']     = './uploads/lesson/';
+				$config['file_name']       = $time.'.pdf';				
+                $config['allowed_types']   = 'pdf';
+                $config['max_size']        = 0;                
+				$config['overwrite'] 	   = TRUE;
+				
+                $this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				
+                if (!$this->upload->do_upload('pdfscan'))
+                {
+					$error = array('error' => $this->upload->display_errors());
+					$this->session->set_flashdata('errmsg', $error->error);
+                    redirect('Setup/chapterDtls');
+                }
+                else
+                { 
+					$chapter=$this->input->post('chaptername');
+					$userid=$this->session->userdata('userid');
 		
-		$dtls=array(
-					'csub_classid'=>$classid,
-					'csub_name'=>$subjectname,
-					'csub_parentid'=>0,
-					'csub_date'=>date('Y-m-d'), 
-					'csub_time'=>date('H:i:s'), 
-					'csub_flag'=>1,
-					'user_id'=>$userid
-					);
-		$this->Globalmodel->savedata('class_subject',$dtls);
-		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
-		redirect('Setup/subjectDtls','refresh');	
+					$dtls=array(
+								'chap_subjectid'=>$subid,
+								'chap_name'=>$chapter,
+								'chap_filename'=>$time.'.pdf',								
+								'chap_date'=>date('Y-m-d'), 
+								'chap_time'=>date('H:i:s'), 
+								'chap_flag'=>1,
+								'user_id'=>$userid
+								);
+					$this->Globalmodel->savedata('class_subject_chapter',$dtls);					
+                    $data = array('upload_data' => $this->upload->data());					
+					$this->session->set_flashdata('successmsg','Chapter Successfully Saved');
+					redirect('Setup/chapterDtls');	
+                }		
 	}
 	
 	public function updateChapterDtls($id)
@@ -503,6 +521,19 @@ class Setup extends CI_Controller
 		$this->Globalmodel->updatedata('class_subject','csub_id',$id,$dtls);
 		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
 		redirect('Setup/subjectDtls');	
+	}
+	
+	public function viewChapter($chapterid)
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');				
+		
+		$data['chapter']=$this->Globalmodel->getdata_by_field('class_subject_chapter','chap_id',$chapterid);						
+		
+		$this->load->view('header',$data);
+		$this->load->view('setup/chapterdtls_view',$data);
+		$this->load->view('setup/footer');	
 	}
 	
 	public function activateChapter($id)

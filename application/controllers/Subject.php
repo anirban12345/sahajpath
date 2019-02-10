@@ -76,7 +76,7 @@ class Subject extends CI_Controller
 		$classid=$this->input->post('classid');
 		$data['rec']=$this->Globalmodel->getdata_by_field('class_subject','csub_classid',$classid);
 		//echo $sectionid;
-		$str='';		
+		$str='<option value="Select">Select</option>';		
 		foreach($data['rec'] as $r)
 		{
 			$str.='<option value="'.$r->csub_id.'">'.$r->csub_name.'</option>';

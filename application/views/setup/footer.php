@@ -263,7 +263,7 @@ $(document).ready(function(){
 				});
 				
 				
-				$('#classname').on('change',function(){					
+				$('#classname1').on('change',function(){					
 					classid = $(this).val();					
 					//alert(classid);					
 					if(classid){
@@ -282,7 +282,7 @@ $(document).ready(function(){
 					}					
 				});
 				
-				$('#classname').on('change',function(){					
+				$('#classname2').on('change',function(){					
 					classid = $(this).val();					
 					//alert(classid);					
 					if(classid){
@@ -301,7 +301,7 @@ $(document).ready(function(){
 					}					
 				});
 				
-				$('#classname').on('change',function(){					
+				$('#classname3').on('change',function(){					
 					classid = $(this).val();					
 					//alert(classid);					
 					if(classid){
@@ -321,7 +321,8 @@ $(document).ready(function(){
 				});
 				
 				
-				$('#classname').on('change',function(){					
+				
+				$('#classname4').on('change',function(){					
 					classid = $(this).val();					
 					//alert(classid);					
 					if(classid){

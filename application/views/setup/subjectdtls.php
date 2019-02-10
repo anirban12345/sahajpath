@@ -40,7 +40,7 @@
               <div class="box-body">			    			    
                 <div class="form-group">
 					<label>Select Class</label>
-						<select class="form-control select2" style="width: 100%;" id="classname" name="classname">
+						<select class="form-control select2" style="width: 100%;" id="classname1" name="classname">
 							<option value="Select">Select</option> 							
 							<?php foreach($class as $r){?>
 							<option value="<?=$r->class_id?>"><?=$r->class_name?></option> 							
