@@ -114,6 +114,16 @@ class Globalmodel extends CI_Model {
 		return $this->query->result();  
 	}
 	
+	public function getdata_by_field_join_array($table1,$f1,$table2,$f2,$array)
+	{
+		$this->db->select('*');
+		$this->db->from($table1);
+		$this->db->join($table2,$table1.'.'.$f1 ."=". $table2.'.'.$f2);
+		$this->db->where($array);									
+		$this->query=$this->db->get();		
+		return $this->query->result();  
+	}
+	
 	public function getdata_by_field_join_twotable($table1,$f1,$table2,$f2,$filer,$value)
 	{
 		$this->db->select('*');

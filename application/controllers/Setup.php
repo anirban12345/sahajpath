@@ -345,8 +345,7 @@ class Setup extends CI_Controller
 		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
 		redirect('Setup/sectionDtls', 'refresh');	
 	}
-	/*   Section End  */
-	
+	/*   Section End  */	
 	/*   Subject  Start */
 	public function subjectDtls()
 	{	
@@ -419,6 +418,100 @@ class Setup extends CI_Controller
 		redirect('Setup/subjectDtls', 'refresh');	
 	}
 	/*   Subject End  */	
+	
+	
+	/*   Chapter  Start */
+	public function chapterDtls()
+	{	
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');				
+		
+		$data['class']=$this->Globalmodel->getdata('class');						
+		
+		$this->load->view('header',$data);
+		$this->load->view('setup/chapterdtls',$data);
+		$this->load->view('setup/footer');	
+	}
+	
+	public function addChapterDtls()
+	{
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		
+		$classid=$this->input->post('classname');
+		$subject=$this->input->post('subject');
+		
+		$filterarray=array('csub_classid'=>$classid,'csub_id'=>$subject);
+		$data['chapter']=$this->Globalmodel->getdata_by_field_join_array('class_subject','csub_id','class_subject_chapter','chap_subjectid',$filterarray);	
+		
+		$data['class']=$this->Globalmodel->getdata_by_field('class','class_id',$classid);
+		$data['subject']=$this->Globalmodel->getdata_by_field('class_subject','csub_id',$subject);
+		
+		$this->load->view('header',$data);
+		$this->load->view('setup/chapterdtls_add',$data);
+		$this->load->view('setup/footer');
+	}
+	
+	public function editChapterDtls($id)
+	{	
+		$username=$this->session->userdata('username');
+		$data['rec']=$this->Globalmodel->getdata_by_field_join('users','levelid','user_level','id','Username',$username);				
+		$data['setup']=$this->Globalmodel->getdata('setup');
+		$data['classsubject']=$this->Setupmodel->get_all_class_subject_by_id($id);		
+		$this->load->view('header',$data);
+		$this->load->view('setup/subjectdtls_edit',$data);
+		$this->load->view('setup/footer');	
+	}
+	
+	public function saveChapterDtls()
+	{
+	    $classid=$this->input->post('classname');		
+		$subjectname=$this->input->post('subjectname');		
+		$userid=$this->session->userdata('userid');
+		
+		$dtls=array(
+					'csub_classid'=>$classid,
+					'csub_name'=>$subjectname,
+					'csub_parentid'=>0,
+					'csub_date'=>date('Y-m-d'), 
+					'csub_time'=>date('H:i:s'), 
+					'csub_flag'=>1,
+					'user_id'=>$userid
+					);
+		$this->Globalmodel->savedata('class_subject',$dtls);
+		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
+		redirect('Setup/subjectDtls','refresh');	
+	}
+	
+	public function updateChapterDtls($id)
+	{
+		$classid=$this->input->post('classname');		
+		$subjectname=$this->input->post('subjectname');		
+		$userid=$this->session->userdata('userid');
+		
+		$dtls=array(
+					'csub_classid'=>$classid,
+					'csub_name'=>$subjectname,
+					'csub_parentid'=>0,
+					'csub_date'=>date('Y-m-d'), 
+					'csub_time'=>date('H:i:s'), 
+					'csub_flag'=>1,
+					'user_id'=>$userid
+					);
+		$this->Globalmodel->updatedata('class_subject','csub_id',$id,$dtls);
+		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
+		redirect('Setup/subjectDtls');	
+	}
+	
+	public function activateChapter($id)
+	{
+		$this->Globalmodel->activate('class_subject','csub_id',$id,'csub_flag');
+		$this->session->set_flashdata('successmsg','Subject Successfully Saved');
+		redirect('Setup/subjectDtls', 'refresh');	
+	}
+	/*   Chapter End  */
 	
 	/*   Fees Start */
 	public function feesDtls()

@@ -395,6 +395,7 @@
             <li><a href="<?php echo site_url('Setup/classDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Class</a></li>  			
 			<li><a href="<?php echo site_url('Setup/sectionDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Sections</a></li>  			
 			<li><a href="<?php echo site_url('Setup/subjectDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Subjects</a></li>
+			<li><a href="<?php echo site_url('Setup/chapterDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Chapters And Units</a></li>
 			<li><a href="<?php echo site_url('Setup/feesDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Fees</a></li>
 			<li><a href="<?php echo site_url('Setup/termDtls'); ?>"><i class="fa fa-circle-o text-aqua"></i>Exam Term</a></li>			
 			<!-- <li><a href="<?php echo base_url().'assets/'; ?>"><i class="fa fa-circle-o text-aqua"></i>Student Pick-Up Point</a></li>  -->

@@ -70,4 +70,17 @@ class Subject extends CI_Controller
 		$str.='</tbody></table>';		
 		echo $str;
 	}
+	
+	public function getSubject2()
+	{
+		$classid=$this->input->post('classid');
+		$data['rec']=$this->Globalmodel->getdata_by_field('class_subject','csub_classid',$classid);
+		//echo $sectionid;
+		$str='';		
+		foreach($data['rec'] as $r)
+		{
+			$str.='<option value="'.$r->csub_id.'">'.$r->csub_name.'</option>';
+		}
+		echo $str;		
+	}
 }

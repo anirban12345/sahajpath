@@ -321,6 +321,26 @@ $(document).ready(function(){
 				});
 				
 				
+				$('#classname').on('change',function(){					
+					classid = $(this).val();					
+					//alert(classid);					
+					if(classid){
+						$.ajax({
+							type:'POST',
+							url:'<?php echo base_url('Subject/getSubject2'); ?>',
+							data:{'classid':classid},
+							success:function(data){
+								//alert(data);
+								$('#subject').html(data);
+							}
+						}); 
+					}else{
+						$('#subject').html('');
+							
+					}					
+				});
+				
+				
 				
 });
 </script>
